@@ -9,6 +9,7 @@ android {
             storePassword '123456'
         }
     }
+
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.physical.app"
