@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg">
+
+    <ImageView
+        android:id="@+id/iv_title"
+        android:layout_width="@dimen/x744"
+        android:layout_height="@dimen/x96"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x236"
+        android:src="@mipmap/title_one" />
+
+    <ImageView
+        android:id="@+id/iv_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/border" />
+
+    <ImageView
+        android:layout_marginBottom="92dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/iv_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/arc" />
+
+    <LinearLayout
+        android:id="@+id/ll_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x62"
+        android:background="@mipmap/input_box"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="24dp"
+            android:src="@mipmap/icon_account" />
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/et_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:background="@null"
+            android:gravity="center|left"
+            android:hint="手机号"
+            android:textColor="@color/color_12adb3"
+            android:textColorHint="@color/color_12adb3"
+            android:textSize="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_phone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x19"
+        android:background="@mipmap/input_box"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="24dp"
+            android:src="@mipmap/icon_password" />
+
+        <EditText
+            android:id="@+id/et_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:background="@null"
+            android:gravity="center|left"
+            android:hint="输入密码"
+            android:textColor="@color/color_12adb3"
+            android:textColorHint="@color/color_12adb3"
+            android:textSize="8dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_pwd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@mipmap/button_login"
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:textSize="@dimen/x27"
+        android:id="@+id/tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="注册账户"
+        android:textColor="@color/color_05C9D3" />
+
+</RelativeLayout>

@@ -58,7 +58,7 @@ public class StartActivity extends BaseActivity {
 
                 case 100:
 
-                    startTo(MainActivity.class);
+                    startTo(LoginActivity.class);
 
                     finish();
 
