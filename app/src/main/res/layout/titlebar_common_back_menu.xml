@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlTop"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x88"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:id="@+id/tvBack"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textColor="@color/white"
+        android:textSize="@dimen/x30"
+        android:text="返回"
+        android:layout_centerVertical="true"
+        android:drawableLeft="@mipmap/icon_zuo"
+        android:drawablePadding="@dimen/x12"
+        android:gravity="center"
+        android:paddingLeft="@dimen/x24"
+        android:paddingRight="@dimen/x24"
+        />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:maxEms="10"
+        android:singleLine="true"
+        android:text="标题"
+        android:textColor="@color/white"
+        android:textSize="@dimen/x38" />
+
+    <TextView
+        android:id="@+id/tvMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textColor="@color/white"
+        android:textSize="@dimen/x30"
+        android:text="菜单"
+        android:gravity="center"
+        android:paddingLeft="@dimen/x20"
+        android:paddingRight="@dimen/x20"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>
