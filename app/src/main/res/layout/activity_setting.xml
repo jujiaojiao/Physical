@@ -107,6 +107,7 @@
 
         </LinearLayout>
         <FrameLayout
+
             android:id="@+id/framlayout"
             android:background="@mipmap/border_small"
             android:layout_width="match_parent"
