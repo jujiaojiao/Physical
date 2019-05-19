@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/titlebar_common_back" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/music_border">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_music"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="50dp"
+                android:src="@mipmap/icon_music" />
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="60dp"
+                android:layout_toRightOf="@+id/iv_music"
+                android:id="@+id/tv_music_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="年少有为"
+                android:textColor="@color/color_24ff00"
+                android:textSize="10sp"
+                />
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/iv_music"
+                android:layout_below="@+id/tv_music_name"
+                android:id="@+id/tv_name"
+                android:layout_width="21dp"
+                android:layout_height="7dp"
+                android:text="李荣浩"
+                android:textColor="@color/color_138400"
+                android:textSize="7sp"
+                />
+            <ProgressBar
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/iv_music"
+                android:layout_below="@+id/tv_name"
+                android:id="@+id/pv_music"
+                android:layout_width="379dp"
+                android:layout_height="3dp" />
+            <LinearLayout
+                android:layout_marginLeft="50dp"
+                android:layout_toRightOf="@+id/tv_music_name"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_prev"
+                    android:layout_marginTop="60dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_prev" />
+                <ImageView
+                    android:id="@+id/iv_pause"
+                    android:layout_marginTop="58dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_pause" />
+                <ImageView
+                    android:id="@+id/iv_next"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_next" />
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_voice" />
+                <ProgressBar
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/iv_music"
+                    android:layout_below="@+id/tv_name"
+                    android:id="@+id/pb_voice"
+                    android:layout_width="83dp"
+                    android:layout_height="3dp" />
+                <ImageView
+                    android:id="@+id/iv_single"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_single" />
+                <ImageView
+                    android:id="@+id/iv_loop"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_loop" />
+                <ImageView
+                    android:id="@+id/iv_random"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_random" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:scrollbars="none"
+            android:id="@+id/refreshlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ListView
+                android:id="@+id/lv_data"
+                android:scrollbars="none"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
+</LinearLayout>

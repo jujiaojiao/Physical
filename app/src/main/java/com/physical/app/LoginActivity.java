@@ -16,6 +16,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 登录页面
+ */
 public class LoginActivity extends BaseActivity {
     @Bind(R.id.iv_title)
     ImageView ivTitle;

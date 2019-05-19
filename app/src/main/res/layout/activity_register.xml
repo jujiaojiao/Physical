@@ -10,7 +10,7 @@
         android:layout_height="@dimen/x96"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/x236"
-        android:src="@mipmap/title_one" />
+        android:src="@mipmap/title_two" />
 
     <ImageView
         android:id="@+id/iv_circle"
@@ -29,7 +29,7 @@
         android:src="@mipmap/arc" />
 
     <LinearLayout
-        android:id="@+id/ll_phone"
+        android:id="@+id/ll_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_title"
@@ -47,18 +47,60 @@
 
         <EditText
             android:inputType="number"
-            android:id="@+id/et_phone"
+            android:id="@+id/et_user"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="12dp"
             android:background="@null"
             android:gravity="center|left"
-            android:hint="手机号"
+            android:hint="姓名"
             android:textColor="@color/color_12adb3"
             android:textColorHint="@color/color_12adb3"
             android:textSize="8dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_user"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x19"
+        android:background="@mipmap/input_box"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="24dp"
+            android:src="@mipmap/icon_phone" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:background="@null"
+            android:gravity="center|left"
+            android:hint="+86"
+            android:textColor="@color/color_12adb3"
+            android:textColorHint="@color/color_12adb3"
+            android:textSize="8dp" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@color/color_12adb3"/>
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="center|left"
+            android:hint="输入手机号"
+            android:textColor="@color/color_12adb3"
+            android:textColorHint="@color/color_12adb3"
+            android:textSize="8dp" />
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/ll_pwd"
         android:layout_width="wrap_content"
@@ -88,12 +130,73 @@
             android:textColorHint="@color/color_12adb3"
             android:textSize="8dp" />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_repwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_pwd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x19"
+        android:background="@mipmap/input_box"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="24dp"
+            android:src="@mipmap/icon_password" />
+
+        <EditText
+            android:id="@+id/et_repwd"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:background="@null"
+            android:gravity="center|left"
+            android:hint="输入密码"
+            android:textColor="@color/color_12adb3"
+            android:textColorHint="@color/color_12adb3"
+            android:textSize="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_repwd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x19"
+        android:background="@mipmap/input_box"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_marginLeft="24dp"
+            android:id="@+id/et_code"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="center|left"
+            android:hint="输入验证码"
+            android:textColor="@color/color_12adb3"
+            android:textColorHint="@color/color_12adb3"
+            android:textSize="8dp" />
+
+        <TextView
+            android:layout_width="56dp"
+            android:layout_height="23dp"
+            android:text="获取验证码"
+            android:textColor="@color/color_052c48"
+            android:textSize="20sp"
+            android:background="@drawable/bg_get_code"
+            />
+    </LinearLayout>
     <TextView
         android:id="@+id/tv_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_pwd"
+        android:layout_below="@+id/ll_code"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@mipmap/button_login"
@@ -109,7 +212,7 @@
         android:layout_below="@+id/tv_login"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="注册账户"
+        android:text="使用已有账户登录"
         android:textColor="@color/color_05C9D3" />
 
 </RelativeLayout>

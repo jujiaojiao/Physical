@@ -2,22 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rlTop"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/x88"
-    android:background="@color/colorPrimary">
+    android:layout_height="@dimen/x88">
 
-    <TextView
-        android:id="@+id/tvBack"
+    <ImageView
+        android:id="@+id/ivBack"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textColor="@color/white"
-        android:textSize="@dimen/x30"
-        android:text="返回"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_arrow"
         android:layout_centerVertical="true"
-        android:drawableLeft="@mipmap/icon_zuo"
-        android:drawablePadding="@dimen/x12"
         android:gravity="center"
-        android:paddingLeft="@dimen/x24"
-        android:paddingRight="@dimen/x24"
+        android:padding="@dimen/x24"
         />
 
     <TextView
