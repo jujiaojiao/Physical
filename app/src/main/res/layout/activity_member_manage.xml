@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@mipmap/bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/titlebar_common_back_menu"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@mipmap/music_border"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="@drawable/bg_member_manage"
+            android:layout_marginTop="@dimen/x100"
+            android:orientation="horizontal"
+            android:layout_width="@dimen/x600"
+            android:layout_height="@dimen/x50">
+            <EditText
+                android:padding="@dimen/x2"
+                android:layout_weight="1"
+                android:textColorHint="@color/color_35c1f0"
+                android:hint="请输入姓名/手机号身份证号"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/tv_search"
+                android:text="查询"
+                android:background="@mipmap/button_orange"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_num"
+                android:text="序号"
+                android:textColor="@color/color_0fa6ec"
+                android:textSize="@dimen/x55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_name"
+                android:text="姓名"
+                android:textColor="@color/color_0fa6ec"
+                android:textSize="@dimen/x55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_sex"
+                android:text="性别"
+                android:textColor="@color/color_0fa6ec"
+                android:textSize="@dimen/x55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_phone"
+                android:text="手机号"
+                android:textColor="@color/color_0fa6ec"
+                android:textSize="@dimen/x55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_certi"
+                android:text="身份证号"
+                android:textColor="@color/color_0fa6ec"
+                android:textSize="@dimen/x55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_times"
+                android:text="诊疗次数"
+                android:textColor="@color/color_0fa6ec"
+                android:textSize="@dimen/x55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_operate"
+                android:text="操作"
+                android:textColor="@color/color_0fa6ec"
+                android:textSize="@dimen/x55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshlayout"
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ListView
+                android:id="@+id/lv_data"
+                android:scrollbars="none"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
+
+</LinearLayout>

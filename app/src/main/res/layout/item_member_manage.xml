@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_num"
+            android:text="序号"
+            android:textColor="@color/color_0fa6ec"
+            android:textSize="@dimen/x55"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_name"
+            android:text="姓名"
+            android:textColor="@color/color_0fa6ec"
+            android:textSize="@dimen/x55"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_sex"
+            android:text="性别"
+            android:textColor="@color/color_0fa6ec"
+            android:textSize="@dimen/x55"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_phone"
+            android:text="手机号"
+            android:textColor="@color/color_0fa6ec"
+            android:textSize="@dimen/x55"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_certi"
+            android:text="身份证号"
+            android:textColor="@color/color_0fa6ec"
+            android:textSize="@dimen/x55"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_times"
+            android:text="诊疗次数"
+            android:textColor="@color/color_0fa6ec"
+            android:textSize="@dimen/x55"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_charge"
+                android:text="充值"
+                android:textColor="@color/color_0fa6ec"
+                android:textSize="@dimen/x55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_change"
+                android:text="修改"
+                android:textColor="@color/color_0fa6ec"
+                android:textSize="@dimen/x55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_watch"
+                android:text="查看"
+                android:textColor="@color/color_0fa6ec"
+                android:textSize="@dimen/x55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
