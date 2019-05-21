@@ -6,9 +6,9 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:background="@mipmap/bg_set"
         android:layout_width="@dimen/x520"
         android:layout_height="@dimen/x260"
-        android:background="@drawable/bg_com_dialog"
         android:orientation="vertical">
 
         <TextView
@@ -41,7 +41,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="取消"
-                android:textColor="@color/colorPrimary"
+                android:background="@mipmap/button_blue"
+                android:textColor="@color/white"
                 android:textSize="@dimen/x30" />
 
             <View
@@ -56,7 +57,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="确定"
-                android:textColor="@color/colorPrimary"
+                android:background="@mipmap/button_orange"
+                android:textColor="@color/white"
                 android:textSize="@dimen/x30" />
         </LinearLayout>
 

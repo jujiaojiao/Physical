@@ -1,5 +1,7 @@
 package com.physical.app.member;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
@@ -11,6 +13,7 @@ import com.physical.app.R;
 import com.physical.app.adapter.MemberManageAdapter;
 import com.physical.app.bean.MemberManageBean;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.music.LocalMucicActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
@@ -53,6 +56,12 @@ public class MemberManageActivity extends BaseActivity {
     SmartRefreshLayout refreshlayout;
     private MemberManageAdapter adapter;
     private ArrayList<MemberManageBean> list;
+
+    public static void start(Context context){
+        Intent intent = new Intent(context,MemberManageActivity.class);
+        context.startActivity(intent);
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

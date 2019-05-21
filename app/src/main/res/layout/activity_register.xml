@@ -184,6 +184,7 @@
             android:textSize="8dp" />
 
         <TextView
+            android:id="@+id/tv_getcode"
             android:layout_width="56dp"
             android:layout_height="23dp"
             android:text="获取验证码"

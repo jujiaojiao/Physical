@@ -17,10 +17,10 @@ import android.widget.TextView;
 
 
 import com.physical.app.AppData;
+import com.physical.app.LoginActivity;
 import com.physical.app.R;
 import com.physical.app.common.utils.ToastUtil;
 import com.physical.app.mine.bean.User;
-import com.physical.app.mine.view.LoginActivity;
 
 import butterknife.ButterKnife;
 
@@ -88,32 +88,32 @@ public class BaseActivity extends AppCompatActivity {
         }
         decor.setSystemUiVisibility(ui);
     }
-    public void initTitleAndBack(String title, String menuName){
-        ButterKnife.bind(this);
-        TextView tvTitle = findViewById(R.id.tvTitle);
-        TextView tvBack = findViewById(R.id.tvBack);
-        TextView tvMenu = findViewById(R.id.tvMenu);
-        tvBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        tvTitle.setText(title);
-        tvMenu.setText(menuName);
-    }
-    public void initTitleAndBack(String title){
-        ButterKnife.bind(this);
-        TextView tvTitle = findViewById(R.id.tvTitle);
-        TextView tvBack = findViewById(R.id.tvBack);
-        tvBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        tvTitle.setText(title);
-    }
+//    public void initTitleAndBack(String title, String menuName){
+//        ButterKnife.bind(this);
+//        TextView tvTitle = findViewById(R.id.tvTitle);
+//        TextView tvBack = findViewById(R.id.tvBack);
+//        TextView tvMenu = findViewById(R.id.tvMenu);
+//        tvBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+//        tvTitle.setText(title);
+//        tvMenu.setText(menuName);
+//    }
+//    public void initTitleAndBack(String title){
+//        ButterKnife.bind(this);
+//        TextView tvTitle = findViewById(R.id.tvTitle);
+//        TextView tvBack = findViewById(R.id.tvBack);
+//        tvBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+//        tvTitle.setText(title);
+//    }
 
 
     protected void initWebviewSettings(WebView webView) {

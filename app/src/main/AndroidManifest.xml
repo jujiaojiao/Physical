@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.physical.app">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,38 +25,38 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|fontScale|fontScale"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <!--登录-->
         <activity
             android:name=".LoginActivity"
             android:configChanges="keyboardHidden|orientation|fontScale|fontScale"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <!--注册-->
         <activity
             android:name=".RegisterActivity"
             android:configChanges="keyboardHidden|orientation|fontScale|fontScale"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <!--本地音乐-->
         <activity
             android:name=".music.LocalMucicActivity"
             android:configChanges="keyboardHidden|orientation|fontScale|fontScale"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
 
         <!--会员信息管理-->
         <activity
             android:name=".member.MemberManageActivity"
             android:configChanges="keyboardHidden|orientation|fontScale|fontScale"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <!--系统设置-->
         <activity
             android:name=".setting.SettingActivity"
             android:configChanges="keyboardHidden|orientation|fontScale|fontScale"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
 
     </application>

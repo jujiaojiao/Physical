@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.utils.RegularUtils;
+import com.physical.app.common.utils.StringUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -57,11 +59,31 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.tv_login:
-
+                MainActivity.start(this);
                 break;
             case R.id.tv_register:
-
+                RegisterActivity.start(this);
                 break;
+        }
+    }
+
+
+    private void login(){
+        String phone = etPhone.getText().toString().trim();
+        String pwd = etPwd.getText().toString().trim();
+        if (StringUtil.isEmpty(phone)){
+            showToast("请输入手机号码");
+            return;
+        }
+        if (!RegularUtils.isMobilePhone(phone)){
+            if (StringUtil.isEmpty(phone)){
+                showToast("请输入正确的手机号码");
+                return;
+            }
+        }
+        if (StringUtil.isEmpty(pwd)){
+            showToast("请输入密码");
+            return;
         }
     }
 

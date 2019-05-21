@@ -1,5 +1,7 @@
 package com.physical.app.setting;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.physical.app.R;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.music.LocalMucicActivity;
 import com.physical.app.setting.fragment.MangeFragment;
 import com.physical.app.setting.fragment.RecoverFragment;
 import com.physical.app.setting.fragment.RepairFragment;
@@ -56,6 +59,10 @@ public class SettingActivity extends BaseActivity {
     private RepairFragment repairFragment;
     private TimesFragment timesFragment;
 
+    public static void start(Context context){
+        Intent intent = new Intent(context,SettingActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,36 +117,72 @@ public class SettingActivity extends BaseActivity {
                 }
                 //将原来的Fragment替换掉---此处R.id.fragmen指的是FrameLayout
                 ft.replace(R.id.framlayout, wifiFragment);
+                tvWifi.setBackgroundResource(R.mipmap.menu_orange);
+                tvManage.setBackgroundResource(R.mipmap.menu_blue);
+                tvRecover.setBackgroundResource(R.mipmap.menu_blue);
+                tvUpdate.setBackgroundResource(R.mipmap.menu_blue);
+                tvRepair.setBackgroundResource(R.mipmap.menu_blue);
+                tvTimes.setBackgroundResource(R.mipmap.menu_blue);
                 break;
             case 1:
                 if (mangeFragment == null) {
                     mangeFragment = new MangeFragment();
                 }
                 ft.replace(R.id.framlayout, mangeFragment);
+                tvWifi.setBackgroundResource(R.mipmap.menu_blue);
+                tvManage.setBackgroundResource(R.mipmap.menu_orange);
+                tvRecover.setBackgroundResource(R.mipmap.menu_blue);
+                tvUpdate.setBackgroundResource(R.mipmap.menu_blue);
+                tvRepair.setBackgroundResource(R.mipmap.menu_blue);
+                tvTimes.setBackgroundResource(R.mipmap.menu_blue);
                 break;
             case 2:
                 if (recoverFragment == null) {
                     recoverFragment = new RecoverFragment();
                 }
                 ft.replace(R.id.framlayout, recoverFragment);
+                tvWifi.setBackgroundResource(R.mipmap.menu_blue);
+                tvManage.setBackgroundResource(R.mipmap.menu_blue);
+                tvRecover.setBackgroundResource(R.mipmap.menu_orange);
+                tvUpdate.setBackgroundResource(R.mipmap.menu_blue);
+                tvRepair.setBackgroundResource(R.mipmap.menu_blue);
+                tvTimes.setBackgroundResource(R.mipmap.menu_blue);
                 break;
             case 3:
                 if (updateFragment == null) {
                     updateFragment = new UpdateFragment();
                 }
                 ft.replace(R.id.framlayout, updateFragment);
+                tvWifi.setBackgroundResource(R.mipmap.menu_blue);
+                tvManage.setBackgroundResource(R.mipmap.menu_blue);
+                tvRecover.setBackgroundResource(R.mipmap.menu_blue);
+                tvUpdate.setBackgroundResource(R.mipmap.menu_orange);
+                tvRepair.setBackgroundResource(R.mipmap.menu_blue);
+                tvTimes.setBackgroundResource(R.mipmap.menu_blue);
                 break;
             case 4:
                 if (repairFragment == null) {
                     repairFragment = new RepairFragment();
                 }
                 ft.replace(R.id.framlayout, repairFragment);
+                tvWifi.setBackgroundResource(R.mipmap.menu_blue);
+                tvManage.setBackgroundResource(R.mipmap.menu_blue);
+                tvRecover.setBackgroundResource(R.mipmap.menu_blue);
+                tvUpdate.setBackgroundResource(R.mipmap.menu_blue);
+                tvRepair.setBackgroundResource(R.mipmap.menu_orange);
+                tvTimes.setBackgroundResource(R.mipmap.menu_blue);
                 break;
             case 5:
                 if (timesFragment == null) {
                     timesFragment = new TimesFragment();
                 }
                 ft.replace(R.id.framlayout, timesFragment);
+                tvWifi.setBackgroundResource(R.mipmap.menu_blue);
+                tvManage.setBackgroundResource(R.mipmap.menu_blue);
+                tvRecover.setBackgroundResource(R.mipmap.menu_blue);
+                tvUpdate.setBackgroundResource(R.mipmap.menu_blue);
+                tvRepair.setBackgroundResource(R.mipmap.menu_blue);
+                tvTimes.setBackgroundResource(R.mipmap.menu_orange);
                 break;
             default:
                 break;

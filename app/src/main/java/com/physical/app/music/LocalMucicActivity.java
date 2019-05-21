@@ -1,6 +1,9 @@
 package com.physical.app.music;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,11 +13,16 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.physical.app.MainActivity;
 import com.physical.app.R;
 import com.physical.app.adapter.LocalMusicAdapter;
 import com.physical.app.bean.MusicBean;
 import com.physical.app.common.base.BaseActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 
 import java.util.ArrayList;
 
@@ -61,6 +69,11 @@ public class LocalMucicActivity extends BaseActivity {
     SmartRefreshLayout refreshlayout;
     private LocalMusicAdapter adapter;
     private ArrayList<MusicBean> list;
+    public static void start(Context context){
+        Intent intent = new Intent(context,LocalMucicActivity.class);
+        context.startActivity(intent);
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +85,15 @@ public class LocalMucicActivity extends BaseActivity {
     }
 
     private void initView(){
+        ClassicsFooter footer = new ClassicsFooter(this);
+        footer.setFinishDuration(0);
+        ClassicsHeader header = new ClassicsHeader(this);
+        header.setFinishDuration(0);
+        refreshlayout.setDisableContentWhenRefresh(true);
+        refreshlayout.setDisableContentWhenLoading(true);
+        refreshlayout.setRefreshHeader(header);
+        refreshlayout.setRefreshFooter(footer);
+
 
         list = new ArrayList<>();
         list.add(new MusicBean());
@@ -90,6 +112,19 @@ public class LocalMucicActivity extends BaseActivity {
 
             }
         });
+        refreshlayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadmore();
+                loadMore();
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh();
+                refresh();
+            }
+        });
     }
 
     @OnClick({R.id.ivBack})
@@ -99,6 +134,18 @@ public class LocalMucicActivity extends BaseActivity {
                 finish();
                 break;
         }
+    }
+
+    private void loadMore() {
+//        pageNum++;
+//        request();
+    }
+
+    private void refresh() {
+//        pageNum = 1;
+//        cartDataList.clear();
+//        adapter.notifyDataSetChanged();
+//        request();
     }
 
 }

@@ -1,6 +1,9 @@
 package com.physical.app;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
@@ -9,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.utils.RegularUtils;
+import com.physical.app.common.utils.StringUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,6 +50,14 @@ public class RegisterActivity extends BaseActivity {
     TextView tvLogin;
     @Bind(R.id.tv_register)
     TextView tvRegister;
+    @Bind(R.id.tv_getcode)
+    TextView tvGetCode;
+    private String code;
+
+    public static void start(Context context){
+        Intent intent = new Intent(context,RegisterActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,16 +67,81 @@ public class RegisterActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_login,R.id.tv_register})
+    @OnClick({R.id.tv_login,R.id.tv_register,R.id.tv_getcode})
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.tv_login:
-
+                MainActivity.start(this);
                 break;
             case R.id.tv_register:
-
+                //使用已有账号登录
+                LoginActivity.start(this);
+                break;
+            case R.id.tv_getcode:
+                timer.start();
                 break;
         }
+    }
+
+    CountDownTimer timer = new CountDownTimer(60000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            int time = (int) (millisUntilFinished / 1000);
+            tvGetCode.setText(time + "秒后重发");
+            tvGetCode.setEnabled(false);
+//            tvGetmsg.setBackgroundResource(R.drawable.);
+        }
+
+        @Override
+        public void onFinish() {
+            tvGetCode.setText("重新发送");
+            tvGetCode.setEnabled(true);
+//            tvGetmsg.setBackgroundResource(R.drawable.bg_333_12);
+
+        }
+    };
+
+    private void login(){
+        String phone = etPhone.getText().toString().trim();
+        String pwd = etPwd.getText().toString().trim();
+        String name = etUser.getText().toString().trim();
+        String repwd = etRepwd.getText().toString().trim();
+        code = etCode.getText().toString().trim();
+        if (StringUtil.isEmpty(name)){
+            showToast("请输入姓名");
+            return;
+        }
+        if (StringUtil.isEmpty(phone)){
+            showToast("请输入手机号码");
+            return;
+        }
+        if (!RegularUtils.isMobilePhone(phone)){
+            if (StringUtil.isEmpty(phone)){
+                showToast("请输入正确的手机号码");
+                return;
+            }
+        }
+        if (StringUtil.isEmpty(pwd)){
+            showToast("请输入密码");
+            return;
+        }
+        if (StringUtil.isEmpty(repwd)){
+            showToast("请再次输入密码");
+            return;
+        }
+        if (StringUtil.isEmpty(code)){
+            showToast("请输入验证码");
+            return;
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        if (timer != null) {
+            timer.cancel();
+        }
+        super.onDestroy();
     }
 
 }
