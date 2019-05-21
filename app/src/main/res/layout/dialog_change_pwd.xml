@@ -71,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"/>
                 <TextView
+                    android:id="@+id/tv_getcode"
                     android:layout_toRightOf="@+id/et_code"
                     android:text="获取验证码"
                     android:gravity="center|left"

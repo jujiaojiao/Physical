@@ -6,10 +6,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.physical.app.R;
 import com.physical.app.common.base.BaseFragment;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -20,6 +22,11 @@ import butterknife.ButterKnife;
  */
 
 public class UpdateFragment extends BaseFragment {
+    @Bind(R.id.tv_version_name)
+    TextView tvVersionName;
+    @Bind(R.id.tv_check_version)
+    TextView tvCheckVersion;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,10 +43,21 @@ public class UpdateFragment extends BaseFragment {
     }
 
     private void addListener() {
+        tvCheckVersion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     private void initData() {
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

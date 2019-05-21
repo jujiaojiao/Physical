@@ -1,12 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <TextView
-        android:text="recover"
-        android:gravity="center"
-        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:gravity="center|left"
+        android:text="恢复出厂设置"
+        android:textColor="@color/color_1cbae1"
+        android:textSize="@dimen/x56" />
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="1dp"
+        android:background="@color/color_35C1F0" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:gravity="center|left"
+        android:text="此操作会清除您内存设别中的所有问题，包括"
+        android:textColor="@color/color_1cbae1"
+        android:textSize="@dimen/x56" />
+
+    <TextView
+        android:id="@+id/tv_accout"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:gravity="center|left"
+        android:text="• 您的 *** 账户
+
+• 系统及应用数据和设置
+
+• 已下载的应用"
+        android:textColor="@color/color_1cbae1"
+        android:textSize="@dimen/x56" />
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:gravity="center|left"
+        android:text="要清除音乐和其他用户数据，您需要清空该内部存储"
+        android:textColor="@color/color_1cbae1"
+        android:textSize="@dimen/x56" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_recover_crash"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x100"
+            android:gravity="center|left"
+            android:text="格式化内部存储"
+            android:textColor="@color/color_1cbae1"
+            android:textSize="@dimen/x56" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:gravity="center|left"
+        android:text="清除内部存储中的全部数据，例如音乐"
+        android:textColor="@color/color_1cbae1"
+        android:textSize="@dimen/x56" />
+    <TextView
+        android:id="@+id/tv_reset"
+        android:padding="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:gravity="center|left"
+        android:background="@mipmap/button_orange"
+        android:text="重置"
+        android:textColor="@color/white"
+        android:textSize="@dimen/x56" />
 
 </LinearLayout>
