@@ -32,7 +32,7 @@
                 android:src="@mipmap/icon_bright_down"
                 android:layout_width="20dp"
                 android:layout_height="20dp" />
-            <ProgressBar
+            <SeekBar
                 android:id="@+id/progressBar_light"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="100dp"
@@ -43,6 +43,7 @@
                 android:layout_weight="1"
                 android:max="100"
                 android:progress="50"
+                android:thumb="@null"
                 android:progressDrawable="@drawable/progress_fund_detail"
                 android:visibility="visible" />
             <ImageView
@@ -74,7 +75,7 @@
                 android:src="@mipmap/icon_voice_down"
                 android:layout_width="20dp"
                 android:layout_height="20dp" />
-            <ProgressBar
+            <SeekBar
                 android:id="@+id/progressBar_voice"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="100dp"
@@ -84,6 +85,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:max="100"
+                android:thumb="@null"
                 android:progress="50"
                 android:progressDrawable="@drawable/progress_fund_detail"
                 android:visibility="visible" />

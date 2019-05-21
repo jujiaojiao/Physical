@@ -32,11 +32,13 @@ public class RecipeDialog extends Dialog implements View.OnClickListener {
     private TextView tvConfirm;
     private RecipeAdapter adapter;
     private List<RecipeBean> datas;
+    private Callback callback;
 
-    public RecipeDialog(@NonNull Context context, List<RecipeBean> datas) {
+    public RecipeDialog(@NonNull Context context, List<RecipeBean> datas,Callback callback) {
         super(context, R.style.dialog);
         mContext = context;
         this.datas = datas;
+        this.callback = callback;
     }
 
     @Override
@@ -64,8 +66,12 @@ public class RecipeDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_confirm:
-
+                callback.onConfirm();
                 break;
         }
+    }
+
+    public interface Callback{
+        void onConfirm();
     }
 }

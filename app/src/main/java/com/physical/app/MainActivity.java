@@ -93,7 +93,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showSystemDilaog() {
-        systemSetDialog = new SystemSetDialog(this);
+        systemSetDialog = new SystemSetDialog(this, new SystemSetDialog.Callback() {
+            @Override
+            public void onConfirm() {
+
+            }
+
+            @Override
+            public void onCancel() {
+                systemSetDialog.dismiss();
+            }
+        });
         systemSetDialog.show();
     }
 }
