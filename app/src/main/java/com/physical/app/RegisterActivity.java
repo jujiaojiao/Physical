@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.physical.app.common.base.BaseActivity;
@@ -45,7 +46,7 @@ public class RegisterActivity extends BaseActivity {
     @Bind(R.id.et_code)
     EditText etCode;//验证码
     @Bind(R.id.ll_code)
-    LinearLayout llCode;//
+    RelativeLayout llCode;//
     @Bind(R.id.tv_login)
     TextView tvLogin;
     @Bind(R.id.tv_register)

@@ -9,37 +9,39 @@
     tools:context="com.physical.app.MainActivity">
 
     <LinearLayout
-        android:layout_margin = "20dp"
+        android:layout_marginLeft="@dimen/x57"
+        android:layout_marginTop="@dimen/x53"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:layout_weight="1"
             android:id="@+id/tv_title"
-            android:drawablePadding="8dp"
+            android:drawablePadding="@dimen/x46"
             android:gravity="center|left"
             android:drawableLeft="@mipmap/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/x85"
+            android:layout_height="@dimen/x65"
             android:text="广州场导"
             android:textColor="#ffffffff"
-            android:textSize="9sp"
+            android:textSize="@dimen/x27"
             />
         <ImageView
             android:id="@+id/iv_head"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x60"
             android:src="@mipmap/icon_phone"
             />
         <TextView
             android:id="@+id/tv_username"
-            android:layout_marginLeft="20dp"
-            android:layout_width="27dp"
-            android:layout_height="9dp"
+            android:layout_marginLeft="@dimen/x21"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/x58"
             android:text="张晓明"
             android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="9sp"
+            android:textSize="@dimen/x27"
             />
     </LinearLayout>
     <RelativeLayout
@@ -47,8 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_marginTop="60dp"
-            android:layout_marginLeft="109dp"
+            android:layout_marginTop="@dimen/x73"
+            android:layout_marginLeft="@dimen/x358"
             android:id="@+id/ll_local_music"
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -57,20 +59,22 @@
                 android:layout_gravity="center"
                 android:id="@+id/iv_local_mucic"
                 android:src="@mipmap/icon_music"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/x235"
+                android:layout_height="@dimen/x235" />
             <TextView
+                android:layout_marginTop="@dimen/x27"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="本地音乐"
                 android:gravity="center"
                 android:textColor="#ffffffff"
-                android:textSize="13sp"
+                android:textSize="@dimen/x36"
                 />
         </LinearLayout>
         <LinearLayout
-            android:layout_marginTop="60dp"
-            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@+id/ll_local_music"
+            android:layout_marginTop="@dimen/x73"
+            android:layout_marginLeft="@dimen/x249"
             android:id="@+id/ll_phsical"
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -79,21 +83,22 @@
                 android:layout_gravity="center"
                 android:id="@+id/iv_pysical"
                 android:src="@mipmap/icon_physical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/x235"
+                android:layout_height="@dimen/x235" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="理疗"
                 android:gravity="center"
                 android:textColor="#ffffffff"
-                android:textSize="13sp"
+                android:textSize="@dimen/x36"
+                android:layout_marginTop="@dimen/x27"
                 />
         </LinearLayout>
         <LinearLayout
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="60dp"
-            android:layout_marginRight="109dp"
+            android:layout_toRightOf="@+id/ll_phsical"
+            android:layout_marginTop="@dimen/x73"
+            android:layout_marginLeft="@dimen/x249"
             android:id="@+id/ll_vip"
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -102,22 +107,23 @@
                 android:layout_gravity="center"
                 android:id="@+id/iv_vip"
                 android:src="@mipmap/icon_vip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/x235"
+                android:layout_height="@dimen/x235" />
             <TextView
+                android:layout_marginTop="@dimen/x27"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="会员信息"
                 android:gravity="center"
                 android:textColor="#ffffffff"
-                android:textSize="13sp"
+                android:textSize="@dimen/x36"
                 />
         </LinearLayout>
         <LinearLayout
             android:layout_below="@+id/ll_local_music"
             android:id="@+id/ll_set"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="197dp"
+            android:layout_marginTop="@dimen/x97"
+            android:layout_marginLeft="@dimen/x621"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -125,23 +131,24 @@
                 android:layout_gravity="center"
                 android:id="@+id/iv_set"
                 android:src="@mipmap/icon_set"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/x235"
+                android:layout_height="@dimen/x235" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="设置"
                 android:gravity="center"
                 android:textColor="#ffffffff"
-                android:textSize="13sp"
+                android:textSize="@dimen/x36"
+                android:layout_marginTop="@dimen/x27"
                 />
         </LinearLayout>
         <LinearLayout
-            android:layout_alignParentRight="true"
             android:layout_below="@+id/ll_local_music"
             android:id="@+id/ll_qq_music"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="187dp"
+            android:layout_toRightOf="@+id/ll_set"
+            android:layout_marginLeft="@dimen/x240"
+            android:layout_marginTop="@dimen/x97"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -149,15 +156,16 @@
                 android:layout_gravity="center"
                 android:id="@+id/iv_qq"
                 android:src="@mipmap/icon_qqmusic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/x235"
+                android:layout_height="@dimen/x235" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="设置"
                 android:gravity="center"
                 android:textColor="#ffffffff"
-                android:textSize="13sp"
+                android:textSize="@dimen/x36"
+                android:layout_marginTop="@dimen/x27"
                 />
         </LinearLayout>
 
@@ -166,32 +174,35 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@mipmap/icon_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_marginRight="@dimen/x49"
+            android:layout_width="@dimen/x119"
+            android:layout_height="@dimen/x119" />
     </RelativeLayout>
     <View
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <LinearLayout
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/x34"
+        android:layout_marginRight="@dimen/x50"
         android:orientation="horizontal"
         android:layout_gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="门磁开关"
             android:textColor="#ffffffff"
-            android:textSize="11sp"
+            android:textSize="@dimen/x32"
             />
         <ImageView
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/x21"
             android:id="@+id/iv_switch"
             android:src="@mipmap/button_off"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="@dimen/x166"
+            android:layout_height="@dimen/x52" />
     </LinearLayout>
 
 </LinearLayout>
