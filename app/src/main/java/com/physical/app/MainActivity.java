@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.physical.app.common.widget.SystemSetDialog;
 import com.physical.app.member.MemberManageActivity;
 import com.physical.app.music.LocalMucicActivity;
+import com.physical.app.physical.PhysicalActivity;
 import com.physical.app.setting.SettingActivity;
 
 import butterknife.Bind;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 LocalMucicActivity.start(this);
                 break;
             case R.id.ll_phsical:
-
+                PhysicalActivity.start(this);
                 break;
             case R.id.ll_vip:
                 MemberManageActivity.start(this);

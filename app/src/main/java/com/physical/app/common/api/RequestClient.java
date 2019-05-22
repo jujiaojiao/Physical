@@ -2,7 +2,7 @@ package com.physical.app.common.api;
 
 
 import com.physical.app.MyApplication;
-import com.physical.app.mine.bean.User;
+import com.physical.app.common.mine.bean.User;
 
 import java.util.concurrent.TimeUnit;
 

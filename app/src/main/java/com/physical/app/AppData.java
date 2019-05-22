@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.physical.app.common.constains.Constains;
 import com.physical.app.common.utils.Base64Helper;
 import com.physical.app.common.utils.Preferences;
-import com.physical.app.mine.bean.User;
+import com.physical.app.common.mine.bean.User;
 
 
 public class AppData {

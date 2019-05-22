@@ -1,7 +1,7 @@
 package com.physical.app.common.api;
 
 
-import com.physical.app.mine.bean.User;
+import com.physical.app.common.mine.bean.User;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;

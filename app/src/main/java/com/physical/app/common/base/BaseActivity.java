@@ -13,16 +13,12 @@ import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
 
 
 import com.physical.app.AppData;
 import com.physical.app.LoginActivity;
-import com.physical.app.R;
 import com.physical.app.common.utils.ToastUtil;
-import com.physical.app.mine.bean.User;
-
-import butterknife.ButterKnife;
+import com.physical.app.common.mine.bean.User;
 
 /**
  * 作者: liangzixun

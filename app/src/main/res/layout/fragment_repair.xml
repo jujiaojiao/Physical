@@ -1,12 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:text="repair"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x100"
+        android:gravity="center|left"
+        android:text="设备报修"
+        android:textColor="@color/color_1cbae1"
+        android:textSize="@dimen/x56" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_35C1F0" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x100"
+            android:gravity="center|left"
+            android:text="*"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x56" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:text="标题"
+            android:textColor="@color/color_1cbae1"
+            android:textSize="@dimen/x56" />
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:hint="请输入"
+            android:background="@mipmap/input_box"
+            android:textColor="@color/color_1cbae1"
+            android:textSize="@dimen/x56" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x100"
+            android:gravity="center|left"
+            android:text="*"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x56" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:text="内容"
+            android:textColor="@color/color_1cbae1"
+            android:textSize="@dimen/x56" />
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:hint="请输入内容"
+            android:background="@mipmap/input_box"
+            android:textColor="@color/color_1cbae1"
+            android:textSize="@dimen/x56" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:text="取消"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@mipmap/button_blue"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/tv_confirm"
+            android:text="确认"
+            android:background="@mipmap/button_orange"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </LinearLayout>

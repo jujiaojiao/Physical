@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@mipmap/bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/titlebar_common_back"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@mipmap/music_border"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x100"
+            android:gravity="center|left"
+            android:text="诊疗用户"
+            android:textColor="@color/color_1cbae1"
+            android:textSize="@dimen/x56" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_35C1F0" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:gravity="center"
+                    android:text="灯光"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <GridView
+                android:id="@+id/gv_data1"
+                android:numColumns="9"
+                android:listSelector="#00000000"
+                android:horizontalSpacing="0dp"
+                android:layout_width="400dp"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="理疗调整："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/iv_off"
+                android:src="@mipmap/button_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/iv_on"
+                android:src="@mipmap/button_on"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="100dp"
+                android:text="剩余时间："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_time"
+                android:text="20:07"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

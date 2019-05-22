@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 
 import com.physical.app.AppData;
 import com.physical.app.common.utils.ToastUtil;
-import com.physical.app.mine.bean.User;
+import com.physical.app.common.mine.bean.User;
 
 
 /**

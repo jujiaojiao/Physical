@@ -59,6 +59,20 @@
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
 
+        <!--理疗-->
+        <activity
+            android:name=".physical.PhysicalActivity"
+            android:configChanges="keyboardHidden|orientation|fontScale|fontScale"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+
+        <!--理疗详情-->
+        <activity
+            android:name=".physical.PhysicalDetailActivity"
+            android:configChanges="keyboardHidden|orientation|fontScale|fontScale"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+
     </application>
 
 </manifest>

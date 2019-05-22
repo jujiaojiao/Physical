@@ -1,4 +1,4 @@
-package com.physical.app.mine.bean;
+package com.physical.app.common.mine.bean;
 
 import java.io.Serializable;
 
