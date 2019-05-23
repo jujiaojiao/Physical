@@ -1,10 +1,16 @@
 package com.physical.app;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,6 +47,8 @@ public class LoginActivity extends BaseActivity {
     @Bind(R.id.tv_register)
     TextView tvRegister;
 
+    private AnimatorSet animatorSet;
+
     public  static void start(Context context){
         Intent intent = new Intent(context,LoginActivity.class);
         context.startActivity(intent);
@@ -52,8 +60,35 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
+        startAnimator();
     }
+
+
+    private void startAnimator(){
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(ivCircle,"alpha",1,0,1,0,1,1,0,1,0,1);
+        ObjectAnimator rotation = ObjectAnimator.ofFloat(ivCircle,"rotation",0,180,0,-180,0);
+        ObjectAnimator scaleXcircle = ObjectAnimator.ofFloat(ivCircle, "scaleX", 1f, 1.5f, 1f,1.5f,1f);
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(ivTitle, "scaleX", 1f, 1.5f, 1f,1.5f,1f);
+        alpha.setRepeatMode(ValueAnimator.RESTART);
+        rotation.setRepeatMode(ValueAnimator.RESTART);
+        scaleXcircle.setRepeatMode(ValueAnimator.RESTART);
+        scaleX.setRepeatMode(ValueAnimator.RESTART);
+        alpha.setRepeatCount(Animation.INFINITE);
+        rotation.setRepeatCount(Animation.INFINITE);
+        scaleXcircle.setRepeatCount(Animation.INFINITE);
+        scaleX.setRepeatCount(Animation.INFINITE);
+        animatorSet = new AnimatorSet();
+        animatorSet.playTogether(alpha,rotation,scaleXcircle,scaleX);
+        animatorSet.setDuration(3000);
+        animatorSet.start();
+    }
+
+    private void stopAnimator(){
+        if (null!=animatorSet){
+            animatorSet.end();
+        }
+    }
+
 
     @OnClick({R.id.tv_login,R.id.tv_register})
     public void onClick(View view){
@@ -87,4 +122,9 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopAnimator();
+    }
 }
