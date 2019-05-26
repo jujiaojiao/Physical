@@ -13,38 +13,61 @@
         android:layout_width="@dimen/x1789"
         android:layout_height="@dimen/x910">
         <LinearLayout
-            android:background="@drawable/bg_member_manage"
-            android:layout_marginTop="@dimen/x60"
-            android:orientation="horizontal"
-            android:layout_width="@dimen/x600"
-            android:layout_height="@dimen/x50">
-            <EditText
-                android:paddingLeft="@dimen/x10"
-                android:layout_weight="1"
-                android:textColorHint="@color/color_35c1f0"
-                android:hint="请输入姓名/手机号身份证号"
-                android:background="@null"
-                android:textSize="@dimen/x20"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <TextView
-                android:id="@+id/tv_search"
-                android:text="查询"
-                android:background="@mipmap/button_orange"
-                android:gravity="center"
-                android:textSize="@dimen/x26"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="@dimen/x45"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginLeft="@dimen/x593"
+                android:background="@drawable/bg_member_manage"
+                android:layout_marginTop="@dimen/x60"
+                android:orientation="horizontal"
+                android:layout_width="@dimen/x600"
+                android:layout_height="@dimen/x50">
+                <EditText
+                    android:paddingLeft="@dimen/x10"
+                    android:layout_weight="1"
+                    android:textColorHint="@color/color_35c1f0"
+                    android:hint="请输入姓名/手机号身份证号"
+                    android:background="@null"
+                    android:textSize="@dimen/x20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/tv_search"
+                    android:text="查询"
+                    android:background="@mipmap/button_orange"
+                    android:gravity="center"
+                    android:textSize="@dimen/x26"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_sure"
+                android:layout_marginLeft="@dimen/x333"
+                android:layout_marginTop="@dimen/x45"
+                android:src="@mipmap/button_sure"
+                android:layout_width="@dimen/x159"
+                android:layout_height="@dimen/x77" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/x45"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/x35"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_choose"
+                android:text="选择"
+                android:gravity="center"
+                android:visibility="visible"
+                android:textColor="@color/color_d0f1ff"
+                android:textSize="@dimen/x30"
+                android:layout_width="@dimen/x130"
+                android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tv_num"
-                android:layout_marginLeft="@dimen/x35"
                 android:text="序号"
                 android:gravity="center"
                 android:textColor="@color/color_d0f1ff"
@@ -94,7 +117,7 @@
             <TextView
                 android:id="@+id/tv_operate"
                 android:text="操作"
-                android:layout_marginRight="@dimen/x35"
+                android:layout_marginRight="@dimen/x60"
                 android:textColor="@color/color_d0f1ff"
                 android:textSize="@dimen/x30"
                 android:gravity="center"

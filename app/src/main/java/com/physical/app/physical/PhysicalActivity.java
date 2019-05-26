@@ -188,7 +188,7 @@ public class PhysicalActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PhysicalAdapter1.setcurrent(position);
-                PhysicalDetailActivity.start(PhysicalActivity.this);
+//                PhysicalDetailActivity.start(PhysicalActivity.this);
             }
         });
         gvData2.setOnItemClickListener(new AdapterView.OnItemClickListener() {

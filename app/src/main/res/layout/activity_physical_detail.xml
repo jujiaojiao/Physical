@@ -42,8 +42,8 @@
                 <ImageView
                     android:layout_gravity="center_horizontal"
                     android:src="@mipmap/icon_light"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="@dimen/x119"
+                    android:layout_height="@dimen/x119" />
                 <TextView
                     android:gravity="center"
                     android:text="灯光"

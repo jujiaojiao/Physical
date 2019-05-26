@@ -5,9 +5,18 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:layout_marginLeft="@dimen/x15"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x58">
+        <ImageView
+            android:visibility="visible"
+            android:id="@+id/iv_choose"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_choose"
+            android:layout_width="@dimen/x130"
+            android:layout_height="@dimen/x20" />
         <TextView
             android:id="@+id/tv_num"
             android:text="1"
@@ -64,6 +73,7 @@
                 android:id="@+id/tv_charge"
                 android:text="充值"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:gravity="center"
                 android:textColor="@color/color_51FF3A"
                 android:textSize="@dimen/x24"
@@ -72,6 +82,7 @@
             <TextView
                 android:id="@+id/tv_change"
                 android:text="修改"
+                android:visibility="gone"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@color/color_FF5A3A"
