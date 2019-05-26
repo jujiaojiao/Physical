@@ -14,12 +14,12 @@ import android.widget.TextView;
 import com.physical.app.R;
 import com.physical.app.adapter.PhysicalAdapter;
 import com.physical.app.common.base.BaseActivity;
-import com.physical.app.music.LocalMucicActivity;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by jjj
@@ -51,6 +51,8 @@ public class PhysicalActivity extends BaseActivity {
     GridView gvData6;
     @Bind(R.id.gv_data7)
     GridView gvData7;
+    @Bind(R.id.iv_title)
+    ImageView ivTitle;
 
     private PhysicalAdapter PhysicalAdapter1;
     private ArrayList<String> list1;
@@ -68,8 +70,8 @@ public class PhysicalActivity extends BaseActivity {
     private ArrayList<String> list7;
 
 
-    public static void start(Context context){
-        Intent intent = new Intent(context,PhysicalActivity.class);
+    public static void start(Context context) {
+        Intent intent = new Intent(context, PhysicalActivity.class);
         context.startActivity(intent);
     }
 
@@ -84,6 +86,7 @@ public class PhysicalActivity extends BaseActivity {
     }
 
     public void initView() {
+        ivTitle.setImageResource(R.mipmap.word_phy);
         list1 = new ArrayList<>();
         list1.add("1");
         list1.add("2");
@@ -139,7 +142,6 @@ public class PhysicalActivity extends BaseActivity {
         gvData4.setAdapter(PhysicalAdapter4);
 
 
-
         list5 = new ArrayList<>();
         list5.add("1");
         list5.add("2");
@@ -186,6 +188,7 @@ public class PhysicalActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PhysicalAdapter1.setcurrent(position);
+                PhysicalDetailActivity.start(PhysicalActivity.this);
             }
         });
         gvData2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -224,6 +227,15 @@ public class PhysicalActivity extends BaseActivity {
                 PhysicalAdapter7.setcurrent(position);
             }
         });
+    }
+
+    @OnClick({R.id.ivBack})
+    public void onClick(View view){
+        switch (view.getId()) {
+            case R.id.ivBack:
+                finish();
+                break;
+        }
     }
 
 }

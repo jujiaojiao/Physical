@@ -74,7 +74,7 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void initView(){
-        startAnimator();
+//        startAnimator();
     }
 
     @OnClick({R.id.tv_login,R.id.tv_register,R.id.tv_getcode})

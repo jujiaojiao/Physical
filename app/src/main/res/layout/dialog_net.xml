@@ -1,44 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:background="@mipmap/bg_set"
+    android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:background="@mipmap/bg_set"
+        android:layout_width="@dimen/x540"
+        android:layout_height="@dimen/x340">
         <TextView
             android:id="@+id/tv_title"
             android:text="网络提示"
             android:gravity="center"
+            android:textSize="@dimen/x28"
             android:textColor="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="@dimen/x60" />
         <TextView
             android:id="@+id/tv_tip"
+            android:layout_marginTop="@dimen/x45"
             android:text="您的网络已断开，请检查网络。或输入激活码启动离线模式："
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/x70"
+            android:layout_marginRight="@dimen/x80"
             android:gravity="center|left"
+            android:textSize="@dimen/x20"
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
+            android:layout_marginBottom="@dimen/x43"
+            android:layout_marginTop="@dimen/x51"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <TextView
                 android:text="激活码:"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/x69"
                 android:gravity="center|left"
+                android:textSize="@dimen/x20"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
             <EditText
+                android:paddingLeft="@dimen/x8"
+                android:layout_marginLeft="@dimen/x12"
                 android:id="@+id/et_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/x310"
+                android:layout_height="@dimen/x28"
                 android:background="@mipmap/input_box"/>
         </LinearLayout>
 
@@ -48,22 +57,22 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tv_cancel"
+                android:layout_marginLeft="@dimen/x69"
                 android:text="取消"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:background="@mipmap/button_blue"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/x145"
+                android:layout_height="@dimen/x42" />
             <TextView
+                android:layout_marginLeft="@dimen/x116"
                 android:background="@mipmap/button_orange"
-                android:layout_weight="1"
                 android:id="@+id/tv_confirm"
                 android:text="确认"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/x145"
+                android:layout_height="@dimen/x42" />
         </LinearLayout>
     </LinearLayout>
 

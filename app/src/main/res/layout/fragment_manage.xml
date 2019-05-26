@@ -5,13 +5,17 @@
     android:layout_height="match_parent">
     <TextView
         android:text="管理员信息"
-        android:layout_marginLeft="@dimen/x100"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/x60"
+        android:layout_marginLeft="@dimen/x60"
         android:gravity="center|left"
-        android:textSize="@dimen/x56"
-        android:textColor="@color/color_1cbae1"
+        android:textSize="@dimen/x30"
+        android:textColor="@color/color_d0f1ff"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="@dimen/x90" />
     <View
+        android:layout_marginLeft="@dimen/x35"
+        android:layout_marginRight="@dimen/x35"
         android:background="@color/color_35C1F0"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
@@ -19,27 +23,29 @@
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/x78">
         <TextView
             android:text="姓名"
             android:layout_marginLeft="@dimen/x63"
             android:gravity="center|left"
-            android:textSize="35dp"
+            android:textSize="@dimen/x24"
             android:layout_weight="1"
             android:textColor="@color/color_1cbae1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
         <TextView
             android:id="@+id/tv_name"
             android:text="张三"
             android:layout_marginRight="@dimen/x63"
             android:gravity="center|left"
-            android:textSize="35dp"
+            android:textSize="@dimen/x24"
             android:textColor="@color/color_1cbae1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
     </LinearLayout>
     <View
+        android:layout_marginLeft="@dimen/x35"
+        android:layout_marginRight="@dimen/x35"
         android:background="@color/color_35C1F0"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
@@ -47,27 +53,29 @@
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/x78">
         <TextView
             android:text="手机号"
             android:layout_marginLeft="@dimen/x63"
             android:gravity="center|left"
-            android:textSize="35dp"
+            android:textSize="@dimen/x24"
             android:layout_weight="1"
             android:textColor="@color/color_1cbae1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
         <TextView
             android:id="@+id/tv_phone"
             android:text="张三"
             android:layout_marginRight="@dimen/x63"
             android:gravity="center|left"
-            android:textSize="35dp"
+            android:textSize="@dimen/x24"
             android:textColor="@color/color_1cbae1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
     </LinearLayout>
     <View
+        android:layout_marginLeft="@dimen/x35"
+        android:layout_marginRight="@dimen/x35"
         android:background="@color/color_35C1F0"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
@@ -76,25 +84,27 @@
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/x78">
         <TextView
             android:text="修改密码"
             android:layout_marginLeft="@dimen/x63"
             android:gravity="center|left"
-            android:textSize="35dp"
+            android:textSize="@dimen/x24"
             android:layout_weight="1"
             android:textColor="@color/color_1cbae1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
         <ImageView
             android:layout_gravity="center_vertical"
             android:id="@+id/iv_switch"
-            android:layout_marginRight="20dp"
-            android:src="@mipmap/button_on"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_marginRight="@dimen/x35"
+            android:src="@mipmap/next"
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/x21" />
     </LinearLayout>
     <View
+        android:layout_marginLeft="@dimen/x35"
+        android:layout_marginRight="@dimen/x35"
         android:background="@color/color_35C1F0"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>

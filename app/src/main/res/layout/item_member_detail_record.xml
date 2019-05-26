@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x70">
+        <ImageView
+            android:id="@+id/iv_choose"
+            android:layout_gravity="center"
+            android:src="@mipmap/choose_none"
+            android:layout_width="@dimen/x22"
+            android:layout_height="@dimen/x22" />
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="@dimen/x160"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/color_00fcff"
+            android:textSize="@dimen/x24" />
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="@dimen/x280"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x50"
+            android:gravity="center"
+            android:text="2017-10-01 12：00"
+            android:textColor="@color/color_00fcff"
+            android:textSize="@dimen/x24" />
+        <TextView
+            android:id="@+id/tv_area"
+            android:layout_width="@dimen/x330"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x50"
+            android:gravity="center"
+            android:text="广州市"
+            android:textColor="@color/color_00fcff"
+            android:textSize="@dimen/x24" />
+        <TextView
+            android:id="@+id/tv_choose"
+            android:layout_width="@dimen/x390"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x50"
+            android:gravity="center"
+            android:text="黄豆苗1、绿豆苗2、红豆苗2…1"
+            android:textColor="@color/color_00fcff"
+            android:textSize="@dimen/x24" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_detail"
+        android:layout_gravity="center"
+        android:textSize="@dimen/x24"
+        android:textColor="@color/color_33d6ff"
+        android:background="@color/color_021E4F"
+        android:layout_width="@dimen/x1760"
+        android:layout_height="@dimen/x70" />
+</LinearLayout>

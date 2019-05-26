@@ -1,61 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:background="@mipmap/bg_set"
+    android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:background="@mipmap/bg_set"
+        android:layout_width="@dimen/x450"
+        android:layout_height="@dimen/x340"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/x60"
             android:gravity="center"
             android:text="评价"
+            android:textSize="@dimen/x28"
             android:textColor="@color/white" />
 
 
         <TextView
+            android:layout_marginTop="@dimen/x29"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginRight="@dimen/x39"
+            android:layout_marginLeft="@dimen/x39"
+            android:textSize="@dimen/x24"
             android:gravity="center|left"
             android:text="您对此次理疗过程是否满意？请做出您的 评价:"
             android:textColor="@color/white" />
         <GridView
-            android:numColumns="4"
+            android:layout_marginTop="@dimen/x29"
+            android:numColumns="2"
+            android:paddingRight="@dimen/x46"
+            android:paddingLeft="@dimen/x46"
             android:id="@+id/gv_data"
+            android:verticalSpacing="@dimen/x27"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
+        <View
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <LinearLayout
+            android:layout_marginBottom="@dimen/x22"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:layout_marginLeft="@dimen/x50"
                 android:id="@+id/tv_cancel"
                 android:text="取消"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:background="@mipmap/button_blue"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textSize="@dimen/x20"
+                android:layout_width="@dimen/x111"
+                android:layout_height="@dimen/x32" />
             <TextView
-                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/x107"
                 android:id="@+id/tv_confirm"
                 android:text="确认"
                 android:background="@mipmap/button_orange"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textSize="@dimen/x20"
+                android:layout_width="@dimen/x111"
+                android:layout_height="@dimen/x32"/>
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

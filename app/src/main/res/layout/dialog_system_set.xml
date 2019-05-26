@@ -3,125 +3,143 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@mipmap/bg_set"
     android:orientation="vertical">
     <LinearLayout
+        android:background="@mipmap/bg_set"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="@dimen/x540"
+        android:layout_height="@dimen/x340">
         <TextView
             android:id="@+id/tv_title"
             android:text="系统设置"
             android:gravity="center"
+            android:layout_marginBottom="@dimen/x10"
+            android:layout_marginTop="@dimen/x10"
+            android:textSize="@dimen/x30"
             android:textColor="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="wrap_content" />
         <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x69"
+            android:layout_marginTop="@dimen/x45"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/x32">
             <TextView
                 android:id="@+id/tv_light"
                 android:text="亮度"
-                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/x20"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
             <ImageView
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="@dimen/x19"
                 android:src="@mipmap/icon_bright_down"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_width="@dimen/x31"
+                android:layout_height="@dimen/x32" />
             <SeekBar
                 android:id="@+id/progressBar_light"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="100dp"
-                android:layout_height="3dp"
+                android:layout_width="@dimen/x205"
+                android:layout_height="@dimen/x30"
+                android:paddingTop="@dimen/x14"
+                android:paddingBottom="@dimen/x13"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/x8"
+                android:layout_marginRight="@dimen/x6"
                 android:max="100"
                 android:progress="50"
                 android:thumb="@null"
                 android:progressDrawable="@drawable/progress_fund_detail"
                 android:visibility="visible" />
             <ImageView
-                android:layout_marginLeft="10dp"
                 android:src="@mipmap/icon_bright_up"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_width="@dimen/x31"
+                android:layout_height="@dimen/x32" />
             <TextView
                 android:id="@+id/tv_light_percent"
                 android:text="100%"
-                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/x20"
+                android:layout_marginLeft="@dimen/x19"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="@dimen/x56"
+            android:layout_marginLeft="@dimen/x69"
             android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/x31">
             <TextView
                 android:id="@+id/tv_voice"
                 android:text="音量"
-                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/x20"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
             <ImageView
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="@dimen/x22"
                 android:src="@mipmap/icon_voice_down"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_width="@dimen/x29"
+                android:layout_height="@dimen/x30" />
             <SeekBar
                 android:id="@+id/progressBar_voice"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="100dp"
-                android:layout_height="3dp"
+                android:layout_width="@dimen/x205"
+                android:layout_height="@dimen/x30"
+                android:paddingTop="@dimen/x14"
+                android:paddingBottom="@dimen/x13"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/x7"
+                android:layout_marginRight="@dimen/x7"
                 android:max="100"
                 android:thumb="@null"
                 android:progress="50"
                 android:progressDrawable="@drawable/progress_fund_detail"
                 android:visibility="visible" />
             <ImageView
-                android:layout_marginLeft="10dp"
                 android:src="@mipmap/icon_voice_up"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_width="@dimen/x33"
+                android:layout_height="@dimen/x31" />
             <TextView
                 android:id="@+id/tv_voice_percent"
                 android:text="100%"
-                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/x20"
+                android:layout_marginLeft="@dimen/x15"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="@dimen/x46"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:layout_marginLeft="@dimen/x69"
                 android:id="@+id/tv_cancel"
                 android:text="取消"
-                android:layout_weight="1"
+                android:background="@mipmap/button_blue"
                 android:gravity="center"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/x145"
+                android:layout_height="@dimen/x42" />
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/tv_confirm"
                 android:text="确认"
+                android:layout_marginLeft="@dimen/x116"
+                android:background="@mipmap/button_orange"
+                android:textSize="@dimen/x26"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/x145"
+                android:layout_height="@dimen/x42" />
         </LinearLayout>
     </LinearLayout>
 

@@ -4,28 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:layout_marginTop="@dimen/x60"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/x90">
         <TextView
             android:text="wifi"
-            android:layout_marginLeft="@dimen/x63"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/x60"
             android:gravity="center|left"
-            android:textSize="35dp"
+            android:textSize="@dimen/x30"
             android:layout_weight="1"
-            android:textColor="@color/color_1cbae1"
+            android:textColor="@color/color_d0f1ff"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
         <ImageView
             android:layout_gravity="center_vertical"
             android:id="@+id/iv_switch"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="@dimen/x63"
             android:src="@mipmap/button_on"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
     <View
+        android:layout_marginLeft="@dimen/x35"
+        android:layout_marginRight="@dimen/x35"
         android:background="@color/color_35C1F0"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
@@ -33,6 +37,8 @@
         android:id="@+id/lv_data"
         android:dividerHeight="1dp"
         android:scrollbars="none"
+        android:paddingRight="@dimen/x35"
+        android:paddingLeft="@dimen/x35"
         android:divider="@color/color_35C1F0"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

@@ -7,22 +7,24 @@
     <include layout="@layout/titlebar_common_back_menu"/>
     <LinearLayout
         android:orientation="vertical"
+        android:layout_gravity="center"
         android:gravity="center_horizontal"
-        android:background="@mipmap/music_border"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:background="@mipmap/border"
+        android:layout_width="@dimen/x1789"
+        android:layout_height="@dimen/x910">
         <LinearLayout
             android:background="@drawable/bg_member_manage"
-            android:layout_marginTop="@dimen/x100"
+            android:layout_marginTop="@dimen/x60"
             android:orientation="horizontal"
             android:layout_width="@dimen/x600"
             android:layout_height="@dimen/x50">
             <EditText
-                android:padding="@dimen/x2"
+                android:paddingLeft="@dimen/x10"
                 android:layout_weight="1"
                 android:textColorHint="@color/color_35c1f0"
                 android:hint="请输入姓名/手机号身份证号"
                 android:background="@null"
+                android:textSize="@dimen/x20"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
             <TextView
@@ -30,71 +32,93 @@
                 android:text="查询"
                 android:background="@mipmap/button_orange"
                 android:gravity="center"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="@dimen/x45"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tv_num"
+                android:layout_marginLeft="@dimen/x35"
                 android:text="序号"
-                android:textColor="@color/color_0fa6ec"
-                android:textSize="@dimen/x55"
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/color_d0f1ff"
+                android:textSize="@dimen/x30"
+                android:layout_width="@dimen/x130"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tv_name"
                 android:text="姓名"
-                android:textColor="@color/color_0fa6ec"
-                android:textSize="@dimen/x55"
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/color_d0f1ff"
+                android:textSize="@dimen/x30"
+                android:layout_width="@dimen/x175"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tv_sex"
                 android:text="性别"
-                android:textColor="@color/color_0fa6ec"
-                android:textSize="@dimen/x55"
-                android:layout_width="wrap_content"
+                android:textColor="@color/color_d0f1ff"
+                android:gravity="center"
+                android:textSize="@dimen/x30"
+                android:layout_width="@dimen/x209"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tv_phone"
                 android:text="手机号"
-                android:textColor="@color/color_0fa6ec"
-                android:textSize="@dimen/x55"
-                android:layout_width="wrap_content"
+                android:textColor="@color/color_d0f1ff"
+                android:gravity="center"
+                android:textSize="@dimen/x30"
+                android:layout_width="@dimen/x297"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tv_certi"
                 android:text="身份证号"
-                android:textColor="@color/color_0fa6ec"
-                android:textSize="@dimen/x55"
-                android:layout_width="wrap_content"
+                android:textColor="@color/color_d0f1ff"
+                android:gravity="center"
+                android:textSize="@dimen/x30"
+                android:layout_width="@dimen/x335"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tv_times"
                 android:text="诊疗次数"
-                android:textColor="@color/color_0fa6ec"
-                android:textSize="@dimen/x55"
-                android:layout_width="wrap_content"
+                android:textColor="@color/color_d0f1ff"
+                android:gravity="center"
+                android:textSize="@dimen/x30"
+                android:layout_width="@dimen/x305"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tv_operate"
                 android:text="操作"
-                android:textColor="@color/color_0fa6ec"
-                android:textSize="@dimen/x55"
-                android:layout_width="wrap_content"
+                android:layout_marginRight="@dimen/x35"
+                android:textColor="@color/color_d0f1ff"
+                android:textSize="@dimen/x30"
+                android:gravity="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+        <View
+            android:layout_marginTop="@dimen/x15"
+            android:layout_marginLeft="@dimen/x35"
+            android:layout_marginRight="@dimen/x35"
+            android:background="@color/color_35C1F0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refreshlayout"
             android:scrollbars="none"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ListView
+                android:layout_marginRight="@dimen/x35"
+                android:layout_marginLeft="@dimen/x35"
                 android:id="@+id/lv_data"
+                android:dividerHeight="@dimen/x1"
+                android:divider="@color/color_1cbae1"
                 android:scrollbars="none"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

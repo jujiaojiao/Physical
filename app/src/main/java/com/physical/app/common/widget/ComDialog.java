@@ -18,19 +18,21 @@ import com.physical.app.R;
 public class ComDialog extends AlertDialog {
     private Context context;
     private LayoutInflater inflater;
-    private String desp;
+    private String title ,desp;
 
     private TextView tvDesp;
     private TextView tvCancel;
     private TextView tvConfirm;
 
     private Callback callback;
+    private TextView tvTitle;
 
-    public ComDialog(Context context, String desp, Callback callback) {
+    public ComDialog(Context context, String title,String desp, Callback callback) {
         super(context, R.style.dialog);
         this.context = context;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.desp=desp;
+        this.title = title;
         this.callback=callback;
     }
 
@@ -44,15 +46,17 @@ public class ComDialog extends AlertDialog {
 
     private void initView() {
         View view = inflater.inflate(R.layout.dialog_common_desp, null);
+        tvTitle =view.findViewById(R.id.tv_title);
         tvDesp=view.findViewById(R.id.tvDesp);
-        tvCancel=view.findViewById(R.id.tvCancel);
-        tvConfirm=view.findViewById(R.id.tvConfirm);
+        tvCancel=view.findViewById(R.id.tv_cancel);
+        tvConfirm=view.findViewById(R.id.tv_confirm);
         setContentView(view);
         setCanceledOnTouchOutside(false);
     }
 
     private void initData() {
         tvDesp.setText(desp);
+        tvTitle.setText(title);
     }
 
     private void addListener() {

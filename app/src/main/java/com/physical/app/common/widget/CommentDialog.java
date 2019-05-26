@@ -48,6 +48,10 @@ public class CommentDialog extends Dialog {
         gvData = ((GridView) findViewById(R.id.gv_data));
 
         datas = new ArrayList<>();
+        datas.add("非常满意");
+        datas.add("满意");
+        datas.add("一般");
+        datas.add("不满意");
         commentAdapter = new CommentAdapter(context, datas);
         gvData.setAdapter(commentAdapter);
 
@@ -58,4 +62,6 @@ public class CommentDialog extends Dialog {
             }
         });
     }
+
+
 }

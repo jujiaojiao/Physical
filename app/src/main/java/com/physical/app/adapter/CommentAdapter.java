@@ -63,16 +63,17 @@ public class CommentAdapter extends BaseAdapter {
         }
 
         if (current==position){
-            holder.ivCheck.setImageResource(R.mipmap.icon_strip_have);
+            holder.ivCheck.setImageResource(R.mipmap.icon_circle_have);
         }else{
-            holder.ivCheck.setImageResource(R.mipmap.icon_strip_none);
+            holder.ivCheck.setImageResource(R.mipmap.icon_circle_none);
         }
-
+        holder.tvContent.setText(datas.get(position));
         return convertView;
     }
 
     public void setcurrent(int current) {
         this.current = current;
+        notifyDataSetChanged();
     }
 
 

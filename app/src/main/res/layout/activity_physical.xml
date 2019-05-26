@@ -5,236 +5,254 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/titlebar_common_back"/>
-    <TextView
-        android:id="@+id/tv_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/x100"
-        android:gravity="center|left"
-        android:text="诊疗用户"
-        android:textColor="@color/color_1cbae1"
-        android:textSize="@dimen/x56" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_35C1F0" />
-    <HorizontalScrollView
-        android:scrollbars="none"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:orientation="vertical"
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@mipmap/border"
+        android:layout_width="@dimen/x1789"
+        android:layout_height="@dimen/x910">
+        <TextView
+            android:id="@+id/tv_user"
+            android:text="诊疗用户"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/x60"
+            android:layout_marginLeft="@dimen/x60"
+            android:gravity="center|left"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/color_d0f1ff"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x90" />
+        <View
+            android:layout_marginLeft="@dimen/x35"
+            android:layout_marginRight="@dimen/x35"
+            android:background="@color/color_35C1F0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <HorizontalScrollView
+            android:scrollbars="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <LinearLayout
-                        android:orientation="vertical"
+                        android:layout_marginLeft="@dimen/x100"
+                        android:layout_marginTop="@dimen/x160"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
-                        <ImageView
-                            android:src="@mipmap/logo"
+                        <LinearLayout
+                            android:orientation="vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:gravity="center"
-                            android:text="灯光"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@mipmap/icon_light"
+                                android:layout_width="@dimen/x199"
+                                android:layout_height="@dimen/x199" />
+                            <TextView
+                                android:gravity="center"
+                                android:text="灯光"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/x23"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <GridView
+                            android:id="@+id/gv_data1"
+                            android:gravity="center_vertical"
+                            android:numColumns="9"
+                            android:listSelector="#00000000"
+                            android:horizontalSpacing="0dp"
+                            android:layout_width="@dimen/x600"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
 
-                    <GridView
-                        android:id="@+id/gv_data1"
-                        android:numColumns="9"
-                        android:listSelector="#00000000"
-                        android:horizontalSpacing="0dp"
-                        android:layout_width="400dp"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@mipmap/logo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:gravity="center"
+                                android:text="灯光"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
 
+                        <GridView
+                            android:id="@+id/gv_data2"
+                            android:numColumns="9"
+                            android:listSelector="#00000000"
+                            android:horizontalSpacing="0dp"
+                            android:layout_width="400dp"
+                            android:layout_height="match_parent"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@mipmap/logo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:gravity="center"
+                                android:text="灯光"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <GridView
+                            android:id="@+id/gv_data3"
+                            android:numColumns="9"
+                            android:listSelector="#00000000"
+                            android:horizontalSpacing="0dp"
+                            android:layout_width="400dp"
+                            android:layout_height="match_parent"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@mipmap/logo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:gravity="center"
+                                android:text="灯光"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <GridView
+                            android:id="@+id/gv_data4"
+                            android:numColumns="9"
+                            android:listSelector="#00000000"
+                            android:horizontalSpacing="0dp"
+                            android:layout_width="400dp"
+                            android:layout_height="match_parent"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
                 <LinearLayout
+                    android:layout_marginTop="50dp"
                     android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <LinearLayout
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:src="@mipmap/logo"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:orientation="vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:gravity="center"
-                            android:text="灯光"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@mipmap/logo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:gravity="center"
+                                android:text="灯光"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <GridView
+                            android:id="@+id/gv_data5"
+                            android:numColumns="9"
+                            android:listSelector="#00000000"
+                            android:horizontalSpacing="0dp"
+                            android:layout_width="400dp"
+                            android:layout_height="match_parent"/>
                     </LinearLayout>
 
-                    <GridView
-                        android:id="@+id/gv_data2"
-                        android:numColumns="9"
-                        android:listSelector="#00000000"
-                        android:horizontalSpacing="0dp"
-                        android:layout_width="400dp"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
                     <LinearLayout
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:src="@mipmap/logo"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:orientation="vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:gravity="center"
-                            android:text="灯光"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@mipmap/logo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:gravity="center"
+                                android:text="灯光"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <GridView
+                            android:id="@+id/gv_data6"
+                            android:numColumns="9"
+                            android:listSelector="#00000000"
+                            android:horizontalSpacing="0dp"
+                            android:layout_width="400dp"
+                            android:layout_height="match_parent"/>
                     </LinearLayout>
 
-                    <GridView
-                        android:id="@+id/gv_data3"
-                        android:numColumns="9"
-                        android:listSelector="#00000000"
-                        android:horizontalSpacing="0dp"
-                        android:layout_width="400dp"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
                     <LinearLayout
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:src="@mipmap/logo"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:orientation="vertical"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:gravity="center"
-                            android:text="灯光"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@mipmap/logo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:gravity="center"
+                                android:text="灯光"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <GridView
+                            android:id="@+id/gv_data7"
+                            android:numColumns="9"
+                            android:listSelector="#00000000"
+                            android:horizontalSpacing="0dp"
+                            android:layout_width="400dp"
+                            android:layout_height="match_parent"/>
                     </LinearLayout>
 
-                    <GridView
-                        android:id="@+id/gv_data4"
-                        android:numColumns="9"
-                        android:listSelector="#00000000"
-                        android:horizontalSpacing="0dp"
-                        android:layout_width="400dp"
-                        android:layout_height="match_parent"/>
                 </LinearLayout>
-
-
             </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="50dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:src="@mipmap/logo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:gravity="center"
-                            android:text="灯光"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
 
-                    <GridView
-                        android:id="@+id/gv_data5"
-                        android:numColumns="9"
-                        android:listSelector="#00000000"
-                        android:horizontalSpacing="0dp"
-                        android:layout_width="400dp"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:src="@mipmap/logo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:gravity="center"
-                            android:text="灯光"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-                    <GridView
-                        android:id="@+id/gv_data6"
-                        android:numColumns="9"
-                        android:listSelector="#00000000"
-                        android:horizontalSpacing="0dp"
-                        android:layout_width="400dp"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:src="@mipmap/logo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:gravity="center"
-                            android:text="灯光"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-                    <GridView
-                        android:id="@+id/gv_data7"
-                        android:numColumns="9"
-                        android:listSelector="#00000000"
-                        android:horizontalSpacing="0dp"
-                        android:layout_width="400dp"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-    </HorizontalScrollView>
 </LinearLayout>

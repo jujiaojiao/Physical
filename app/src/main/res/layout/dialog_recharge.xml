@@ -1,77 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:background="@mipmap/bg_set"
+    android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
     <LinearLayout
+        android:background="@mipmap/bg_set"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="@dimen/x690"
+        android:layout_height="@dimen/x460">
         <TextView
             android:id="@+id/tv_title"
             android:text="充值"
+            android:textSize="@dimen/x30"
             android:gravity="center"
             android:textColor="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="@dimen/x68" />
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:text="会员卡金额:"
-                android:layout_marginLeft="20dp"
-                android:gravity="center|left"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/et_money"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/input_box"/>
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:text="剩余次数:"
-                android:layout_marginLeft="20dp"
-                android:gravity="center|left"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/et_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/input_box"/>
-        </LinearLayout>
-        <LinearLayout
+            android:layout_marginTop="@dimen/x70"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:text="会员卡金额:"
+                android:textSize="@dimen/x24"
+                android:layout_marginLeft="@dimen/x87"
+                android:gravity="center|left"
+                android:textColor="@color/color_00fcff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:textColor="@color/color_00fcff"
+                android:textSize="@dimen/x18"
+                android:layout_marginLeft="@dimen/x19"
+                android:id="@+id/et_money"
+                android:layout_width="@dimen/x360"
+                android:layout_height="@dimen/x50"
+                android:background="@mipmap/input_box"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/x64"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="剩余次数:"
+                android:textSize="@dimen/x24"
+                android:layout_marginLeft="@dimen/x109"
+                android:gravity="center|left"
+                android:textColor="@color/color_00fcff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:textColor="@color/color_00fcff"
+                android:textSize="@dimen/x18"
+                android:layout_marginLeft="@dimen/x19"
+                android:id="@+id/et_time"
+                android:layout_width="@dimen/x360"
+                android:layout_height="@dimen/x50"
+                android:background="@mipmap/input_box"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/x58"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginLeft="@dimen/x171"
                 android:id="@+id/tv_cancel"
                 android:text="取消"
-                android:layout_weight="1"
+                android:textSize="@dimen/x20"
                 android:gravity="center"
                 android:background="@mipmap/button_blue"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/x120"
+                android:layout_height="@dimen/x46" />
             <TextView
-                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/x90"
                 android:id="@+id/tv_confirm"
                 android:text="确认"
                 android:gravity="center"
+                android:textSize="@dimen/x20"
                 android:background="@mipmap/button_orange"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/x120"
+                android:layout_height="@dimen/x46" />
         </LinearLayout>
     </LinearLayout>
 

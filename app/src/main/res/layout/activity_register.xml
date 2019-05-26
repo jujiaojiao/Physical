@@ -19,7 +19,7 @@
         android:layout_width="@dimen/y824"
         android:layout_height="@dimen/x363"
         android:layout_centerInParent="true"
-        android:src="@mipmap/border" />
+        android:src="@mipmap/border_circle" />
 
     <ImageView
         android:layout_centerHorizontal="true"
@@ -32,7 +32,7 @@
 
     <LinearLayout
         android:id="@+id/ll_user"
-        android:layout_width="@dimen/x548"
+        android:layout_width="@dimen/x456"
         android:layout_height="@dimen/x69"
         android:layout_below="@+id/iv_title"
         android:layout_centerHorizontal="true"
@@ -44,7 +44,7 @@
             android:layout_width="@dimen/x28"
             android:layout_height="@dimen/x28"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x73"
+            android:layout_marginLeft="@dimen/x26"
             android:src="@mipmap/icon_account" />
 
         <EditText
@@ -63,7 +63,7 @@
 
     <LinearLayout
         android:id="@+id/ll_phone"
-        android:layout_width="@dimen/x548"
+        android:layout_width="@dimen/x456"
         android:layout_height="@dimen/x69"
         android:layout_below="@+id/ll_user"
         android:layout_centerHorizontal="true"
@@ -75,7 +75,7 @@
             android:layout_width="@dimen/x28"
             android:layout_height="@dimen/x28"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x73"
+            android:layout_marginLeft="@dimen/x26"
             android:src="@mipmap/icon_phone" />
         <EditText
             android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/ll_pwd"
-        android:layout_width="@dimen/x548"
+        android:layout_width="@dimen/x456"
         android:layout_height="@dimen/x69"
         android:layout_below="@+id/ll_phone"
         android:layout_centerHorizontal="true"
@@ -118,7 +118,7 @@
             android:layout_width="@dimen/x28"
             android:layout_height="@dimen/x28"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x73"
+            android:layout_marginLeft="@dimen/x26"
             android:src="@mipmap/icon_password" />
 
         <EditText
@@ -135,7 +135,7 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/ll_repwd"
-        android:layout_width="@dimen/x548"
+        android:layout_width="@dimen/x456"
         android:layout_height="@dimen/x69"
         android:layout_below="@+id/ll_pwd"
         android:layout_centerHorizontal="true"
@@ -147,7 +147,7 @@
             android:layout_width="@dimen/x28"
             android:layout_height="@dimen/x28"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x73"
+            android:layout_marginLeft="@dimen/x26"
             android:src="@mipmap/icon_password" />
 
         <EditText
@@ -165,7 +165,7 @@
 
     <RelativeLayout
         android:id="@+id/ll_code"
-        android:layout_width="@dimen/x548"
+        android:layout_width="@dimen/x456"
         android:layout_height="@dimen/x69"
         android:layout_below="@+id/ll_repwd"
         android:layout_centerHorizontal="true"
@@ -174,7 +174,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:layout_marginLeft="@dimen/x73"
+            android:layout_marginLeft="@dimen/x26"
             android:id="@+id/et_code"
             android:layout_weight="1"
             android:layout_width="wrap_content"
@@ -187,26 +187,26 @@
             android:textSize="@dimen/x24" />
 
         <TextView
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x337"
             android:id="@+id/tv_getcode"
             android:layout_width="@dimen/x169"
-            android:layout_height="@dimen/x59"
+            android:layout_height="@dimen/x62"
             android:text="获取验证码"
             android:gravity="center"
             android:textColor="@color/color_052c48"
-            android:textSize="@dimen/x24"
+            android:textSize="@dimen/x23"
             android:background="@drawable/bg_get_code"
             />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_login"
-        android:layout_width="@dimen/x600"
-        android:layout_height="@dimen/x85"
+        android:layout_width="@dimen/x456"
+        android:layout_height="@dimen/x69"
         android:layout_below="@+id/ll_code"
         android:layout_marginTop="@dimen/x14"
-        android:layout_marginLeft="@dimen/x643"
+        android:layout_centerHorizontal="true"
         android:background="@mipmap/button_login"
         android:gravity="center"
         android:textSize="@dimen/x35"

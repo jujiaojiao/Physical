@@ -16,12 +16,16 @@
         <View
             android:id="@+id/view_flag"
             android:background="@color/color_24ff00"
-            android:layout_width="30dp"
-            android:layout_height="1dp"/>
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x2"/>
     </LinearLayout>
     <TextView
         android:text="1"
+        android:layout_marginTop="@dimen/x12"
+        android:paddingLeft="@dimen/x6"
         android:id="@+id/tv_num"
+        android:textColor="@color/white"
+        android:textSize="@dimen/x16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>

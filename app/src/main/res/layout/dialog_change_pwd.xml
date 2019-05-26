@@ -1,108 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:background="@mipmap/bg_set"
+    android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
     <LinearLayout
+        android:background="@mipmap/bg_set"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="@dimen/x581"
+        android:layout_height="@dimen/x400">
         <TextView
             android:id="@+id/tv_title"
             android:text="修改密码"
             android:gravity="center"
+            android:textSize="@dimen/x30"
             android:textColor="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="@dimen/x60" />
         <LinearLayout
+            android:layout_marginTop="@dimen/x41"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/x35">
             <TextView
-                android:text="手机号:"
-                android:layout_marginLeft="20dp"
+                android:text="手机号"
+                android:textSize="@dimen/x20"
+                android:layout_marginLeft="@dimen/x110"
                 android:gravity="center|left"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
             <EditText
+                android:layout_marginLeft="@dimen/x20"
                 android:id="@+id/et_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/x290"
+                android:layout_height="@dimen/x35"
                 android:background="@mipmap/input_box"/>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="@dimen/x36"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/x35">
             <TextView
-                android:text="密码:"
-                android:layout_marginLeft="20dp"
+                android:text="密码"
+                android:textSize="@dimen/x20"
+                android:layout_marginLeft="@dimen/x130"
                 android:gravity="center|left"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/et_pwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_width="@dimen/x290"
+                android:layout_height="@dimen/x35"
                 android:background="@mipmap/input_box"/>
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="@dimen/x34"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/x35">
             <TextView
-                android:text="验证码:"
-                android:layout_marginLeft="20dp"
+                android:text="验证码"
+                android:textSize="@dimen/x20"
+                android:layout_marginLeft="@dimen/x111"
                 android:gravity="center|left"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
             <RelativeLayout
+                android:layout_marginLeft="@dimen/x20"
                 android:background="@mipmap/input_box"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="@dimen/x290"
+                android:layout_height="match_parent">
                 <EditText
                     android:id="@+id/et_code"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/x200"
+                    android:layout_height="@dimen/x35"
                     android:background="@null"/>
                 <TextView
+                    android:layout_centerVertical="true"
                     android:id="@+id/tv_getcode"
                     android:layout_toRightOf="@+id/et_code"
                     android:text="获取验证码"
-                    android:gravity="center|left"
+                    android:background="@mipmap/button_blue"
+                    android:gravity="center"
+                    android:textSize="@dimen/x15"
                     android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="@dimen/x90"
+                    android:layout_height="@dimen/x31" />
             </RelativeLayout>
 
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="@dimen/x45"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:layout_marginLeft="@dimen/x69"
                 android:id="@+id/tv_cancel"
                 android:text="取消"
-                android:background="@mipmap/button_blue"
-                android:layout_weight="1"
                 android:gravity="center"
+                android:background="@mipmap/button_blue"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textSize="@dimen/x26"
+                android:layout_width="@dimen/x145"
+                android:layout_height="@dimen/x42" />
             <TextView
-                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/x116"
                 android:id="@+id/tv_confirm"
                 android:text="确认"
                 android:background="@mipmap/button_orange"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textSize="@dimen/x26"
+                android:layout_width="@dimen/x145"
+                android:layout_height="@dimen/x42"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.physical.app.common.widget.NetDialog;
 import com.physical.app.common.widget.SystemSetDialog;
 import com.physical.app.member.MemberManageActivity;
 import com.physical.app.music.LocalMucicActivity;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private int door = 0;//0 关  1开
+    private NetDialog netDialog;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -79,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.iv_menu://菜单
-                showSystemDilaog();
+//                showSystemDilaog();
+                showNetDilaog();
                 break;
             case R.id.iv_switch://门磁开关
                 if (door==0){
@@ -106,5 +109,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         systemSetDialog.show();
+    }
+
+    private void showNetDilaog(){
+        netDialog = new NetDialog(this, new NetDialog.Callback() {
+            @Override
+            public void onConfirm(String code) {
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
+        netDialog.show();
     }
 }

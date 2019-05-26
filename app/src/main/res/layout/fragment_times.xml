@@ -2,68 +2,98 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/x100"
+        android:layout_height="@dimen/x90"
+        android:layout_marginLeft="@dimen/x60"
+        android:layout_marginTop="@dimen/x60"
         android:gravity="center|left"
         android:text="理疗次数"
-        android:textColor="@color/color_1cbae1"
-        android:textSize="@dimen/x56" />
+        android:textColor="@color/color_d0f1ff"
+        android:textSize="@dimen/x30"
+        android:textStyle="bold" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/x35"
+        android:layout_marginRight="@dimen/x35"
         android:background="@color/color_35C1F0" />
+
     <LinearLayout
+        android:layout_marginTop="@dimen/x32"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x100"
+            android:layout_marginLeft="@dimen/x65"
             android:gravity="center|left"
             android:text="开始日期"
-            android:textColor="@color/color_1cbae1"
-            android:textSize="@dimen/x56" />
-        <TextView
-            android:id="@+id/tv_start_time"
+            android:textColor="@color/color_00fcff"
+            android:textSize="@dimen/x24" />
+        <LinearLayout
+            android:layout_marginLeft="@dimen/x19"
+            android:layout_gravity="center_vertical"
             android:background="@mipmap/input_box"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x100"
-            android:gravity="center|left"
-            android:drawableRight="@mipmap/icon_date"
-            android:textColor="@color/color_1cbae1"
-            android:textSize="@dimen/x56" />
+            android:orientation="horizontal"
+            android:layout_width="@dimen/x276"
+            android:layout_height="@dimen/x40">
+            <TextView
+                android:id="@+id/tv_start_time"
+                android:gravity="center|left"
+                android:paddingRight="@dimen/x10"
+                android:textColor="@color/color_00fcff"
+                android:textSize="@dimen/x24"
+                android:layout_width="@dimen/x235"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/icon_date"
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/x28" />
+        </LinearLayout>
+       
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x100"
+            android:layout_marginLeft="@dimen/x65"
             android:gravity="center|left"
             android:text="结束日期"
-            android:textColor="@color/color_1cbae1"
-            android:textSize="@dimen/x56" />
-        <TextView
-            android:id="@+id/tv_end_time"
+            android:textColor="@color/color_00fcff"
+            android:textSize="@dimen/x24" />
+        <LinearLayout
+            android:layout_marginLeft="@dimen/x19"
+            android:layout_gravity="center_vertical"
             android:background="@mipmap/input_box"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x100"
-            android:gravity="center|left"
-            android:drawableRight="@mipmap/icon_date"
-            android:textColor="@color/color_1cbae1"
-            android:textSize="@dimen/x56" />
+            android:orientation="horizontal"
+            android:layout_width="@dimen/x276"
+            android:layout_height="@dimen/x40">
+            <TextView
+                android:id="@+id/tv_end_time"
+                android:gravity="center|left"
+                android:paddingRight="@dimen/x10"
+                android:textColor="@color/color_00fcff"
+                android:textSize="@dimen/x24"
+                android:layout_width="@dimen/x235"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/icon_date"
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/x28" />
+        </LinearLayout>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x100"
+            android:layout_width="@dimen/x145"
+            android:layout_height="@dimen/x42"
+            android:layout_marginLeft="@dimen/x83"
             android:gravity="center"
             android:background="@mipmap/button_orange"
             android:text="确定"
-            android:textColor="@color/color_1cbae1"
-            android:textSize="@dimen/x56" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/x26" />
     </LinearLayout>
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshlayout"
@@ -72,6 +102,9 @@
         android:layout_height="wrap_content">
         <ListView
             android:id="@+id/lv_data"
+            android:layout_marginTop="@dimen/x30"
+            android:layout_marginLeft="@dimen/x35"
+            android:layout_marginRight="@dimen/x35"
             android:divider="@color/color_1cbae1"
             android:dividerHeight="1dp"
             android:layout_width="match_parent"

@@ -1,69 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:background="@mipmap/bg_set"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:gravity="center">
     <LinearLayout
+        android:background="@mipmap/bg_set"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="@dimen/x540"
+        android:layout_height="@dimen/x310">
         <TextView
             android:id="@+id/tv_title"
             android:text="输入密码"
             android:gravity="center"
+            android:textSize="@dimen/x30"
             android:textColor="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="@dimen/x60" />
         <TextView
+            android:layout_marginTop="@dimen/x44"
             android:id="@+id/tv_tip"
             android:text="输入密码"
-            android:layout_marginLeft="20dp"
             android:gravity="center"
+            android:textSize="@dimen/x17"
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
+            android:layout_marginTop="@dimen/x9"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/x35">
             <TextView
                 android:text="密码:"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/x88"
                 android:gravity="center|left"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
             <EditText
+                android:layout_marginLeft="@dimen/x19"
                 android:id="@+id/et_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/x290"
+                android:layout_height="@dimen/x35"
                 android:background="@mipmap/input_box"/>
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="@dimen/x70"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:layout_marginLeft="@dimen/x69"
                 android:id="@+id/tv_cancel"
                 android:text="取消"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:background="@mipmap/button_blue"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textSize="@dimen/x26"
+                android:layout_width="@dimen/x145"
+                android:layout_height="@dimen/x42" />
             <TextView
-                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/x116"
                 android:id="@+id/tv_confirm"
                 android:text="确认"
                 android:background="@mipmap/button_orange"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textSize="@dimen/x26"
+                android:layout_width="@dimen/x145"
+                android:layout_height="@dimen/x42"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -13,13 +15,13 @@ import com.physical.app.R;
 import com.physical.app.adapter.MemberManageAdapter;
 import com.physical.app.bean.MemberManageBean;
 import com.physical.app.common.base.BaseActivity;
-import com.physical.app.music.LocalMucicActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author jjj
@@ -54,11 +56,15 @@ public class MemberManageActivity extends BaseActivity {
     ListView lvData;
     @Bind(R.id.refreshlayout)
     SmartRefreshLayout refreshlayout;
+    @Bind(R.id.rlTop)
+    RelativeLayout rlTop;
+    @Bind(R.id.iv_title)
+    ImageView ivTitle;
     private MemberManageAdapter adapter;
     private ArrayList<MemberManageBean> list;
 
-    public static void start(Context context){
-        Intent intent = new Intent(context,MemberManageActivity.class);
+    public static void start(Context context) {
+        Intent intent = new Intent(context, MemberManageActivity.class);
         context.startActivity(intent);
     }
 
@@ -69,9 +75,11 @@ public class MemberManageActivity extends BaseActivity {
         setContentView(R.layout.activity_member_manage);
         ButterKnife.bind(this);
         initView();
+        addListener();
     }
 
-    private void initView(){
+    private void initView() {
+        ivTitle.setImageResource(R.mipmap.word_vip);
         list = new ArrayList<>();
         list.add(new MemberManageBean());
         list.add(new MemberManageBean());
@@ -85,5 +93,26 @@ public class MemberManageActivity extends BaseActivity {
         adapter = new MemberManageAdapter(this, list);
         lvData.setAdapter(adapter);
 
+    }
+
+    private void addListener() {
+        lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MemberDetailActivity.start(MemberManageActivity.this);
+            }
+        });
+    }
+
+    @OnClick({R.id.ivRight,R.id.ivBack})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ivRight:
+                AddMemberActivity.start(this);
+                break;
+            case R.id.ivBack:
+                finish();
+                break;
+        }
     }
 }

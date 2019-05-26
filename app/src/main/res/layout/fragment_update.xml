@@ -5,18 +5,21 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/x100"
-        android:gravity="center|left"
         android:text="版本更新"
-        android:textColor="@color/color_1cbae1"
-        android:textSize="@dimen/x56" />
-
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/x60"
+        android:layout_marginLeft="@dimen/x60"
+        android:gravity="center|left"
+        android:textSize="@dimen/x30"
+        android:textColor="@color/color_d0f1ff"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x90" />
     <View
+        android:layout_marginLeft="@dimen/x35"
+        android:layout_marginRight="@dimen/x35"
+        android:background="@color/color_35C1F0"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_35C1F0" />
+        android:layout_height="1dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,30 +30,34 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/x138"
             android:src="@mipmap/logo" />
 
         <TextView
+            android:layout_marginTop="@dimen/x60"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="已是最新版本"
             android:textColor="#ff1cbae1"
-            android:textSize="22dp" />
+            android:textSize="@dimen/x24" />
 
         <TextView
+            android:layout_marginTop="@dimen/x24"
             android:id="@+id/tv_version_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="V1.13.14"
             android:textColor="#ff68dffd"
-            android:textSize="22dp" />
+            android:textSize="@dimen/x13" />
         <TextView
+            android:paddingTop="@dimen/x60"
             android:id="@+id/tv_check_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="检测新版本"
+            android:paddingBottom="@dimen/x20"
             android:textColor="#ffff8122"
-            android:textSize="22dp"
+            android:textSize="@dimen/x26"
             />
     </LinearLayout>
 </LinearLayout>

@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.utils.GenerateValueFiles;
 import com.physical.app.common.utils.RegularUtils;
 import com.physical.app.common.utils.StringUtil;
 
@@ -60,7 +61,8 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        startAnimator();
+//        GenerateValueFiles.main();
+//        startAnimator();
     }
 
 

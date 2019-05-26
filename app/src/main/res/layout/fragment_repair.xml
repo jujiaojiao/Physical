@@ -1,102 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/x100"
+        android:layout_height="@dimen/x90"
+        android:layout_marginLeft="@dimen/x60"
+        android:layout_marginTop="@dimen/x60"
         android:gravity="center|left"
         android:text="设备报修"
-        android:textColor="@color/color_1cbae1"
-        android:textSize="@dimen/x56" />
+        android:textColor="@color/color_d0f1ff"
+        android:textSize="@dimen/x30"
+        android:textStyle="bold" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/x35"
+        android:layout_marginRight="@dimen/x35"
         android:background="@color/color_35C1F0" />
 
+
     <LinearLayout
-        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/x80"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/x54"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x100"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x242"
             android:gravity="center|left"
             android:text="*"
-            android:textColor="@color/white"
-            android:textSize="@dimen/x56" />
+            android:textSize="@dimen/x26"
+            android:textColor="@color/color_ff0000" />
+
         <TextView
+            android:paddingLeft="@dimen/x10"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center|left"
             android:text="标题"
             android:textColor="@color/color_1cbae1"
-            android:textSize="@dimen/x56" />
+            android:textSize="@dimen/x26" />
+
         <EditText
+            android:paddingLeft="@dimen/x15"
+            android:layout_marginLeft="@dimen/x30"
             android:id="@+id/et_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/x780"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_edit_blue"
             android:gravity="center|left"
             android:hint="请输入"
-            android:background="@mipmap/input_box"
+            android:textColorHint="@color/color_0fa6ec"
             android:textColor="@color/color_1cbae1"
-            android:textSize="@dimen/x56" />
+            android:textSize="@dimen/x17" />
     </LinearLayout>
+
     <LinearLayout
-        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/x50"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/x324"
+        android:orientation="horizontal">
+
         <TextView
+            android:paddingTop="@dimen/x40"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x100"
-            android:gravity="center|left"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x242"
+            android:gravity="left"
             android:text="*"
-            android:textColor="@color/white"
-            android:textSize="@dimen/x56" />
+            android:textSize="@dimen/x26"
+            android:textColor="@color/color_ff0000" />
+
         <TextView
+            android:paddingTop="@dimen/x40"
+            android:paddingLeft="@dimen/x10"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center|left"
+            android:layout_height="match_parent"
+            android:gravity="left"
             android:text="内容"
             android:textColor="@color/color_1cbae1"
-            android:textSize="@dimen/x56" />
+            android:textSize="@dimen/x26" />
+
         <EditText
+            android:layout_marginLeft="@dimen/x30"
             android:id="@+id/et_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center|left"
+            android:padding="@dimen/x40"
+            android:layout_width="@dimen/x780"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_edit_blue"
+            android:gravity="left"
+            android:textColorHint="@color/color_0fa6ec"
             android:hint="请输入内容"
-            android:background="@mipmap/input_box"
             android:textColor="@color/color_1cbae1"
-            android:textSize="@dimen/x56" />
+            android:textSize="@dimen/x17" />
     </LinearLayout>
+
+
     <LinearLayout
+        android:layout_marginTop="@dimen/x100"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:layout_marginLeft="@dimen/x502"
             android:id="@+id/tv_cancel"
             android:text="取消"
-            android:layout_weight="1"
             android:gravity="center"
             android:background="@mipmap/button_blue"
             android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textSize="@dimen/x26"
+            android:layout_width="@dimen/x145"
+            android:layout_height="@dimen/x42" />
         <TextView
-            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/x116"
             android:id="@+id/tv_confirm"
             android:text="确认"
             android:background="@mipmap/button_orange"
             android:gravity="center"
             android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textSize="@dimen/x26"
+            android:layout_width="@dimen/x145"
+            android:layout_height="@dimen/x42"/>
     </LinearLayout>
+
 </LinearLayout>

@@ -13,15 +13,14 @@
         android:src="@mipmap/title_one" />
     <ImageView
         android:id="@+id/iv_circle"
-        android:layout_marginTop="@dimen/x347"
-        android:layout_marginLeft="@dimen/x548"
         android:layout_width="@dimen/y824"
         android:layout_height="@dimen/x363"
         android:layout_centerInParent="true"
-        android:src="@mipmap/border" />
+        android:src="@mipmap/border_circle" />
+
 
     <ImageView
-        android:layout_marginBottom="@dimen/x226"
+        android:layout_marginBottom="@dimen/x230"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:id="@+id/iv_bottom"
@@ -31,10 +30,8 @@
 
     <LinearLayout
         android:id="@+id/ll_phone"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/x456"
         android:layout_height="@dimen/x69"
-        android:layout_marginRight="@dimen/x690"
-        android:layout_marginLeft="@dimen/x682"
         android:layout_below="@+id/iv_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/x62"
@@ -42,10 +39,10 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/x28"
+            android:layout_height="@dimen/x28"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x73"
+            android:layout_marginLeft="@dimen/x26"
             android:src="@mipmap/icon_account" />
 
         <EditText
@@ -64,10 +61,8 @@
 
     <LinearLayout
         android:id="@+id/ll_pwd"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/x456"
         android:layout_height="@dimen/x69"
-        android:layout_marginRight="@dimen/x690"
-        android:layout_marginLeft="@dimen/x682"
         android:layout_below="@+id/ll_phone"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/x19"
@@ -75,10 +70,10 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/x24"
+            android:layout_height="@dimen/x31"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x76"
+            android:layout_marginLeft="@dimen/x26"
             android:src="@mipmap/icon_password" />
 
         <EditText
@@ -96,11 +91,11 @@
 
     <TextView
         android:id="@+id/tv_login"
-        android:layout_width="@dimen/x600"
-        android:layout_height="@dimen/x85"
+        android:layout_width="@dimen/x456"
+        android:layout_height="@dimen/x69"
         android:layout_below="@+id/ll_pwd"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/x16"
-        android:layout_marginLeft="@dimen/x643"
         android:background="@mipmap/button_login"
         android:gravity="center"
         android:textSize="@dimen/x34"

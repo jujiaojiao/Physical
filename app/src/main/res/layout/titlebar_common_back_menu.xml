@@ -6,16 +6,18 @@
 
     <ImageView
         android:id="@+id/ivBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x56"
+        android:layout_width="@dimen/x88"
+        android:layout_height="@dimen/x88"
         android:src="@mipmap/icon_arrow"
         android:layout_centerVertical="true"
         android:gravity="center"
-        android:padding="@dimen/x24"
+        android:padding="@dimen/x22"
         />
 
     <TextView
         android:id="@+id/tvTitle"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -27,10 +29,20 @@
         android:textSize="@dimen/x38" />
 
     <ImageView
-        android:id="@+id/ivRight"
+        android:id="@+id/iv_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/icon_arrow"
+        android:layout_height="@dimen/x37"
+        android:layout_centerInParent="true"
+        />
+
+
+    <ImageView
+        android:layout_marginRight="@dimen/x70"
+        android:id="@+id/ivRight"
+        android:layout_width="@dimen/x88"
+        android:layout_height="@dimen/x88"
+        android:src="@mipmap/icon_add"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:gravity="center"
         android:padding="@dimen/x24"
