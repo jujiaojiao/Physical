@@ -23,8 +23,8 @@ public class MyApplication extends Application {
     }
 
     private void initUmeng() {
-        String umeng_appkey = "5b347affa40fa374a6000035";
-        String umeng_push_secret = "cb2c3bef600e616a8a0bd719538ba555";
+//        String umeng_appkey = "5b347affa40fa374a6000035";
+//        String umeng_push_secret = "cb2c3bef600e616a8a0bd719538ba555";
 //        UMConfigure.setLogEnabled(true);
 //        UMConfigure.init(context, umeng_appkey, "", UMConfigure.DEVICE_TYPE_PHONE, umeng_push_secret);
 //        PlatformConfig.setWeixin("wxd75f906c4ce6fdda", "9dcbec79eaa52a38e3c3a73bca12e9bf");

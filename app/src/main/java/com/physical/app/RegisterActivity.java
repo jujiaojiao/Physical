@@ -92,7 +92,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
             case R.id.tv_login:
 //                MainActivity.start(this);
 
-                registerPresenter.register("+86","1234567","18689466314","123456","123456","jjj",etCode.getText().toString());
+                registerPresenter.register("+86","3333","18127095808","123456","123456","lq",etCode.getText().toString());
                 break;
             case R.id.tv_register:
                 //使用已有账号登录
@@ -101,8 +101,8 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
 
                 break;
             case R.id.tv_getcode:
-                registerPresenter.sendMessage("18689466314");
-                timer.start();
+                registerPresenter.sendMessage("18127095808");
+//                timer.start();
                 break;
         }
     }

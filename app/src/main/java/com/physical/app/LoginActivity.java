@@ -105,8 +105,8 @@ public class LoginActivity extends BaseActivity implements ISeedlingCallback {
         switch (view.getId()) {
             case R.id.tv_login:
 //                MainActivity.start(this);
-                request();
-//                startActivity(new Intent(this, MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+//                request();
+                startActivity(new Intent(this, MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                 break;
             case R.id.tv_register:
 //                RegisterActivity.start(this);
