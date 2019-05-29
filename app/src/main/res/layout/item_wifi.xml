@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/x78">
         <TextView
+            android:id="@+id/tv_name"
             android:text="wifi"
             android:gravity="center|left"
             android:textSize="@dimen/x24"

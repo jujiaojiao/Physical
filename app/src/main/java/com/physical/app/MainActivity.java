@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.physical.app.common.base.BaseActivity;
 import com.physical.app.common.widget.NetDialog;
 import com.physical.app.common.widget.SystemSetDialog;
 import com.physical.app.member.MemberManageActivity;
@@ -21,7 +23,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Bind(R.id.iv_head)
     ImageView ivHead;//头像
@@ -58,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        getWindow().setEnterTransition(new Slide().setDuration(2000));
+        getWindow().setExitTransition(new Slide().setDuration(2000));
         Log.i("jjj", "onCreate: ");
     }
 
@@ -78,7 +82,10 @@ public class MainActivity extends AppCompatActivity {
                 SettingActivity.start(this);
                 break;
             case R.id.ll_qq_music:
-
+//                Intent intent = new Intent();
+//                //包名 包名+类名（全路径）
+//                intent.setClassName("com.demo.surfaceviewdemo", "com.demo.surfaceviewdemo.JumpTestActivity");
+//                startActivity(intent);
                 break;
             case R.id.iv_menu://菜单
 //                showSystemDilaog();
@@ -125,4 +132,7 @@ public class MainActivity extends AppCompatActivity {
         });
         netDialog.show();
     }
+
+
+
 }

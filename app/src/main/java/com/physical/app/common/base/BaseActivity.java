@@ -3,7 +3,9 @@ package com.physical.app.common.base;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +15,7 @@ import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 
 import com.physical.app.AppData;
@@ -132,6 +135,55 @@ public class BaseActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    /**
+     * 判断apk是否安装
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isAppInstalled(Context context, String packageName) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    /**
+     * 通过包名 在应用商店打开应用
+     *
+     * @param context     上下文
+     * @param packageName 包名
+     * @param url         下载App的官方链接
+     */
+    public void openApplicationMarket(Context context, String packageName, String url) {
+        try {
+            String str = "market://details?id=" + packageName;
+            Intent localIntent = new Intent(Intent.ACTION_VIEW);
+            localIntent.setData(Uri.parse(str));
+            context.startActivity(localIntent);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 调用系统浏览器进行下载
+            Toast.makeText(context, "打开应用商店失败", Toast.LENGTH_SHORT).show();
+            openLinkBySystem(context, url);
+        }
+    }
+
+    /**
+     * 调用系统浏览器打开网页或下载链接
+     *
+     * @param url 地址
+     */
+
+    public void openLinkBySystem(Context context, String url) {
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        context.startActivity(intent);
     }
 
 }

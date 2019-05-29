@@ -2,16 +2,16 @@ package com.physical.app.common.api;
 
 public class HttpResult<T> {
 
-    public String type;
-    public String msg;
-    public T returnMap;
+    public String status;
+    public String statusText;
+    public T data;
 
     @Override
     public String toString() {
         return "HttpResult{" +
-                "type='" + type + '\'' +
-                ", msg='" + msg + '\'' +
-                ", returnMap=" + returnMap +
+                "type='" + status + '\'' +
+                ", msg='" + statusText + '\'' +
+                ", returnMap=" + data +
                 '}';
     }
 }

@@ -55,9 +55,11 @@ public class CommonInterceptor implements Interceptor {
             String qTime=format.format(System.currentTimeMillis());
             Map<String, String> params=getParamsPost(request);
             //加入公共参数
-            params.put("deviceId", DeviceUtils.getDeviceId(MyApplication.context));//
-            params.put("qTime",qTime);
-            params.put("appkey", SecretConstains.APP_KEY);
+//            params.put("deviceId", DeviceUtils.getDeviceId(MyApplication.context));//
+//            params.put("qTime",qTime);
+//            params.put("appkey", SecretConstains.APP_KEY);
+            params.put("sessionId", "userID");
+            params.put("app_key", "1234567");
             Request.Builder builder = request.newBuilder();
             FormBody.Builder formBodyBuilder = new FormBody.Builder();
             new FormBody.Builder();

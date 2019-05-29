@@ -1,5 +1,7 @@
 package com.physical.app.setting.fragment;
 
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,9 +15,11 @@ import android.widget.ListView;
 import com.physical.app.R;
 import com.physical.app.adapter.WifiAdapter;
 import com.physical.app.common.base.BaseFragment;
+import com.physical.app.common.utils.WifiUtils;
 import com.physical.app.common.widget.InputPwdDialog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,7 +38,7 @@ public class WifiFragment extends BaseFragment {
     @Bind(R.id.lv_data)
     ListView lvData;
     private WifiAdapter adapter;
-    private ArrayList<String> datas;
+    private List<ScanResult> datas;
     private InputPwdDialog inputPwdDialog;
 
     @Nullable
@@ -56,18 +60,20 @@ public class WifiFragment extends BaseFragment {
         lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showInputPwdDialog();
+                ScanResult data = datas.get(position);
+                if (data.capabilities.contains("WEP")||data.capabilities.contains("PSK")||data.capabilities.contains("EAP")){
+                    showInputPwdDialog();
+                }else{
+                    WifiUtils.getInstance(mContext).connectNoPassWordWifi(data);
+                }
             }
         });
     }
 
     private void initData() {
-        datas = new ArrayList<>();
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
+        WifiUtils.getInstance(mContext).openWifi();
+        datas = WifiUtils.getInstance(mContext).getScanResults();
+//        datas = new ArrayList<>();
         adapter = new WifiAdapter(mContext, datas);
         lvData.setAdapter(adapter);
     }

@@ -3,11 +3,13 @@ package com.physical.app;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
+import android.transition.Fade;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.EditText;
@@ -16,15 +18,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.physical.app.callback.IRegisterCallback;
 import com.physical.app.common.base.BaseActivity;
 import com.physical.app.common.utils.RegularUtils;
 import com.physical.app.common.utils.StringUtil;
+import com.physical.app.presenter.RegisterPresenter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity implements IRegisterCallback {
     @Bind(R.id.iv_title)
     ImageView ivTitle;
     @Bind(R.id.iv_circle)
@@ -59,6 +63,7 @@ public class RegisterActivity extends BaseActivity {
     TextView tvGetCode;
     private String code;
     private AnimatorSet animatorSet;
+    private RegisterPresenter registerPresenter;
 
     public static void start(Context context){
         Intent intent = new Intent(context,RegisterActivity.class);
@@ -74,20 +79,29 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void initView(){
+
+        registerPresenter = new RegisterPresenter(this, this);
 //        startAnimator();
+        getWindow().setEnterTransition(new Fade().setDuration(2000));
+        getWindow().setExitTransition(new Fade().setDuration(2000));
     }
 
     @OnClick({R.id.tv_login,R.id.tv_register,R.id.tv_getcode})
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.tv_login:
-                MainActivity.start(this);
+//                MainActivity.start(this);
+
+                registerPresenter.register("+86","1234567","18689466314","123456","123456","jjj",etCode.getText().toString());
                 break;
             case R.id.tv_register:
                 //使用已有账号登录
-                LoginActivity.start(this);
+//                LoginActivity.start(this);
+                startActivity(new Intent(this, LoginActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+
                 break;
             case R.id.tv_getcode:
+                registerPresenter.sendMessage("18689466314");
                 timer.start();
                 break;
         }
@@ -181,4 +195,20 @@ public class RegisterActivity extends BaseActivity {
         super.onDestroy();
     }
 
+
+    /**
+     * 注册成功回调
+     */
+    @Override
+    public void onRegisterSuccess() {
+
+    }
+
+    /**
+     * 验证码回调
+     */
+    @Override
+    public void onCodeFinish() {
+
+    }
 }

@@ -45,6 +45,7 @@ public interface ServerAPI {
 
     /**
      * 手机号注册
+     *
      * @param phone
      * @param validateKey
      * @param password
@@ -53,5 +54,41 @@ public interface ServerAPI {
     @POST("appApi/mobileRegisiter")
     @FormUrlEncoded
     Observable<HttpResult<Object>> mobileRegisiter(@Field("phone") String phone, @Field("validateKey") String validateKey, @Field("password") String password);
+
+    /**
+     * 幼苗
+     *
+     * @param phone
+     * @return
+     */
+    @POST("app/data/seedling")
+    @FormUrlEncoded
+    Observable<HttpResult<Object>> seedling(@Field("phone") String phone);
+
+    /**
+     * 获取注册验证码
+     *
+     * @param mobile
+     * @return
+     */
+    @POST("app/message/sendMessage.json")
+    @FormUrlEncoded
+    Observable<HttpResult<Object>> sendMessage(@Field("mobile") String mobile);
+
+    /**
+     * 获取注册验证码
+     *
+     * @param mobile
+     * @return
+     */
+    @POST("app/member/register.json")
+    @FormUrlEncoded
+    Observable<HttpResult<Object>> register(@Field("countryCode") String countryCode,
+                                            @Field("machineCode") String machineCode,
+                                            @Field("mobile") String mobile,
+                                            @Field("password") String password,
+                                            @Field("rePassword") String rePassword,
+                                            @Field("userName") String userName,
+                                            @Field("verifyCode") String verifyCode);
 
 }

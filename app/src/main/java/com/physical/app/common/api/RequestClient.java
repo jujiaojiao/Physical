@@ -48,7 +48,7 @@ public class RequestClient {
 //        builder.retryOnConnectionFailure(false);
         //添加https支持
 //        builder.sslSocketFactory(SSLSocketFactoryUtils.createSSLSocketFactory());
-        builder.sslSocketFactory(SSLSocketFactoryUtils.createSSLSocketFactory(MyApplication.context));
+//        builder.sslSocketFactory(SSLSocketFactoryUtils.createSSLSocketFactory(MyApplication.context));
 //        builder.sslSocketFactory(SSLSocketFactoryUtils.getSSLSocketFactory(MyApplication.context));
         //拦截器－添加公共字段
         builder.addInterceptor(new CommonInterceptor());
@@ -119,6 +119,7 @@ public class RequestClient {
 
     /**
      * 手机号注册
+     *
      * @param phone
      * @param validateKey
      * @param password
@@ -131,6 +132,49 @@ public class RequestClient {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+
+    /**
+     * 手机号注册
+     *
+     * @return
+     */
+    public Observable<Object> seedling() {
+        return mServerApi.seedling("")
+                .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取注册验证码
+     *
+     * @param mobile
+     * @return
+     */
+    public Observable<Object> sendMessage(String mobile) {
+        return mServerApi.sendMessage(mobile)
+                .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+    /**
+     * 获取注册验证码
+     *
+     * @param mobile
+     * @return
+     */
+    public Observable<Object> register( String countryCode,
+                                        String machineCode,
+                                        String mobile,
+                                        String  password,
+                                        String rePassword,
+                                        String  userName,
+                                        String  verifyCode) {
+        return mServerApi.register(countryCode, machineCode, mobile, password, rePassword, userName, verifyCode)
+                .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
 
 }

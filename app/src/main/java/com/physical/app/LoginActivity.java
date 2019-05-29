@@ -4,10 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.transition.Explode;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -16,10 +18,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.physical.app.callback.ISeedlingCallback;
 import com.physical.app.common.base.BaseActivity;
 import com.physical.app.common.utils.GenerateValueFiles;
 import com.physical.app.common.utils.RegularUtils;
 import com.physical.app.common.utils.StringUtil;
+import com.physical.app.presenter.SeedlingPresenter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,7 +32,7 @@ import butterknife.OnClick;
 /**
  * 登录页面
  */
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements ISeedlingCallback {
     @Bind(R.id.iv_title)
     ImageView ivTitle;
     @Bind(R.id.iv_circle)
@@ -49,6 +53,7 @@ public class LoginActivity extends BaseActivity {
     TextView tvRegister;
 
     private AnimatorSet animatorSet;
+    private SeedlingPresenter seedlingPresenter;
 
     public  static void start(Context context){
         Intent intent = new Intent(context,LoginActivity.class);
@@ -61,6 +66,8 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        getWindow().setEnterTransition(new Explode().setDuration(2000));
+        getWindow().setExitTransition(new Explode().setDuration(2000));
 //        GenerateValueFiles.main();
 //        startAnimator();
     }
@@ -83,6 +90,7 @@ public class LoginActivity extends BaseActivity {
         animatorSet.playTogether(alpha,rotation,scaleXcircle,scaleX);
         animatorSet.setDuration(3000);
         animatorSet.start();
+
     }
 
     private void stopAnimator(){
@@ -96,12 +104,22 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.tv_login:
-                MainActivity.start(this);
+//                MainActivity.start(this);
+                request();
+//                startActivity(new Intent(this, MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                 break;
             case R.id.tv_register:
-                RegisterActivity.start(this);
+//                RegisterActivity.start(this);
+                startActivity(new Intent(this, RegisterActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+
                 break;
         }
+    }
+
+
+    private void request(){
+        seedlingPresenter = new SeedlingPresenter(this, this);
+        seedlingPresenter.seedling();
     }
 
 
@@ -129,4 +147,6 @@ public class LoginActivity extends BaseActivity {
         super.onDestroy();
         stopAnimator();
     }
+
+
 }

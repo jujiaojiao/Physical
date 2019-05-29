@@ -1,12 +1,12 @@
 package com.physical.app.adapter;
 
 import android.content.Context;
+import android.net.wifi.ScanResult;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.physical.app.R;
@@ -18,17 +18,17 @@ import butterknife.ButterKnife;
 
 /**
  * @author jjj
- * 版本：1.0
- * 创建日期：2019/5/21
- * 描述：wifi
+ *         版本：1.0
+ *         创建日期：2019/5/21
+ *         描述：wifi
  */
 public class WifiAdapter extends BaseAdapter {
     private Context context;
-    private List<String> datas;
+    private List<ScanResult> datas;
     private LayoutInflater inflater;
     private int current;
 
-    public WifiAdapter(Context context, List<String> datas) {
+    public WifiAdapter(Context context, List<ScanResult> datas) {
         this.context = context;
         this.datas = datas;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -60,6 +60,17 @@ public class WifiAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        ScanResult data = datas.get(position);
+        holder.tvName.setText(data.SSID);
+        if (null != data.capabilities) {
+            if (data.capabilities.contains("WEP")||data.capabilities.contains("PSK")||data.capabilities.contains("EAP")){
+                holder.ivSwitch.setImageResource(R.mipmap.icon_wifi_lock);
+            }else{
+                holder.ivSwitch.setImageResource(R.mipmap.icon_wifi_open);
+            }
+        }
+
+        holder.tvName.setText(datas.get(position).SSID);
         return convertView;
     }
 
@@ -69,6 +80,8 @@ public class WifiAdapter extends BaseAdapter {
 
 
     class ViewHolder {
+        @Bind(R.id.tv_name)
+        TextView tvName;
         @Bind(R.id.iv_switch)
         ImageView ivSwitch;
 
