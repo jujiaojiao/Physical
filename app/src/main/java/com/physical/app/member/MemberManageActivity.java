@@ -99,7 +99,8 @@ public class MemberManageActivity extends BaseActivity {
         lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MemberDetailActivity.start(MemberManageActivity.this);
+                AddMemberActivity.start(MemberManageActivity.this);
+//                MemberDetailActivity.start(MemberManageActivity.this);
             }
         });
     }
