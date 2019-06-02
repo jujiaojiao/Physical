@@ -1,10 +1,12 @@
 package com.physical.app;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.physical.app.common.base.BaseActivity;
@@ -28,13 +30,14 @@ public class StartActivity extends BaseActivity {
         //全屏
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_start);
 
 
         initData();
 
     }
+
+
 
 
     private void initData() {

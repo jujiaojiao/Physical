@@ -1,8 +1,11 @@
 package com.physical.app;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.os.Build;
 import android.os.Environment;
+import android.view.View;
 
 import java.io.File;
 
@@ -73,4 +76,7 @@ public class MyApplication extends Application {
             file.mkdirs();
         }
     }
+
+
+
 }

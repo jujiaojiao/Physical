@@ -157,6 +157,7 @@ public class LoginActivity extends BaseActivity implements ISeedlingCallback, IL
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return false;
     }
+    
 }
 
 

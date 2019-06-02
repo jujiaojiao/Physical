@@ -1,5 +1,6 @@
 package com.physical.app.common.base;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +38,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+        hideBottomUIMenu();
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -207,5 +209,17 @@ public class BaseActivity extends AppCompatActivity {
         String jsonStr = gson.toJson(data);
         return jsonStr;
     }
+
+    /**
+     * 隐藏虚拟按键，并且设置成全屏
+     */
+    @SuppressLint("ObsoleteSdkInt")
+    protected void hideBottomUIMenu() {
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE;
+        getWindow().setAttributes(params);
+
+    }
+
 
 }
