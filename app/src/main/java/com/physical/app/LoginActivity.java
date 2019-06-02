@@ -147,6 +147,7 @@ public class LoginActivity extends BaseActivity implements ISeedlingCallback, IL
 
     @Override
     public void onLoginSuccess(User user) {
+        AppData.getInstance().setUser(user);
         startActivity(new Intent(this, MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 }

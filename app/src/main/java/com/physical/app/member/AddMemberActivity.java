@@ -15,12 +15,17 @@ import android.widget.TextView;
 
 import com.physical.app.R;
 import com.physical.app.adapter.AddMemberAdapter;
+import com.physical.app.bean.MedicalHistory;
+import com.physical.app.bean.MemberVo;
+import com.physical.app.callback.IAddMemberCallback;
 import com.physical.app.common.base.BaseActivity;
 import com.physical.app.common.widget.ComDialog;
 import com.physical.app.common.widget.RechargeDialog;
 import com.physical.app.physical.SelectSeedlingActivity;
+import com.physical.app.presenter.AddMemberPresenter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,7 +37,7 @@ import butterknife.OnClick;
  * 创建日期：2019/5/25
  * 描述：新增会员信息
  */
-public class AddMemberActivity extends BaseActivity {
+public class AddMemberActivity extends BaseActivity implements IAddMemberCallback {
 
     @Bind(R.id.ivBack)
     ImageView ivBack;
@@ -75,9 +80,10 @@ public class AddMemberActivity extends BaseActivity {
     @Bind(R.id.ll_bottome)
     LinearLayout llBottome;
     private AddMemberAdapter adapter;
-    private ArrayList<String> datas;
+    private List<MedicalHistory> datas;
     private RechargeDialog rechargeDialog;
     private ComDialog comDialog;
+    private AddMemberPresenter addMemberPresenter;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, AddMemberActivity.class);
@@ -96,32 +102,11 @@ public class AddMemberActivity extends BaseActivity {
     private void initView() {
         ivTitle.setImageResource(R.mipmap.word_add);
         datas = new ArrayList<>();
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
         adapter = new AddMemberAdapter(this, datas);
         gvData.setAdapter(adapter);
+
+        addMemberPresenter = new AddMemberPresenter(this, this);
+        addMemberPresenter.disease(getUserId());
     }
 
     private void addListener() {
@@ -133,11 +118,15 @@ public class AddMemberActivity extends BaseActivity {
         });
     }
 
+
+
+
     @OnClick({R.id.tv_confirm, R.id.tv_cancel, R.id.iv_recharge, R.id.ivBack})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_confirm:
-                SelectSeedlingActivity.start(this);
+//                SelectSeedlingActivity.start(this);
+                confirm();
                 break;
             case R.id.tv_cancel:
                 showComdialog();
@@ -150,6 +139,31 @@ public class AddMemberActivity extends BaseActivity {
                 break;
 
         }
+    }
+
+    private void confirm(){
+        MemberVo memberVo = new MemberVo();
+        memberVo.name = "zz";
+//        memberVo.nickName = "壮壮";
+        memberVo.mobile = "18689466314";
+        memberVo.idCard = "610321199309141133";
+        memberVo.sex = "1";//1男  2女
+        memberVo.birthday = "2016-06-10";
+        memberVo.firstTime = "2017-03-09";
+        memberVo.height = "178";
+        memberVo.weight = "66";
+        memberVo.totalMoney = "100";
+        memberVo.usedTime = "1";
+        memberVo.vipTimes = "2";
+        List<MedicalHistory> selects = new ArrayList<>();
+        for (MedicalHistory data : datas) {
+            if (data.select){
+                selects.add(data);
+            }
+        }
+        memberVo.medicalHistoryList = selects;
+        addMemberPresenter.save(toJson(memberVo),getUserId());
+
     }
 
     private void showComdialog() {
@@ -175,5 +189,24 @@ public class AddMemberActivity extends BaseActivity {
             }
         });
         rechargeDialog.show();
+    }
+
+    /**
+     * 新增会员
+     */
+    @Override
+    public void onSaveSuccess() {
+
+    }
+
+    /**
+     * 疾病史
+     */
+    @Override
+    public void onDiseaseSuccess(List<MedicalHistory> bean) {
+        if (null!=bean&&bean.size()>0){
+            datas.addAll(bean);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

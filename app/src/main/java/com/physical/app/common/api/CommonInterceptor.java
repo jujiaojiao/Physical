@@ -58,7 +58,6 @@ public class CommonInterceptor implements Interceptor {
 //            params.put("deviceId", DeviceUtils.getDeviceId(MyApplication.context));//
 //            params.put("qTime",qTime);
 //            params.put("appkey", SecretConstains.APP_KEY);
-            params.put("sessionId", "userID");
             params.put("app_key", "1234567");
             Request.Builder builder = request.newBuilder();
             FormBody.Builder formBodyBuilder = new FormBody.Builder();

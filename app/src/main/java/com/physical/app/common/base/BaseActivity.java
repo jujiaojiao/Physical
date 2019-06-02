@@ -19,6 +19,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 
+import com.google.gson.Gson;
 import com.physical.app.AppData;
 import com.physical.app.LoginActivity;
 import com.physical.app.common.utils.ToastUtil;
@@ -197,6 +198,14 @@ public class BaseActivity extends AppCompatActivity {
         Uri uri = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         context.startActivity(intent);
+    }
+
+
+
+    public static <T> String toJson(T data) {
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(data);
+        return jsonStr;
     }
 
 }
