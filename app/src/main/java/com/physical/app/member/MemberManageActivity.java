@@ -11,10 +11,13 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.physical.app.AppData;
 import com.physical.app.R;
 import com.physical.app.adapter.MemberManageAdapter;
 import com.physical.app.bean.MemberManageBean;
+import com.physical.app.callback.IMemberManageCallback;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.presenter.MemberManagePresenter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
@@ -29,7 +32,7 @@ import butterknife.OnClick;
  * 创建日期：2019/5/19
  * 描述：会员信息管理
  */
-public class MemberManageActivity extends BaseActivity {
+public class MemberManageActivity extends BaseActivity implements IMemberManageCallback {
     @Bind(R.id.ivBack)
     ImageView ivBack;
     @Bind(R.id.tvTitle)
@@ -62,7 +65,10 @@ public class MemberManageActivity extends BaseActivity {
     ImageView ivTitle;
     private MemberManageAdapter adapter;
     private ArrayList<MemberManageBean> list;
-
+    private MemberManagePresenter memberManagePresenter;
+    private String keyword;
+    private int  pageNum = 1;
+    private int  pageSize = 20;
     public static void start(Context context) {
         Intent intent = new Intent(context, MemberManageActivity.class);
         context.startActivity(intent);
@@ -93,6 +99,9 @@ public class MemberManageActivity extends BaseActivity {
         adapter = new MemberManageAdapter(this, list);
         lvData.setAdapter(adapter);
 
+        memberManagePresenter = new MemberManagePresenter(this,this);
+        request();
+
     }
 
     private void addListener() {
@@ -105,6 +114,11 @@ public class MemberManageActivity extends BaseActivity {
         });
     }
 
+
+    private void request(){
+        memberManagePresenter.queryMemberList(getUserId(), keyword,""+pageNum,""+ pageSize);
+    }
+
     @OnClick({R.id.ivRight,R.id.ivBack})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -115,5 +129,10 @@ public class MemberManageActivity extends BaseActivity {
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onMemberListSuccess() {
+
     }
 }

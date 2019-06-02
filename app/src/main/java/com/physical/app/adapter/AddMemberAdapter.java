@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.physical.app.R;
+import com.physical.app.bean.MedicalHistory;
 
 import java.util.List;
 
@@ -24,11 +25,11 @@ import butterknife.ButterKnife;
  */
 public class AddMemberAdapter extends BaseAdapter{
     private Context context;
-    private List<String> datas;
+    private List<MedicalHistory> datas;
     private LayoutInflater inflater;
     private int current;
 
-    public AddMemberAdapter(Context context, List<String> datas) {
+    public AddMemberAdapter(Context context, List<MedicalHistory> datas) {
         this.context = context;
         this.datas = datas;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,14 +60,19 @@ public class AddMemberAdapter extends BaseAdapter{
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        MedicalHistory data = datas.get(position);
 
         if (current==position){
-            holder.ivCheck.setImageResource(R.mipmap.choose_have);
+            if (data.select){
+                data.select = false;
+                holder.ivCheck.setImageResource(R.mipmap.choose_none);
+            }else{
+                data.select = true;
+                holder.ivCheck.setImageResource(R.mipmap.choose_have);
+            }
+
         }
-//        else{
-//            holder.ivCheck.setImageResource(R.mipmap.icon_circle_none);
-//        }
-//        holder.tvContent.setText(datas.get(position));
+        holder.tvContent.setText(data.name);
         return convertView;
     }
 

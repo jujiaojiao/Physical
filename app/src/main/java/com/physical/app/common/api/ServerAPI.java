@@ -1,7 +1,10 @@
 package com.physical.app.common.api;
 
 
+import com.physical.app.bean.MedicalHistory;
 import com.physical.app.common.mine.bean.User;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -108,7 +111,8 @@ public interface ServerAPI {
     Observable<HttpResult<Object>> charge(@Field("machineCode") String machineCode,
                                           @Field("memberId") String memberId,
                                           @Field("money") String money,
-                                          @Field("times") String times);
+                                          @Field("times") String times,
+                                          @Field("sessionId") String sessionId);
 
     /**
      * 根据会员id查询会员详情
@@ -118,30 +122,27 @@ public interface ServerAPI {
      */
     @POST("app/member/queryDetailById.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> queryDetailById(@Field("memberId") String memberId);
+    Observable<HttpResult<Object>> queryDetailById(@Field("memberId") String memberId,@Field("sessionId") String sessionId);
 
 
     /**
      * 分页查询会员列表
      *
-     * @param idCard    身份证
      * @param idxStr    姓名或手机号或身份证
-     * @param mobile    手机号
      * @param page      当前默认页
-     * @param pageIndex
      * @param pageSize  每页大小
-     * @param userName  姓名
      * @return
      */
     @POST("app/member/queryMemberList.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> queryMemberList(@Field("idCard") String idCard,
+    Observable<HttpResult<Object>> queryMemberList(@Field("sessionId") String sessionId,
                                                    @Field("idxStr") String idxStr,
-                                                   @Field("mobile") String mobile,
                                                    @Field("page") String page,
-                                                   @Field("pageIndex") String pageIndex,
-                                                   @Field("pageSize") String pageSize,
-                                                   @Field("userName") String userName);
+                                                   @Field("pageSize") String pageSize);
+//    ,
+//    @Field("idCard") String idCard,
+//    @Field("mobile") String mobile,
+//    @Field("userName") String userName
 
     /**
      * 查询处方
@@ -151,7 +152,7 @@ public interface ServerAPI {
      */
     @POST("app/member/queryRecipeList.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> queryRecipeList(@Field("hisIds") String hisIds);
+    Observable<HttpResult<Object>> queryRecipeList(@Field("hisIds") String hisIds,@Field("sessionId") String sessionId);
 
 
     /**
@@ -166,6 +167,25 @@ public interface ServerAPI {
     @FormUrlEncoded
     Observable<HttpResult<Object>> updatePwd(@Field("newPassword") String newPassword,
                                              @Field("userId") String userId,
-                                             @Field("verifyCode") String verifyCode);
+                                             @Field("verifyCode") String verifyCode,
+                                             @Field("sessionId") String sessionId);
+
+    /**
+     *  新增会员
+     * @param param
+     * @return
+     */
+    @POST("app/member/save.json")
+    @FormUrlEncoded
+    Observable<HttpResult<Object>> save(@Field("param") String param, @Field("sessionId") String sessionId);
+
+    /**
+     *  病史列表
+     * @param sessionId
+     * @return
+     */
+    @POST("app/data/disease.json")
+    @FormUrlEncoded
+    Observable<HttpResult<List<MedicalHistory>>> disease(@Field("sessionId") String sessionId);
 
 }

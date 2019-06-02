@@ -2,8 +2,10 @@ package com.physical.app.common.api;
 
 
 import com.physical.app.MyApplication;
+import com.physical.app.bean.MedicalHistory;
 import com.physical.app.common.mine.bean.User;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MultipartBody;
@@ -191,8 +193,9 @@ public class RequestClient {
     public Observable<Object> charge(String machineCode,
                                      String memberId,
                                      String money,
-                                     String times) {
-        return mServerApi.charge(machineCode, memberId, money, times)
+                                     String times,
+                                     String sessionId) {
+        return mServerApi.charge(machineCode, memberId, money, times,sessionId)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -205,8 +208,8 @@ public class RequestClient {
      * @param memberId
      * @return
      */
-    public Observable<Object> queryDetailById(String memberId) {
-        return mServerApi.queryDetailById(memberId)
+    public Observable<Object> queryDetailById(String memberId,String sessionId) {
+        return mServerApi.queryDetailById(memberId,sessionId)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -219,19 +222,15 @@ public class RequestClient {
      * @param idxStr    姓名或手机号或身份证
      * @param mobile    手机号
      * @param page      当前默认页
-     * @param pageIndex
      * @param pageSize  每页大小
      * @param userName  姓名
      * @return
      */
-    public Observable<Object> queryMemberList(String idCard,
+    public Observable<Object> queryMemberList(String sessionId,
                                               String idxStr,
-                                              String mobile,
                                               String page,
-                                              String pageIndex,
-                                              String pageSize,
-                                              String userName) {
-        return mServerApi.queryMemberList(idCard, idxStr, mobile, page, pageIndex, pageSize, userName)
+                                              String pageSize) {
+        return mServerApi.queryMemberList(sessionId,idxStr, page, pageSize)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -244,8 +243,8 @@ public class RequestClient {
      * @param hisIds
      * @return
      */
-    public Observable<Object> queryRecipeList(String hisIds) {
-        return mServerApi.queryRecipeList(hisIds)
+    public Observable<Object> queryRecipeList(String hisIds,String sessionId) {
+        return mServerApi.queryRecipeList(hisIds,sessionId)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -259,9 +258,33 @@ public class RequestClient {
      * @param verifyCode
      * @return
      */
-    public Observable<Object> updatePwd(String newPassword,String userId,String verifyCode) {
-        return mServerApi.updatePwd(newPassword, userId, verifyCode)
+    public Observable<Object> updatePwd(String newPassword,String userId,String verifyCode,String sessionId) {
+        return mServerApi.updatePwd(newPassword, userId, verifyCode,sessionId)
                 .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     *  新增会员
+     * @param param
+     * @return
+     */
+    public Observable<Object> save(String param,String sessionId) {
+        return mServerApi.save(param,sessionId)
+                .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+    /**
+     *  病史列表
+     * @return
+     */
+    public Observable<List<MedicalHistory>> disease(String sessionId) {
+        return mServerApi.disease(sessionId)
+                .map(new HttpResultFuc<List<MedicalHistory>>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
