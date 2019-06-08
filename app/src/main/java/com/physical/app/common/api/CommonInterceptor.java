@@ -1,11 +1,15 @@
 package com.physical.app.common.api;
 
 
+import android.provider.Settings;
+
 import com.physical.app.MyApplication;
+import com.physical.app.common.constains.Constains;
 import com.physical.app.common.sign.SecretConstains;
 import com.physical.app.common.sign.SignCore;
 import com.physical.app.common.utils.DeviceUtils;
 import com.physical.app.common.utils.LogUtil;
+import com.physical.app.common.utils.Preferences;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -32,6 +36,7 @@ public class CommonInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
+        String wifimac = Preferences.getString(Constains.WIFIMAC);
         //得到原始的请求对象
         Request request = chain.request();
         //得到用户所使用的请求方式
@@ -58,7 +63,7 @@ public class CommonInterceptor implements Interceptor {
 //            params.put("deviceId", DeviceUtils.getDeviceId(MyApplication.context));//
 //            params.put("qTime",qTime);
 //            params.put("appkey", SecretConstains.APP_KEY);
-            params.put("app_key", "1234567");
+            params.put("app_key", wifimac);//设备id
             Request.Builder builder = request.newBuilder();
             FormBody.Builder formBodyBuilder = new FormBody.Builder();
             new FormBody.Builder();

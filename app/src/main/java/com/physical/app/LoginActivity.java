@@ -59,6 +59,8 @@ public class LoginActivity extends BaseActivity implements ISeedlingCallback, IL
     private AnimatorSet animatorSet;
     private SeedlingPresenter seedlingPresenter;
     private LoginPresenter loginPresenter;
+    private String phone;
+    private String pwd;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -71,8 +73,8 @@ public class LoginActivity extends BaseActivity implements ISeedlingCallback, IL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        getWindow().setEnterTransition(new Explode().setDuration(2000));
-        getWindow().setExitTransition(new Explode().setDuration(2000));
+        getWindow().setEnterTransition(new Explode().setDuration(1000));
+        getWindow().setExitTransition(new Explode().setDuration(1000));
 //        GenerateValueFiles.main();
 //        startAnimator();
     }
@@ -109,8 +111,7 @@ public class LoginActivity extends BaseActivity implements ISeedlingCallback, IL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login:
-//                MainActivity.start(this);
-                request();
+                login();
                 break;
             case R.id.tv_register:
 //                RegisterActivity.start(this);
@@ -122,13 +123,13 @@ public class LoginActivity extends BaseActivity implements ISeedlingCallback, IL
 
     private void request() {
         loginPresenter = new LoginPresenter(this, this);
-        loginPresenter.login("1234567","jjj","123456");
+        loginPresenter.login(getWifiMac(),phone,pwd);
     }
 
 
     private void login() {
-        String phone = etPhone.getText().toString().trim();
-        String pwd = etPwd.getText().toString().trim();
+        phone = etPhone.getText().toString().trim();
+        pwd = etPwd.getText().toString().trim();
         if (StringUtil.isEmpty(phone)) {
             showToast("请输入手机号码");
             return;
@@ -137,6 +138,7 @@ public class LoginActivity extends BaseActivity implements ISeedlingCallback, IL
             showToast("请输入密码");
             return;
         }
+        request();
     }
 
     @Override
@@ -150,6 +152,7 @@ public class LoginActivity extends BaseActivity implements ISeedlingCallback, IL
     public void onLoginSuccess(User user) {
         AppData.getInstance().setUser(user);
         startActivity(new Intent(this, MainActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        finish();
     }
 
     //取消返回键的监听

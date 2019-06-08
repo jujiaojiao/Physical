@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.physical.app.AppData;
 import com.physical.app.LoginActivity;
+import com.physical.app.common.constains.Constains;
+import com.physical.app.common.utils.Preferences;
 import com.physical.app.common.utils.ToastUtil;
 import com.physical.app.common.mine.bean.User;
 
@@ -64,6 +66,9 @@ public class BaseActivity extends AppCompatActivity {
 
     public String getUserId() {
         return AppData.getInstance().getUserId();
+    }
+    public String getWifiMac() {
+        return  Preferences.getString(Constains.WIFIMAC);
     }
 
     public boolean userIsLogin(boolean startToLogin) {

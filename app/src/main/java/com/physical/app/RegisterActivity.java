@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.transition.Fade;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -64,6 +66,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
     private String code;
     private AnimatorSet animatorSet;
     private RegisterPresenter registerPresenter;
+    private String phone;
 
     public static void start(Context context){
         Intent intent = new Intent(context,RegisterActivity.class);
@@ -84,6 +87,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
 //        startAnimator();
         getWindow().setEnterTransition(new Fade().setDuration(2000));
         getWindow().setExitTransition(new Fade().setDuration(2000));
+        addListener();
     }
 
     @OnClick({R.id.tv_login,R.id.tv_register,R.id.tv_getcode})
@@ -91,8 +95,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
         switch (view.getId()) {
             case R.id.tv_login:
 //                MainActivity.start(this);
-
-                registerPresenter.register("+86","3333","18127095808","123456","123456","lq",etCode.getText().toString());
+                login();
                 break;
             case R.id.tv_register:
                 //使用已有账号登录
@@ -101,12 +104,89 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
 
                 break;
             case R.id.tv_getcode:
-                registerPresenter.sendMessage("18127095808");
+                registerPresenter.sendMessage(phone);
 //                timer.start();
                 break;
         }
     }
 
+    private void addListener(){
+        etUser.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // 监听到回车键，会执行2次该方法。按下与松开
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        //松开事件
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(etUser.getWindowToken(), 0); //强制隐藏键盘
+                    }
+                }
+                return false;
+
+            }
+        });
+        etPhone.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // 监听到回车键，会执行2次该方法。按下与松开
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        //松开事件
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(etPhone.getWindowToken(), 0); //强制隐藏键盘
+                    }
+                }
+                return false;
+
+            }
+        });
+        etPwd.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // 监听到回车键，会执行2次该方法。按下与松开
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        //松开事件
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(etPwd.getWindowToken(), 0); //强制隐藏键盘
+                    }
+                }
+                return false;
+
+            }
+        });
+        etRepwd.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // 监听到回车键，会执行2次该方法。按下与松开
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        //松开事件
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(etRepwd.getWindowToken(), 0); //强制隐藏键盘
+                    }
+                }
+                return false;
+
+            }
+        });
+        etCode.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // 监听到回车键，会执行2次该方法。按下与松开
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        //松开事件
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(etCode.getWindowToken(), 0); //强制隐藏键盘
+                    }
+                }
+                return false;
+
+            }
+        });
+    }
     CountDownTimer timer = new CountDownTimer(60000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
@@ -152,7 +232,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
     }
 
     private void login(){
-        String phone = etPhone.getText().toString().trim();
+        phone = etPhone.getText().toString().trim();
         String pwd = etPwd.getText().toString().trim();
         String name = etUser.getText().toString().trim();
         String repwd = etRepwd.getText().toString().trim();
@@ -183,6 +263,8 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
             showToast("请输入验证码");
             return;
         }
+        registerPresenter.register("+86",getWifiMac(), phone,pwd,repwd,name,code);
+
     }
 
 
@@ -201,7 +283,8 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
      */
     @Override
     public void onRegisterSuccess() {
-
+        showToast("注册成功");
+        finish();
     }
 
     /**
@@ -209,6 +292,6 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
      */
     @Override
     public void onCodeFinish() {
-
+        timer.start();
     }
 }

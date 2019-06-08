@@ -142,8 +142,8 @@ public class RequestClient {
      *
      * @return
      */
-    public Observable<Object> seedling() {
-        return mServerApi.seedling("")
+    public Observable<Object> seedling(String sessionId) {
+        return mServerApi.seedling(sessionId)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -195,7 +195,7 @@ public class RequestClient {
                                      String money,
                                      String times,
                                      String sessionId) {
-        return mServerApi.charge(machineCode, memberId, money, times,sessionId)
+        return mServerApi.charge(machineCode, memberId, money, times, sessionId)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -208,8 +208,8 @@ public class RequestClient {
      * @param memberId
      * @return
      */
-    public Observable<Object> queryDetailById(String memberId,String sessionId) {
-        return mServerApi.queryDetailById(memberId,sessionId)
+    public Observable<Object> queryDetailById(String memberId, String sessionId) {
+        return mServerApi.queryDetailById(memberId, sessionId)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -218,19 +218,16 @@ public class RequestClient {
     /**
      * 分页查询会员列表
      *
-     * @param idCard    身份证
-     * @param idxStr    姓名或手机号或身份证
-     * @param mobile    手机号
-     * @param page      当前默认页
-     * @param pageSize  每页大小
-     * @param userName  姓名
+     * @param idxStr   姓名或手机号或身份证
+     * @param page     当前默认页
+     * @param pageSize 每页大小
      * @return
      */
     public Observable<Object> queryMemberList(String sessionId,
                                               String idxStr,
                                               String page,
                                               String pageSize) {
-        return mServerApi.queryMemberList(sessionId,idxStr, page, pageSize)
+        return mServerApi.queryMemberList(sessionId, idxStr, page, pageSize)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -243,8 +240,8 @@ public class RequestClient {
      * @param hisIds
      * @return
      */
-    public Observable<Object> queryRecipeList(String hisIds,String sessionId) {
-        return mServerApi.queryRecipeList(hisIds,sessionId)
+    public Observable<Object> queryRecipeList(String hisIds, String sessionId) {
+        return mServerApi.queryRecipeList(hisIds, sessionId)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -258,20 +255,21 @@ public class RequestClient {
      * @param verifyCode
      * @return
      */
-    public Observable<Object> updatePwd(String newPassword,String userId,String verifyCode,String sessionId) {
-        return mServerApi.updatePwd(newPassword, userId, verifyCode,sessionId)
+    public Observable<Object> updatePwd(String newPassword, String userId, String verifyCode, String sessionId) {
+        return mServerApi.updatePwd(newPassword, userId, verifyCode, sessionId)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
-     *  新增会员
+     * 新增会员
+     *
      * @param param
      * @return
      */
-    public Observable<Object> save(String param,String sessionId) {
-        return mServerApi.save(param,sessionId)
+    public Observable<Object> save(String param, String sessionId) {
+        return mServerApi.save(param, sessionId)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -279,12 +277,69 @@ public class RequestClient {
 
 
     /**
-     *  病史列表
+     * 病史列表
+     *
      * @return
      */
     public Observable<List<MedicalHistory>> disease(String sessionId) {
         return mServerApi.disease(sessionId)
                 .map(new HttpResultFuc<List<MedicalHistory>>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+    /**
+     * 上传机器问题报告
+     *
+     * @param title       标题
+     * @param descript    描述
+     * @param machineCode 机器码
+     * @param sessionId
+     * @return
+     */
+    public Observable<Object> problemReport(String title,
+                                                          String descript,
+                                                          String machineCode,
+                                                          String sessionId) {
+        return mServerApi.problemReport(title, descript, machineCode, sessionId)
+                .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 查询最新的版本号
+     * @param sessionId
+     * @return
+     */
+    public Observable<Object> queryLatestVersion(String sessionId) {
+        return mServerApi.queryLatestVersion(sessionId)
+                .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 查询广告
+     * @param sessionId
+     * @return
+     */
+    public Observable<Object> query(String sessionId) {
+        return mServerApi.query(sessionId)
+                .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 下载app
+     * @param sessionId
+     * @return
+     */
+    public Observable<Object> downLoadNewVersion(String sessionId) {
+        return mServerApi.downLoadNewVersion(sessionId)
+                .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

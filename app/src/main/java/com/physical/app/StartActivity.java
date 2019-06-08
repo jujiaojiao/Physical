@@ -60,8 +60,11 @@ public class StartActivity extends BaseActivity {
             switch (msg.what) {
 
                 case 100:
-
-                    startTo(LoginActivity.class);
+//                    if (null!=getUser()){
+//                        MainActivity.start(mContext);
+//                    }else{
+                        startTo(LoginActivity.class);
+//                    }
 
                     finish();
 

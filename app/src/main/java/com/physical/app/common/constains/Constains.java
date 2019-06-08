@@ -10,6 +10,7 @@ public class Constains {
      * 用户登录信息
      **/
     public static final String USER = "user";
+    public static final String WIFIMAC = "wifimac";
     public static final String PHONE = "PHONE";
     public static final String PASSWORD = "PASSWORD";
 

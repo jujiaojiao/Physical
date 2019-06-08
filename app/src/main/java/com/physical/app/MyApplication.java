@@ -3,9 +3,15 @@ package com.physical.app;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.Settings;
 import android.view.View;
+
+import com.physical.app.common.constains.Constains;
+import com.physical.app.common.utils.Preferences;
 
 import java.io.File;
 
@@ -67,6 +73,11 @@ public class MyApplication extends Application {
 //        LitePal.initialize(this);
         context = this;
         initPath();
+        WifiManager wifi = (WifiManager)
+                context.getSystemService(Context.WIFI_SERVICE);
+        WifiInfo info = wifi.getConnectionInfo();
+        String wifiMac = info.getMacAddress();
+        Preferences.putString(Constains.WIFIMAC, wifiMac);
 //        CrashReport.initCrashReport(getApplicationContext(), "aa2f75bab1", false);
     }
 
