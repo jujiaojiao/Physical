@@ -45,6 +45,31 @@ public class StringUtil {
         String strTime = dateToString(date, formatType); // date类型转成String
         return strTime;
     }
+
+    // strTime要转换的String类型的时间
+    // formatType时间格式
+    // strTime的时间格式和formatType的时间格式必须相同
+    public static long stringToLong(String strTime, String formatType) {
+        Date date = null; // String类型转成date类型
+        try {
+            date = stringToDate(strTime, formatType);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (date == null) {
+            return 0;
+        } else {
+            long currentTime = dateToLong(date); // date类型转成long类型
+            return currentTime;
+        }
+    }
+
+
+    // date要转换的date类型的时间
+    public static long dateToLong(Date date) {
+        return date.getTime();
+    }
+
     public static String dateToString(Date data, String formatType) {
         return new SimpleDateFormat(formatType).format(data);
     }

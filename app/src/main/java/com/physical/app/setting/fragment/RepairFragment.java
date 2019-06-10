@@ -10,8 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.physical.app.R;
+import com.physical.app.callback.IRepairCallback;
 import com.physical.app.common.base.BaseFragment;
 import com.physical.app.common.utils.StringUtil;
+import com.physical.app.presenter.RepairPresenter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,7 +26,7 @@ import butterknife.OnClick;
  * 描述: 设备报修
  */
 
-public class RepairFragment extends BaseFragment {
+public class RepairFragment extends BaseFragment implements IRepairCallback {
     @Bind(R.id.et_title)
     EditText etTitle;
     @Bind(R.id.et_content)
@@ -35,6 +37,7 @@ public class RepairFragment extends BaseFragment {
     TextView tvConfirm;
     private String title;
     private String content;
+    private RepairPresenter repairPresenter;
 
     @Nullable
     @Override
@@ -51,27 +54,27 @@ public class RepairFragment extends BaseFragment {
     }
 
     private void initData() {
-
+        repairPresenter = new RepairPresenter(getContext(), this);
     }
 
-    @OnClick({R.id.tv_cancel,R.id.tv_confirm})
-    public void onClick(View view){
+    @OnClick({R.id.tv_cancel, R.id.tv_confirm})
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_cancel:
-
+                getActivity().finish();
                 break;
             case R.id.tv_confirm:
                 title = etTitle.getText().toString().trim();
                 content = etContent.getText().toString().trim();
-                if (StringUtil.isEmpty(title)){
+                if (StringUtil.isEmpty(title)) {
                     showToast("请输入标题");
                     return;
                 }
-                if (StringUtil.isEmpty(content)){
+                if (StringUtil.isEmpty(content)) {
                     showToast("请输入内容");
                     return;
                 }
-
+                repairPresenter.problemReport(title, content, getWifiMac(), getUserId());
                 break;
         }
     }
@@ -80,5 +83,12 @@ public class RepairFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onProblemSuccess(Object bean) {
+        showToast("上传成功");
+        etTitle.setText("");
+        etContent.setText("");
     }
 }

@@ -33,8 +33,10 @@
                 android:layout_width="@dimen/x600"
                 android:layout_height="@dimen/x50">
                 <EditText
+                    android:id="@+id/et_search"
                     android:paddingLeft="@dimen/x10"
                     android:layout_weight="1"
+                    android:singleLine="true"
                     android:textColorHint="@color/color_35c1f0"
                     android:hint="请输入姓名/手机号身份证号"
                     android:background="@null"

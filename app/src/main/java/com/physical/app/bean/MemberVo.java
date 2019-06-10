@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class MemberVo implements Serializable{
 
+    public String id;
+
     /**
      * 名称
      */
@@ -38,7 +40,7 @@ public class MemberVo implements Serializable{
     /**
      * 生日
      */
-    public String  birthday;
+    public long  birthday;
 
     /**
      * 升高
@@ -53,7 +55,7 @@ public class MemberVo implements Serializable{
     /**
      * 首次诊疗时间
      */
-    public String firstTime;
+    public long firstTime;
 
     /**
      * 是否是vip客户
@@ -85,5 +87,10 @@ public class MemberVo implements Serializable{
      * @return
      */
     public List<MedicalHistory> medicalHistoryList;
+
+    /**
+     * 诊疗纪录
+     */
+    public List<MemberCardVo> memberCardVoList;
 
 }

@@ -157,8 +157,8 @@ public class RequestClient {
      * @param mobile
      * @return
      */
-    public Observable<Object> sendMessage(String mobile) {
-        return mServerApi.sendMessage(mobile)
+    public Observable<Object> sendMessage(String mobile,String type) {
+        return mServerApi.sendMessage(mobile,type)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -210,9 +210,9 @@ public class RequestClient {
      * @param memberId
      * @return
      */
-    public Observable<Object> queryDetailById(String memberId, String sessionId) {
+    public Observable<MemberVo> queryDetailById(String memberId, String sessionId) {
         return mServerApi.queryDetailById(memberId, sessionId)
-                .map(new HttpResultFuc<Object>())
+                .map(new HttpResultFuc<MemberVo>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -301,9 +301,9 @@ public class RequestClient {
      * @return
      */
     public Observable<Object> problemReport(String title,
-                                                          String descript,
-                                                          String machineCode,
-                                                          String sessionId) {
+                                            String descript,
+                                            String machineCode,
+                                            String sessionId) {
         return mServerApi.problemReport(title, descript, machineCode, sessionId)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
@@ -312,6 +312,7 @@ public class RequestClient {
 
     /**
      * 查询最新的版本号
+     *
      * @param sessionId
      * @return
      */
@@ -324,6 +325,7 @@ public class RequestClient {
 
     /**
      * 查询广告
+     *
      * @param sessionId
      * @return
      */
@@ -336,6 +338,7 @@ public class RequestClient {
 
     /**
      * 下载app
+     *
      * @param sessionId
      * @return
      */

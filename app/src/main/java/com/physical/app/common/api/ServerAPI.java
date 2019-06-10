@@ -66,7 +66,7 @@ public interface ServerAPI {
      */
     @POST("app/message/sendMessage.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> sendMessage(@Field("mobile") String mobile);
+    Observable<HttpResult<Object>> sendMessage(@Field("mobile") String mobile,@Field("type")String type);
 
     /**
      * 注册
@@ -124,7 +124,7 @@ public interface ServerAPI {
      */
     @POST("app/member/queryDetailById.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> queryDetailById(@Field("memberId") String memberId, @Field("sessionId") String sessionId);
+    Observable<HttpResult<MemberVo>> queryDetailById(@Field("memberId") String memberId, @Field("sessionId") String sessionId);
 
 
     /**

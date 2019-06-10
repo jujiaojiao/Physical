@@ -3,6 +3,7 @@ package com.physical.app.presenter;
 import android.content.Context;
 
 import com.physical.app.bean.MedicalHistory;
+import com.physical.app.bean.MemberVo;
 import com.physical.app.callback.IAddMemberCallback;
 import com.physical.app.common.api.ProgressSubscriber;
 import com.physical.app.common.base.BasePresenter;
@@ -53,6 +54,23 @@ public class AddMemberPresenter extends BasePresenter {
             }
         });
     }
+    /**
+     * 根据会员id查询会员详情
+     *
+     * @param memberId
+     * @return
+     */
+    public void queryDetailById(String memberId,String sessionId) {
+        mRequestClient.queryDetailById(memberId,sessionId).subscribe(new ProgressSubscriber<MemberVo>(mContext) {
+            @Override
+            public void onNext(MemberVo bean) {
+                callback.onQueryDetailSuccess(bean);
+            }
+
+        });
+    }
+
+
     /**
      * 会员充值
      *

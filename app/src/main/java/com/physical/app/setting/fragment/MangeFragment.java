@@ -11,8 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.physical.app.R;
+import com.physical.app.callback.IUpdatePwdCallback;
 import com.physical.app.common.base.BaseFragment;
 import com.physical.app.common.widget.ChangePwdDialog;
+import com.physical.app.presenter.UpdatePwdPresenter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,7 +26,7 @@ import butterknife.ButterKnife;
  * 描述: 管理员信息
  */
 
-public class MangeFragment extends BaseFragment {
+public class MangeFragment extends BaseFragment implements IUpdatePwdCallback {
     @Bind(R.id.tv_name)
     TextView tvName;
     @Bind(R.id.tv_phone)
@@ -34,6 +36,7 @@ public class MangeFragment extends BaseFragment {
     @Bind(R.id.ll_changePwd)
     LinearLayout llChangePwd;
     private ChangePwdDialog changePwdDialog;
+    private UpdatePwdPresenter updatePwdPresenter;
 
     @Nullable
     @Override
@@ -60,19 +63,25 @@ public class MangeFragment extends BaseFragment {
     }
 
     private void initData() {
+        tvName.setText(getUser().userName);
+        tvPhone.setText(getUser().mobile);
 
+        updatePwdPresenter = new UpdatePwdPresenter(mContext, this);
     }
 
-    private void showChangePwdDailog(){
-        changePwdDialog = new ChangePwdDialog(mContext, new ChangePwdDialog.Callback() {
-            @Override
-            public void onConfirm(String phone, String pwd, String code) {
 
+
+    private void showChangePwdDailog(){
+        changePwdDialog = new ChangePwdDialog(mContext,getUser().mobile, new ChangePwdDialog.Callback() {
+            @Override
+            public void onConfirm(String pwd, String code) {
+                updatePwdPresenter.updatePwd(pwd,getUserId(),code,getUserId());
+                changePwdDialog.dismiss();
             }
 
             @Override
             public void onCancel() {
-
+                changePwdDialog.dismiss();
             }
         });
         changePwdDialog.show();
@@ -82,5 +91,14 @@ public class MangeFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    /**
+     * 更新密码回调
+     * @param bean
+     */
+    @Override
+    public void onUpdateSuccess(Object bean) {
+
     }
 }

@@ -27,10 +27,11 @@ public class RegisterPresenter extends BasePresenter {
      * 获取注册验证码
      *
      * @param mobile
+     * @param type 0注册 1修改密码
      * @return
      */
-    public void sendMessage(String mobile) {
-        mRequestClient.sendMessage(mobile).subscribe(new ProgressSubscriber<Object>(mContext) {
+    public void sendMessage(String mobile,String type) {
+        mRequestClient.sendMessage(mobile,type).subscribe(new ProgressSubscriber<Object>(mContext) {
             @Override
             public void onNext(Object bean) {
                 callback.onCodeFinish();

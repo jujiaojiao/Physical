@@ -106,7 +106,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
                 break;
             case R.id.tv_getcode:
                 Log.i("jjj", "onClick: "+etPhone.getText().toString());
-                registerPresenter.sendMessage(etPhone.getText().toString());
+                registerPresenter.sendMessage(etPhone.getText().toString(),"0");
 //                timer.start();
                 break;
         }

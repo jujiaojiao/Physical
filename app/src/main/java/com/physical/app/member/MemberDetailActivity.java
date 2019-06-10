@@ -12,10 +12,15 @@ import android.widget.TextView;
 import com.physical.app.R;
 import com.physical.app.adapter.MemberDetailAdapter;
 import com.physical.app.adapter.MemberDetailRecordAdapter;
+import com.physical.app.bean.MedicalHistory;
 import com.physical.app.bean.MemberDetailRecordBean;
+import com.physical.app.bean.MemberVo;
+import com.physical.app.callback.IMemberDetailCallback;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.utils.StringUtil;
 import com.physical.app.common.widget.MyGridView;
 import com.physical.app.common.widget.MyListView;
+import com.physical.app.presenter.MemberDetailPresenter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
@@ -30,7 +35,7 @@ import butterknife.OnClick;
  * 创建日期：2019/5/25
  * 描述： 会员详情
  */
-public class MemberDetailActivity extends BaseActivity {
+public class MemberDetailActivity extends BaseActivity implements IMemberDetailCallback {
 
     @Bind(R.id.ivBack)
     ImageView ivBack;
@@ -67,12 +72,15 @@ public class MemberDetailActivity extends BaseActivity {
     @Bind(R.id.iv_title)
     ImageView ivTitle;
     private MemberDetailAdapter memberDetailAdapter;
-    private ArrayList<String> datas;
+    private ArrayList<MedicalHistory> datas;
     private MemberDetailRecordAdapter memberDetailRecordAdapter;
     private ArrayList<MemberDetailRecordBean> records;
+    private String memberId;
+    private MemberDetailPresenter memberDetailPresenter;
 
-    public static void start(Context context) {
+    public static void start(Context context,String memberId) {
         Intent intent = new Intent(context, MemberDetailActivity.class);
+        intent.putExtra("memberId",memberId);
         context.startActivity(intent);
     }
 
@@ -85,24 +93,21 @@ public class MemberDetailActivity extends BaseActivity {
     }
 
     private void initView() {
+
+        memberId = getIntent().getStringExtra("memberId");
+
         ivTitle.setImageResource(R.mipmap.word_details);
         datas = new ArrayList<>();
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
-        datas.add("");
         memberDetailAdapter = new MemberDetailAdapter(this, datas);
         gvData.setAdapter(memberDetailAdapter);
 
         records = new ArrayList<>();
-        records.add(new MemberDetailRecordBean());
-        records.add(new MemberDetailRecordBean());
-        records.add(new MemberDetailRecordBean());
-        records.add(new MemberDetailRecordBean());
-        records.add(new MemberDetailRecordBean());
         memberDetailRecordAdapter = new MemberDetailRecordAdapter(this, records);
         lvData.setAdapter(memberDetailRecordAdapter);
+
+
+        memberDetailPresenter = new MemberDetailPresenter(this, this);
+        request();
     }
 
     @OnClick({R.id.ivBack})
@@ -112,5 +117,34 @@ public class MemberDetailActivity extends BaseActivity {
                 finish();
                 break;
         }
+    }
+
+    private void request(){
+        memberDetailPresenter.queryDetailById(memberId,getUserId());
+    }
+
+
+    /**
+     * 详情回调
+     * @param bean
+     */
+    @Override
+    public void onQueryDetailSuccess(MemberVo bean) {
+        tvName.setText(bean.name);
+        tvPhone.setText(bean.mobile);
+        tvIden.setText(bean.idCard);
+        if (bean.sex.equals("1")) {
+            tvSex.setText("男");
+        }else{
+            tvSex.setText("女");
+        }
+        tvBirthday.setText(StringUtil.longToSDate(bean.birthday, "yyyy-MM-dd"));
+        tvOut.setText(StringUtil.longToSDate(bean.firstTime, "yyyy-MM-dd"));
+        tvHigh.setText(""+bean.height);
+        tvWeight.setText(""+bean.weight);
+        tvMoney.setText(bean.totalMoney);
+        tvTime.setText(bean.vipTimes);
+        datas.addAll(bean.medicalHistoryList);
+
     }
 }

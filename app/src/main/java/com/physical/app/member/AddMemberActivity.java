@@ -46,9 +46,9 @@ import butterknife.OnClick;
 
 /**
  * @author jjj
- * 版本：1.0
- * 创建日期：2019/5/25
- * 描述：新增会员信息
+ *         版本：1.0
+ *         创建日期：2019/5/25
+ *         描述：新增会员信息
  */
 public class AddMemberActivity extends BaseActivity implements IAddMemberCallback {
 
@@ -112,7 +112,7 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
     private String vipTimes;
     private String birthday;//出生日期
     private String out;//出诊日期
-    private MemberManageBean data;
+    private MemberVo data;
 
     public static void start(Context context, MemberVo data) {
         Intent intent = new Intent(context, AddMemberActivity.class);
@@ -130,31 +130,19 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
     }
 
     private void initView() {
-        data = ((MemberManageBean) getIntent().getSerializableExtra("data"));
+        data = ((MemberVo) getIntent().getSerializableExtra("data"));
         ivTitle.setImageResource(R.mipmap.word_add);
         datas = new ArrayList<>();
         adapter = new AddMemberAdapter(this, datas);
         gvData.setAdapter(adapter);
 
-        if (null != data) {
-            etName.setText(data.name);
-            etPhone.setText(data.mobile);
-            etId.setText(data.idCard);
-            if (data.sex == 1) {
-                selectSex(1);
-            } else {
-                selectSex(2);
-            }
-            tvBirthday.setText(StringUtil.longToSDate(data.birthday, "yyyy-MM-dd"));
-            tvOut.setText(StringUtil.longToSDate(data.firstTime, "yyyy-MM-dd"));
-            etHigh.setText(""+data.height);
-            etHeight.setText(""+data.weight);
-        } else {
-
-        }
-
         addMemberPresenter = new AddMemberPresenter(this, this);
         addMemberPresenter.disease(getUserId());
+
+        if (null != data) {
+            addMemberPresenter.queryDetailById(data.id, getUserId());
+        }
+
 
     }
 
@@ -294,6 +282,8 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
         idCard = etId.getText().toString();
         high = etHigh.getText().toString();
         weight = etHeight.getText().toString();
+        birthday = tvBirthday.getText().toString();
+        out = tvOut.getText().toString();
         if (StringUtil.isEmpty(name)) {
             showToast("请输入会员姓名");
             return;
@@ -306,6 +296,14 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
             showToast("请输入身份证号码");
             return;
         }
+        if (StringUtil.isEmpty(birthday)) {
+            showToast("请输入出生日期");
+            return;
+        }
+        if (StringUtil.isEmpty(out)) {
+            showToast("请输入出诊日期");
+            return;
+        }
         if (StringUtil.isEmpty(high)) {
             showToast("请输入会员身高");
             return;
@@ -314,18 +312,17 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
             showToast("请输入会员体重");
             return;
         }
-//        if (StringUtil.isEmpty(name)){
-//            showToast("请输入会员姓名");
-//            return;
-//        }
+
 
         MemberVo memberVo = new MemberVo();
         memberVo.name = name;
         memberVo.mobile = phone;
         memberVo.idCard = idCard;
         memberVo.sex = "" + sexId;//1男  2女
-        memberVo.birthday = birthday;
-        memberVo.firstTime = out;
+        long birth = StringUtil.stringToLong(birthday, "yyyy-MM-dd");
+        long firstTime = StringUtil.stringToLong(out, "yyyy-MM-dd");
+        memberVo.birthday = birth;
+        memberVo.firstTime = firstTime;
         memberVo.height = high;
         memberVo.weight = weight;
         memberVo.totalMoney = totalmoney;
@@ -336,9 +333,9 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
                 selects.add(data);
             }
         }
-        Log.i("jjj", "confirm: "+toJson(memberVo));
         memberVo.medicalHistoryList = selects;
-//        addMemberPresenter.save(toJson(memberVo), getUserId());
+        Log.i("jjj", "confirm: " + toJson(memberVo));
+        addMemberPresenter.save(toJson(memberVo), getUserId());
 
     }
 
@@ -359,14 +356,12 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
 
             @Override
             public void onConfirm(String money, String time) {
-                totalmoney = money;
-                vipTimes = time;
-                String mobile = etPhone.getText().toString();
-                if (StringUtil.isEmpty(mobile)) {
-                    showToast("请输入手机号码");
-                    return;
+                if (null == data) {
+                    totalmoney = money;
+                    vipTimes = time;
+                } else {
+                    addMemberPresenter.charge(getWifiMac(), data.id, money, time, getUserId());
                 }
-                addMemberPresenter.charge(getWifiMac(), mobile, money, time, getUserId());
                 rechargeDialog.dismiss();
             }
 
@@ -408,7 +403,6 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
         TimePickerView pvTime = new TimePickerBuilder(AddMemberActivity.this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                birthday = format.format(date);
                 tvBirthday.setText(format.format(date));
             }
         }).setRangDate(startDate, endDate).build();
@@ -445,7 +439,6 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
         TimePickerView pvTime = new TimePickerBuilder(AddMemberActivity.this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                out = format.format(date);
                 tvOut.setText(format.format(date));
             }
         }).setRangDate(startDate, endDate).build();
@@ -474,8 +467,46 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
         }
     }
 
+
+    /**
+     * 根据id查详情
+     *
+     * @param data
+     */
+    @Override
+    public void onQueryDetailSuccess(MemberVo data) {
+        etName.setText(data.name);
+        etPhone.setText(data.mobile);
+        etId.setText(data.idCard);
+        if (data.sex.equals("1")) {
+            selectSex(1);
+        } else {
+            selectSex(2);
+        }
+        tvBirthday.setText(StringUtil.longToSDate(data.birthday, "yyyy-MM-dd"));
+        tvOut.setText(StringUtil.longToSDate(data.firstTime, "yyyy-MM-dd"));
+        etHigh.setText("" + data.height);
+        etHeight.setText("" + data.weight);
+        for (MedicalHistory medicalHistory : datas) {
+            for (MedicalHistory history : data.medicalHistoryList) {
+                if (medicalHistory.name.equals(history.name)) {
+                    medicalHistory.select = true;
+                }
+            }
+        }
+        adapter.notifyDataSetChanged();
+//        for (MedicalHistory history : data.medicalHistoryList) {
+//            if (datas.contains(history)) {
+//                history.select = true;
+//                adapter.notifyDataSetChanged();
+//            }
+//        }
+    }
+
     @Override
     public void onchargeSuccess() {
         showToast("充值成功");
     }
+
+
 }

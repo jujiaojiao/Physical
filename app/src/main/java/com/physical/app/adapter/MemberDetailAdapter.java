@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.physical.app.R;
+import com.physical.app.bean.MedicalHistory;
 
 import java.util.List;
 
@@ -24,11 +25,11 @@ import butterknife.ButterKnife;
  */
 public class MemberDetailAdapter extends BaseAdapter {
     private Context context;
-    private List<String> datas;
+    private List<MedicalHistory> datas;
     private LayoutInflater inflater;
     private int current;
 
-    public MemberDetailAdapter(Context context, List<String> datas) {
+    public MemberDetailAdapter(Context context, List<MedicalHistory> datas) {
         this.context = context;
         this.datas = datas;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -60,6 +61,8 @@ public class MemberDetailAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        MedicalHistory data = datas.get(position);
+        holder.tvName.setText(data.name);
 
         return convertView;
     }

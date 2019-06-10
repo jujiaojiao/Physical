@@ -1,6 +1,7 @@
 package com.physical.app.callback;
 
 import com.physical.app.bean.MedicalHistory;
+import com.physical.app.bean.MemberVo;
 
 import java.util.List;
 
@@ -15,5 +16,9 @@ public interface IAddMemberCallback  {
 
     void onDiseaseSuccess(List<MedicalHistory> bean);
 
+
+    void onQueryDetailSuccess(MemberVo bean);
+
     void onchargeSuccess();
+
 }

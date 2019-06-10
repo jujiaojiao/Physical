@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -77,6 +78,8 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
     TextView tvChoose;
     @Bind(R.id.iv_sure)
     ImageView iv_sure;
+    @Bind(R.id.et_search)
+    EditText et_search;
     private MemberManageAdapter adapter;
     private List<MemberVo> list;
     private MemberManagePresenter memberManagePresenter;
@@ -129,20 +132,20 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
         adapter = new MemberManageAdapter(this, list, type, new MemberManageAdapter.Callback() {
             @Override
             public void recharge(int position) {
-                MemberVo data = list.get(position);
-                showRechargeDialog(data.mobile);
+                MemberVo data = list.get(position);//充值
+                showRechargeDialog(data.userId);
             }
 
             @Override
             public void onchange(int position) {
-                MemberVo data = list.get(position);
+                MemberVo data = list.get(position);//修改
                 AddMemberActivity.start(MemberManageActivity.this,data);
             }
 
             @Override
             public void onwatch(int position) {
-                MemberVo data = list.get(position);
-                MemberDetailActivity.start(MemberManageActivity.this);
+                MemberVo data = list.get(position);//查看详情
+                MemberDetailActivity.start(MemberManageActivity.this,data.id);
 
             }
         });
@@ -209,7 +212,7 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
         memberManagePresenter.queryMemberList(getUserId(), keyword,""+pageNum,""+ pageSize);
     }
 
-    @OnClick({R.id.ivRight,R.id.ivBack})
+    @OnClick({R.id.ivRight,R.id.ivBack,R.id.tv_search})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivRight:
@@ -217,6 +220,15 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
                 break;
             case R.id.ivBack:
                 finish();
+                break;
+            case R.id.tv_search:
+                String search = et_search.getText().toString();
+                if (StringUtil.isEmpty(search)){
+                    showToast("请输入查询内容");
+                    return;
+                }
+                keyword = search;
+                refresh();
                 break;
         }
     }

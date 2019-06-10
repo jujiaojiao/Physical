@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.physical.app.AppData;
+import com.physical.app.common.constains.Constains;
+import com.physical.app.common.utils.Preferences;
 import com.physical.app.common.utils.ToastUtil;
 import com.physical.app.common.mine.bean.User;
 
@@ -46,5 +48,8 @@ public class BaseFragment extends Fragment {
         return AppData.getInstance().getUser();
     }
 
+    public String getWifiMac() {
+        return  Preferences.getString(Constains.WIFIMAC);
+    }
 
 }
