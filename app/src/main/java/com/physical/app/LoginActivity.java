@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -77,6 +78,40 @@ public class LoginActivity extends BaseActivity implements ISeedlingCallback, IL
         getWindow().setExitTransition(new Explode().setDuration(1000));
 //        GenerateValueFiles.main();
 //        startAnimator();
+        addListener();
+    }
+
+    private void addListener(){
+        etPhone.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // 监听到回车键，会执行2次该方法。按下与松开
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        //松开事件
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(etPhone.getWindowToken(), 0); //强制隐藏键盘
+                    }
+                }
+                return false;
+
+            }
+        });
+        etPwd.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // 监听到回车键，会执行2次该方法。按下与松开
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        //松开事件
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(etPwd.getWindowToken(), 0); //强制隐藏键盘
+                    }
+                }
+                return false;
+
+            }
+        });
     }
 
 

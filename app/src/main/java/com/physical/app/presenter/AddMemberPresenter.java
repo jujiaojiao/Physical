@@ -53,4 +53,25 @@ public class AddMemberPresenter extends BasePresenter {
             }
         });
     }
+    /**
+     * 会员充值
+     *
+     * @param machineCode
+     * @param memberId
+     * @param money
+     * @param times
+     * @return
+     */
+    public void charge(String machineCode,
+                       String memberId,
+                       String money,
+                       String times,
+                       String sessionId) {
+        mRequestClient.charge(machineCode, memberId, money, times, sessionId).subscribe(new ProgressSubscriber<Object>(mContext) {
+            @Override
+            public void onNext(Object bean) {
+                callback.onchargeSuccess();
+            }
+        });
+    }
 }

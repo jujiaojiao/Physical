@@ -80,4 +80,7 @@ dependencies {
     //智能刷新库
     implementation 'com.android.support:design:27.1.1'
     implementation files('libs/mcommons-codec-1.11.jar')
+
+    implementation 'com.contrarywind:Android-PickerView:4.1.3'
+
 }

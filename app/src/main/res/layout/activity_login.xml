@@ -43,9 +43,12 @@
             android:layout_height="@dimen/x28"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/x26"
-            android:src="@mipmap/icon_account" />
+            android:src="@mipmap/icon_phone" />
 
         <EditText
+            android:singleLine="true"
+            android:maxLength="11"
+            android:inputType="number"
             android:id="@+id/et_phone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -76,6 +79,8 @@
             android:src="@mipmap/icon_password" />
 
         <EditText
+            android:singleLine="true"
+            android:inputType="textPassword"
             android:id="@+id/et_pwd"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -1,13 +1,14 @@
 package com.physical.app.bean;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by bucke on 2019/5/6.
  */
-public class MemberVo{
+public class MemberVo implements Serializable{
 
     /**
      * 名称

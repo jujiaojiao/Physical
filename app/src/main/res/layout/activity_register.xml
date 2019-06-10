@@ -55,7 +55,7 @@
             android:layout_marginLeft="@dimen/x35"
             android:background="@null"
             android:gravity="center|left"
-            android:hint="姓名"
+            android:hint="用户名"
             android:textColor="@color/color_12adb3"
             android:textColorHint="@color/color_12adb3"
             android:textSize="@dimen/x24" />

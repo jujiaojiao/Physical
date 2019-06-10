@@ -33,6 +33,9 @@
             <EditText
                 android:textColor="@color/color_00fcff"
                 android:textSize="@dimen/x18"
+                android:singleLine="true"
+                android:inputType="numberDecimal"
+                android:paddingLeft="@dimen/x10"
                 android:layout_marginLeft="@dimen/x19"
                 android:id="@+id/et_money"
                 android:layout_width="@dimen/x360"
@@ -45,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="剩余次数:"
+                android:text="充值次数:"
                 android:textSize="@dimen/x24"
                 android:layout_marginLeft="@dimen/x109"
                 android:gravity="center|left"
@@ -53,6 +56,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <EditText
+                android:singleLine="true"
+                android:inputType="numberDecimal"
+                android:paddingLeft="@dimen/x10"
                 android:textColor="@color/color_00fcff"
                 android:textSize="@dimen/x18"
                 android:layout_marginLeft="@dimen/x19"

@@ -14,4 +14,6 @@ public interface IAddMemberCallback  {
     void onSaveSuccess();
 
     void onDiseaseSuccess(List<MedicalHistory> bean);
+
+    void onchargeSuccess();
 }

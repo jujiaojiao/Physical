@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.KeyboardShortcutGroup;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -57,10 +59,44 @@ public class RechargeDialog extends Dialog implements View.OnClickListener {
         tvTime = ((EditText) findViewById(R.id.et_time));
         tvCancel = ((TextView) findViewById(R.id.tv_cancel));
         tvConfirm = ((TextView) findViewById(R.id.tv_confirm));
-
         tvCancel.setOnClickListener(this);
         tvConfirm.setOnClickListener(this);
+        addListener();
+    }
 
+    private void addListener(){
+
+        tvMoney.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // 监听到回车键，会执行2次该方法。按下与松开
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        //松开事件
+                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(tvMoney.getWindowToken(), 0); //强制隐藏键盘
+                    }
+                }
+                return false;
+
+            }
+        });
+
+        tvTime.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // 监听到回车键，会执行2次该方法。按下与松开
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        //松开事件
+                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(tvTime.getWindowToken(), 0); //强制隐藏键盘
+                    }
+                }
+                return false;
+
+            }
+        });
     }
 
     @Override
@@ -70,7 +106,6 @@ public class RechargeDialog extends Dialog implements View.OnClickListener {
                 callback.onCancel();
                 break;
             case R.id.tv_confirm:
-
                 String money  = tvMoney.getText().toString();
                 String time  = tvTime.getText().toString();
                 if (StringUtil.isEmpty(money)){
@@ -78,7 +113,7 @@ public class RechargeDialog extends Dialog implements View.OnClickListener {
                     return;
                 }
                 if (StringUtil.isEmpty(time)){
-                    ToastUtil.show("请输入剩余次数");
+                    ToastUtil.show("请输入充值次数");
                     return;
                 }
                 callback.onConfirm(money,time);

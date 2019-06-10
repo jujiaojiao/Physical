@@ -3,6 +3,8 @@ package com.physical.app.common.api;
 
 import com.physical.app.MyApplication;
 import com.physical.app.bean.MedicalHistory;
+import com.physical.app.bean.MemberManageBean;
+import com.physical.app.bean.MemberVo;
 import com.physical.app.common.mine.bean.User;
 
 import java.util.List;
@@ -223,12 +225,12 @@ public class RequestClient {
      * @param pageSize 每页大小
      * @return
      */
-    public Observable<Object> queryMemberList(String sessionId,
-                                              String idxStr,
-                                              String page,
-                                              String pageSize) {
+    public Observable<List<MemberVo>> queryMemberList(String sessionId,
+                                                      String idxStr,
+                                                      String page,
+                                                      String pageSize) {
         return mServerApi.queryMemberList(sessionId, idxStr, page, pageSize)
-                .map(new HttpResultFuc<Object>())
+                .map(new HttpResultFuc<List<MemberVo>>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

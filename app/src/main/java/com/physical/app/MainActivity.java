@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity {
                 PhysicalActivity.start(this);
                 break;
             case R.id.ll_vip:
-                MemberManageActivity.start(this);
+                MemberManageActivity.start(this,"");
                 break;
             case R.id.ll_set:
                 SettingActivity.start(this);

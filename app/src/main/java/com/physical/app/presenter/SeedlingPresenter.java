@@ -24,8 +24,8 @@ public class SeedlingPresenter extends BasePresenter {
     }
 
 
-    public void seedling() {
-        mRequestClient.seedling().subscribe(new ProgressSubscriber<Object>(mContext) {
+    public void seedling(String sessionId) {
+        mRequestClient.seedling(sessionId).subscribe(new ProgressSubscriber<Object>(mContext) {
             @Override
             public void onNext(Object bean) {
                 ToastUtil.show("网络请求成功");

@@ -66,8 +66,12 @@ public abstract class ProgressSubscriber<T> extends Subscriber<T> implements Pro
 
     @Override
     public void onCompleted() {
+        onFinish();
         dismissProgressDialog();
     }
+    public void onFinish() {
+    }
+
 
     @Override
     public void onError(Throwable e) {
@@ -89,6 +93,7 @@ public abstract class ProgressSubscriber<T> extends Subscriber<T> implements Pro
             ToastUtil.show("服务器异常！！！");
         }
         dismissProgressDialog();
+        onFinish();
     }
 
     /**

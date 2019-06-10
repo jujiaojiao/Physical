@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.transition.Fade;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -104,7 +105,8 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
 
                 break;
             case R.id.tv_getcode:
-                registerPresenter.sendMessage(phone);
+                Log.i("jjj", "onClick: "+etPhone.getText().toString());
+                registerPresenter.sendMessage(etPhone.getText().toString());
 //                timer.start();
                 break;
         }
@@ -263,6 +265,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
             showToast("请输入验证码");
             return;
         }
+        Log.i("jjj", "wifimac: "+getWifiMac());
         registerPresenter.register("+86",getWifiMac(), phone,pwd,repwd,name,code);
 
     }

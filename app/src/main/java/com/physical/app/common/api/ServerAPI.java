@@ -2,6 +2,8 @@ package com.physical.app.common.api;
 
 
 import com.physical.app.bean.MedicalHistory;
+import com.physical.app.bean.MemberManageBean;
+import com.physical.app.bean.MemberVo;
 import com.physical.app.common.mine.bean.User;
 
 import java.util.List;
@@ -135,10 +137,10 @@ public interface ServerAPI {
      */
     @POST("app/member/queryMemberList.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> queryMemberList(@Field("sessionId") String sessionId,
-                                                   @Field("idxStr") String idxStr,
-                                                   @Field("page") String page,
-                                                   @Field("pageSize") String pageSize);
+    Observable<HttpResult<List<MemberVo>>> queryMemberList(@Field("sessionId") String sessionId,
+                                                           @Field("idxStr") String idxStr,
+                                                           @Field("page") String page,
+                                                           @Field("pageSize") String pageSize);
 //    ,
 //    @Field("idCard") String idCard,
 //    @Field("mobile") String mobile,

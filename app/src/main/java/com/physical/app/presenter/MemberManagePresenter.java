@@ -2,9 +2,13 @@ package com.physical.app.presenter;
 
 import android.content.Context;
 
+import com.physical.app.bean.MemberManageBean;
+import com.physical.app.bean.MemberVo;
 import com.physical.app.callback.IMemberManageCallback;
 import com.physical.app.common.api.ProgressSubscriber;
 import com.physical.app.common.base.BasePresenter;
+
+import java.util.List;
 
 /**
  * @author jjj
@@ -25,24 +29,48 @@ public class MemberManagePresenter extends BasePresenter {
     /**
      * 分页查询会员列表
      *
-     * @param idCard   身份证
      * @param idxStr   姓名或手机号或身份证
-     * @param mobile   手机号
      * @param page     当前默认页
      * @param pageSize 每页大小
-     * @param userName 姓名
      * @return
      */
     public void queryMemberList(String sessionId,
                                 String idxStr,
                                 String page,
                                 String pageSize) {
-        mRequestClient.queryMemberList( sessionId,idxStr, page, pageSize).subscribe(new ProgressSubscriber<Object>(mContext) {
+        mRequestClient.queryMemberList( sessionId,idxStr, page, pageSize).subscribe(new ProgressSubscriber<List<MemberVo>>(mContext) {
             @Override
-            public void onNext(Object bean) {
-                callback.onMemberListSuccess();
+            public void onNext(List<MemberVo>  bean) {
+                callback.onMemberListSuccess(bean);
             }
 
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                callback.onFinish();
+            }
+        });
+    }
+
+    /**
+     * 会员充值
+     *
+     * @param machineCode
+     * @param memberId
+     * @param money
+     * @param times
+     * @return
+     */
+    public void charge(String machineCode,
+                       String memberId,
+                       String money,
+                       String times,
+                       String sessionId) {
+        mRequestClient.charge(machineCode, memberId, money, times, sessionId).subscribe(new ProgressSubscriber<Object>(mContext) {
+            @Override
+            public void onNext(Object bean) {
+                callback.onchargeSuccess();
+            }
         });
     }
 }

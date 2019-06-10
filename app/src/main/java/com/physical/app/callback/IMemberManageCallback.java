@@ -1,5 +1,10 @@
 package com.physical.app.callback;
 
+import com.physical.app.bean.MemberManageBean;
+import com.physical.app.bean.MemberVo;
+
+import java.util.List;
+
 /**
  * @author jjj
  * 版本：1.0
@@ -7,5 +12,10 @@ package com.physical.app.callback;
  * 描述：会员列表
  */
 public interface IMemberManageCallback {
-    void onMemberListSuccess();
+    void onMemberListSuccess(List<MemberVo> bean);
+
+    void onFinish();
+
+    void onchargeSuccess();
+
 }

@@ -12,6 +12,15 @@
         android:background="@mipmap/border"
         android:layout_width="@dimen/x1789"
         android:layout_height="@dimen/x910">
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_no_data"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x35"
+            android:text="暂无数据"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
