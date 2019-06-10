@@ -133,7 +133,7 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
             @Override
             public void recharge(int position) {
                 MemberVo data = list.get(position);//充值
-                showRechargeDialog(data.userId);
+                showRechargeDialog(data.id);
             }
 
             @Override
@@ -154,18 +154,18 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
         memberManagePresenter = new MemberManagePresenter(this,this);
 
     }
-    private void showRechargeDialog(final String phone) {
+    private void showRechargeDialog(final String id) {
         rechargeDialog = new RechargeDialog(this, new RechargeDialog.Callback() {
 
             @Override
             public void onConfirm(String money, String time) {
                 totalmoney = money;
                 vipTimes = time;
-                if (StringUtil.isEmpty(phone)){
-                    showToast("请输入手机号码");
-                    return;
-                }
-                memberManagePresenter.charge(getWifiMac(),phone, money, time,getUserId());
+//                if (StringUtil.isEmpty(phone)){
+//                    showToast("请输入手机号码");
+//                    return;
+//                }
+                memberManagePresenter.charge(getWifiMac(),id, money, time,getUserId());
                 rechargeDialog.dismiss();
             }
 

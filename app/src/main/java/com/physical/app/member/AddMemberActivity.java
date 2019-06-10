@@ -113,6 +113,7 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
     private String birthday;//出生日期
     private String out;//出诊日期
     private MemberVo data;
+    private String id;
 
     public static void start(Context context, MemberVo data) {
         Intent intent = new Intent(context, AddMemberActivity.class);
@@ -139,9 +140,7 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
         addMemberPresenter = new AddMemberPresenter(this, this);
         addMemberPresenter.disease(getUserId());
 
-        if (null != data) {
-            addMemberPresenter.queryDetailById(data.id, getUserId());
-        }
+
 
 
     }
@@ -150,7 +149,8 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
         gvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                adapter.setcurrent(position);
+                MedicalHistory data = datas.get(position);
+                adapter.selOrRemoveItem(data);
             }
         });
         etName.setOnKeyListener(new View.OnKeyListener() {
@@ -315,6 +315,7 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
 
 
         MemberVo memberVo = new MemberVo();
+        memberVo.id = id;
         memberVo.name = name;
         memberVo.mobile = phone;
         memberVo.idCard = idCard;
@@ -327,13 +328,7 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
         memberVo.weight = weight;
         memberVo.totalMoney = totalmoney;
         memberVo.vipTimes = vipTimes;
-        List<MedicalHistory> selects = new ArrayList<>();
-        for (MedicalHistory data : datas) {
-            if (data.select) {
-                selects.add(data);
-            }
-        }
-        memberVo.medicalHistoryList = selects;
+        memberVo.medicalHistoryList =  adapter.getSelectList();
         Log.i("jjj", "confirm: " + toJson(memberVo));
         addMemberPresenter.save(toJson(memberVo), getUserId());
 
@@ -465,6 +460,9 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
             datas.addAll(bean);
             adapter.notifyDataSetChanged();
         }
+        if (null != data) {
+            addMemberPresenter.queryDetailById(data.id, getUserId());
+        }
     }
 
 
@@ -475,6 +473,7 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
      */
     @Override
     public void onQueryDetailSuccess(MemberVo data) {
+        id = data.id;
         etName.setText(data.name);
         etPhone.setText(data.mobile);
         etId.setText(data.idCard);
@@ -487,20 +486,14 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
         tvOut.setText(StringUtil.longToSDate(data.firstTime, "yyyy-MM-dd"));
         etHigh.setText("" + data.height);
         etHeight.setText("" + data.weight);
-        for (MedicalHistory medicalHistory : datas) {
-            for (MedicalHistory history : data.medicalHistoryList) {
+        for (MedicalHistory medicalHistory : datas) {//疾病史
+            for (MedicalHistory history : data.medicalHistoryList) {//会员选中疾病史
                 if (medicalHistory.name.equals(history.name)) {
-                    medicalHistory.select = true;
+                   adapter.selOrRemoveItem(medicalHistory);
                 }
             }
         }
         adapter.notifyDataSetChanged();
-//        for (MedicalHistory history : data.medicalHistoryList) {
-//            if (datas.contains(history)) {
-//                history.select = true;
-//                adapter.notifyDataSetChanged();
-//            }
-//        }
     }
 
     @Override

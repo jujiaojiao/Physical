@@ -8,7 +8,7 @@
         android:background="@mipmap/bg_set"
         android:orientation="vertical"
         android:layout_width="@dimen/x581"
-        android:layout_height="@dimen/x400">
+        android:layout_height="@dimen/x350">
         <TextView
             android:id="@+id/tv_title"
             android:text="修改密码"
@@ -39,7 +39,7 @@
                 android:background="@mipmap/input_box"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_marginTop="@dimen/x36"
+            android:layout_marginTop="@dimen/x41"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x35">
@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/et_pwd"
+                android:inputType="textPassword"
                 android:paddingLeft="@dimen/x10"
                 android:textColor="@color/white"
                 android:textSize="@dimen/x17"
@@ -63,7 +64,7 @@
                 android:background="@mipmap/input_box"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_marginTop="@dimen/x34"
+            android:layout_marginTop="@dimen/x41"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x35">
@@ -105,7 +106,7 @@
 
         </LinearLayout>
         <LinearLayout
-            android:layout_marginTop="@dimen/x45"
+            android:layout_marginTop="@dimen/x65"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

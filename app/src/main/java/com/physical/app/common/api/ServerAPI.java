@@ -178,7 +178,7 @@ public interface ServerAPI {
      * @param param
      * @return
      */
-    @POST("app/member/save.json")
+    @POST("app/member/saveOrUpdate.json")
     @FormUrlEncoded
     Observable<HttpResult<Object>> save(@Field("param") String param, @Field("sessionId") String sessionId);
 
