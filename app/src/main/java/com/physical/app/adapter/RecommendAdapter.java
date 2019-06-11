@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import com.physical.app.R;
 import com.physical.app.bean.RecommendBean;
+import com.physical.app.bean.SeedlingBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -26,12 +28,14 @@ import butterknife.ButterKnife;
 public class RecommendAdapter extends BaseAdapter {
     private Context context;
     private List<RecommendBean> datas;
+    private ArrayList<RecommendBean> selectList;
     private LayoutInflater inflater;
-    private int current;
+    private int current = -1;
 
     public RecommendAdapter(Context context, List<RecommendBean> datas) {
         this.context = context;
         this.datas = datas;
+        selectList = new ArrayList<>();
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -61,9 +65,10 @@ public class RecommendAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         RecommendBean data = datas.get(position);
-        if (current == position) {
+
+        if (selectList.contains(data)){
             holder.ivCheck.setImageResource(R.mipmap.icon_circle_have);
-        } else {
+        }else{
             holder.ivCheck.setImageResource(R.mipmap.icon_circle_none);
         }
         holder.tvContent.setText(data.hisName);
@@ -88,4 +93,21 @@ public class RecommendAdapter extends BaseAdapter {
             ButterKnife.bind(this, view);
         }
     }
+
+
+    //单选添加或移除
+    public void selOrRemoveItem(RecommendBean data) {
+        if (selectList.contains(data)) {
+            selectList.remove(data);
+        } else {
+            selectList.add(data);
+        }
+        notifyDataSetChanged();
+    }
+
+    //获取选中的数据集合
+    public ArrayList<RecommendBean> getSelectList() {
+        return selectList;
+    }
+
 }

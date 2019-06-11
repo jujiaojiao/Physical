@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.physical.app.R;
 import com.physical.app.adapter.RecipeAdapter;
 import com.physical.app.bean.RecipeBean;
+import com.physical.app.bean.RecommendBean;
+import com.physical.app.bean.SeedlingBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +33,16 @@ public class RecipeDialog extends Dialog implements View.OnClickListener {
     private GridView gvData;
     private TextView tvConfirm;
     private RecipeAdapter adapter;
-    private List<RecipeBean> datas;
+    private List<SeedlingBean> datas;
     private Callback callback;
+    private TextView tvName;
+    private List<RecommendBean>  name;
 
-    public RecipeDialog(@NonNull Context context, List<RecipeBean> datas,Callback callback) {
+    public RecipeDialog(@NonNull Context context, List<RecommendBean> name, List<SeedlingBean> datas, Callback callback) {
         super(context, R.style.dialog);
         mContext = context;
         this.datas = datas;
+        this.name = name;
         this.callback = callback;
     }
 
@@ -54,6 +59,14 @@ public class RecipeDialog extends Dialog implements View.OnClickListener {
 
         gvData = ((GridView) findViewById(R.id.gv_data));
         tvConfirm = ((TextView) findViewById(R.id.tv_confirm));
+        tvName = ((TextView) findViewById(R.id.tv_name));
+        StringBuffer recipe = new StringBuffer();
+        if (name.size()>0){
+            for (RecommendBean recommendBean : name) {
+                recipe.append(recommendBean.hisName+"  ");
+            }
+            tvName.setText(recipe.toString());
+        }
 
         adapter = new RecipeAdapter(mContext, datas);
         gvData.setAdapter(adapter);

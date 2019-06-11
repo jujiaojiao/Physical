@@ -137,12 +137,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <ImageView
-                                android:src="@mipmap/icon_miao"
+                                android:src="@mipmap/icon_strength"
                                 android:layout_width="@dimen/x199"
                                 android:layout_height="@dimen/x199" />
                             <TextView
                                 android:gravity="center"
-                                android:text="苗光"
+                                android:text="磁场强度"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/x23"
                                 android:layout_width="match_parent"
@@ -172,12 +172,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <ImageView
-                                android:src="@mipmap/icon_miao"
+                                android:src="@mipmap/icon_time"
                                 android:layout_width="@dimen/x199"
                                 android:layout_height="@dimen/x199" />
                             <TextView
                                 android:gravity="center"
-                                android:text="苗光"
+                                android:text="时间(min)"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/x23"
                                 android:layout_width="match_parent"
@@ -211,12 +211,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <ImageView
-                                android:src="@mipmap/icon_light"
+                                android:src="@mipmap/icon_wave"
                                 android:layout_width="@dimen/x199"
                                 android:layout_height="@dimen/x199" />
                             <TextView
                                 android:gravity="center"
-                                android:text="灯光"
+                                android:text="超声波"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/x23"
                                 android:layout_width="match_parent"
@@ -246,12 +246,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <ImageView
-                                android:src="@mipmap/icon_miao"
+                                android:src="@mipmap/icon_shortwave"
                                 android:layout_width="@dimen/x199"
                                 android:layout_height="@dimen/x199" />
                             <TextView
                                 android:gravity="center"
-                                android:text="苗光"
+                                android:text="超短波"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/x23"
                                 android:layout_width="match_parent"
@@ -285,7 +285,7 @@
                                 android:layout_height="@dimen/x199" />
                             <TextView
                                 android:gravity="center"
-                                android:text="灯光"
+                                android:text="波导管"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/x23"
                                 android:layout_width="match_parent"

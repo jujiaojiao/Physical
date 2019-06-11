@@ -14,8 +14,14 @@ import android.widget.TextView;
 import com.physical.app.R;
 import com.physical.app.adapter.MemberManageAdapter;
 import com.physical.app.adapter.PhysicalAdapter;
+import com.physical.app.bean.MemberCaseVo;
+import com.physical.app.bean.MemberVo;
+import com.physical.app.bean.SeedlingBean;
+import com.physical.app.callback.IPhysicalCallback;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.utils.StringUtil;
 import com.physical.app.member.MemberManageActivity;
+import com.physical.app.presenter.PhysicalPresenter;
 
 import java.util.ArrayList;
 
@@ -30,7 +36,7 @@ import butterknife.OnClick;
  * 描述: 理疗
  */
 
-public class PhysicalActivity extends BaseActivity {
+public class PhysicalActivity extends BaseActivity implements IPhysicalCallback {
     @Bind(R.id.ivBack)
     ImageView ivBack;
     @Bind(R.id.tvTitle)
@@ -72,6 +78,16 @@ public class PhysicalActivity extends BaseActivity {
     private ArrayList<String> list6;
     private PhysicalAdapter PhysicalAdapter7;
     private ArrayList<String> list7;
+    private ArrayList<SeedlingBean> seedling;
+    private MemberVo member;
+    private String lampLight = "1";
+    private String seedlingLight = "1";
+    private String waveGuide = "1";
+    private String ultrashortWave = "1";
+    private String superaudible = "1";
+    private String totalTime = "10";
+    private String magneticIntensity;
+    private PhysicalPresenter physicalPresenter;
 
 
     public static void start(Context context) {
@@ -86,7 +102,13 @@ public class PhysicalActivity extends BaseActivity {
         setContentView(R.layout.activity_physical);
         ButterKnife.bind(this);
         initView();
+        intiData();
         addListener();
+    }
+
+    private void intiData() {
+        physicalPresenter = new PhysicalPresenter(this, this);
+
     }
 
     public void initView() {
@@ -133,15 +155,15 @@ public class PhysicalActivity extends BaseActivity {
 
 
         list4 = new ArrayList<>();
-        list4.add("1");
-        list4.add("2");
-        list4.add("3");
-        list4.add("4");
-        list4.add("5");
-        list4.add("6");
-        list4.add("7");
-        list4.add("8");
-        list4.add("9");
+        list4.add("10");
+        list4.add("20");
+        list4.add("30");
+        list4.add("40");
+        list4.add("50");
+        list4.add("60");
+        list4.add("70");
+        list4.add("80");
+        list4.add("90");
         PhysicalAdapter4 = new PhysicalAdapter(this, list4);
         gvData4.setAdapter(PhysicalAdapter4);
 
@@ -191,6 +213,7 @@ public class PhysicalActivity extends BaseActivity {
         gvData1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                lampLight = list1.get(position);
                 PhysicalAdapter1.setcurrent(position);
 //                PhysicalDetailActivity.start(PhysicalActivity.this);
             }
@@ -198,36 +221,45 @@ public class PhysicalActivity extends BaseActivity {
         gvData2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                seedlingLight = list2.get(position);
                 PhysicalAdapter2.setcurrent(position);
             }
         });
         gvData3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                magneticIntensity = list3.get(position);
                 PhysicalAdapter3.setcurrent(position);
             }
         });
         gvData4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                totalTime = list4.get(position);
                 PhysicalAdapter4.setcurrent(position);
             }
         });
         gvData5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                superaudible = list5.get(position);
+
                 PhysicalAdapter5.setcurrent(position);
             }
         });
         gvData6.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ultrashortWave = list6.get(position);
+
                 PhysicalAdapter6.setcurrent(position);
             }
         });
         gvData7.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                waveGuide = list4.get(position);
+
                 PhysicalAdapter7.setcurrent(position);
             }
         });
@@ -243,7 +275,7 @@ public class PhysicalActivity extends BaseActivity {
                 MemberManageActivity.start(this,"1");
                 break;
             case R.id.iv_on:
-
+                start();
                 break;
             case R.id.iv_off:
 
@@ -251,4 +283,44 @@ public class PhysicalActivity extends BaseActivity {
         }
     }
 
+    private void start(){
+        String user = tvUser.getText().toString();
+        if (StringUtil.isEmpty(user)){
+            showToast("请选择会员");
+            return;
+        }
+        if (seedling.size()==0){
+            showToast("请选择幼苗");
+            return;
+        }
+
+        MemberCaseVo memberCaseVo = new MemberCaseVo();
+        memberCaseVo.lampLight = lampLight;
+        memberCaseVo.seedlingLight = seedlingLight;
+        memberCaseVo.magneticIntensity = magneticIntensity;
+        memberCaseVo.totalTime = totalTime;
+        memberCaseVo.superaudible = superaudible;
+        memberCaseVo.ultrashortWave = ultrashortWave;
+        memberCaseVo.waveGuide = waveGuide;
+        memberCaseVo.memberId = member.id;
+        memberCaseVo.memberName = member.name;
+        memberCaseVo.medicineInfoList = seedling;
+        memberCaseVo.machineCode = getWifiMac();
+        physicalPresenter.save(toJson(memberCaseVo),getUserId());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==101&&resultCode==RESULT_OK&&null!=data){
+            seedling = (ArrayList<SeedlingBean>) data.getSerializableExtra("seedling");
+            member = (MemberVo) data.getSerializableExtra("member");
+            tvUser.setText(member.name);
+        }
+    }
+
+    @Override
+    public void onSaveSuccess() {
+
+    }
 }

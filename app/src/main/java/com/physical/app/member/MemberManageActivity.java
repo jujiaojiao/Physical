@@ -1,5 +1,6 @@
 package com.physical.app.member;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.physical.app.R;
 import com.physical.app.adapter.MemberManageAdapter;
 import com.physical.app.bean.MemberManageBean;
 import com.physical.app.bean.MemberVo;
+import com.physical.app.bean.SeedlingBean;
 import com.physical.app.callback.IMemberManageCallback;
 import com.physical.app.common.base.BaseActivity;
 import com.physical.app.common.utils.StringUtil;
@@ -29,6 +31,7 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,11 +94,12 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
     private RechargeDialog rechargeDialog;
     private String totalmoney;
     private String vipTimes;
+    private MemberVo selectData;
 
-    public static void start(Context context,String type) {
+    public static void start(Activity context, String type) {
         Intent intent = new Intent(context, MemberManageActivity.class);
         intent.putExtra("type",type);
-        context.startActivity(intent);
+        context.startActivityForResult(intent,101);
     }
 
 
@@ -190,6 +194,7 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
         lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectData = list.get(position);
                 adapter.setCurrent(position);
             }
         });
@@ -264,6 +269,7 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
                 refreshlayout.setEnableLoadmore(true);
             }
             list.addAll(bean);
+            selectData = list.get(0);
             adapter.notifyDataSetChanged();
         }else {
             refreshlayout.setEnableLoadmore(false);
@@ -278,5 +284,20 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
     @Override
     public void onchargeSuccess() {
         showToast("充值成功");
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==101&&resultCode==RESULT_OK&&null!=data){
+            ArrayList<SeedlingBean> seedling =  (ArrayList<SeedlingBean>) data.getSerializableExtra("seedling");
+            Intent intent = new Intent();
+            intent.putExtra("seedling", (Serializable)seedling);
+            intent.putExtra("member",selectData);
+            MemberManageActivity.this.setResult(RESULT_OK,intent);
+            MemberManageActivity.this.finish();
+
+        }
     }
 }

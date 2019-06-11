@@ -1,5 +1,6 @@
 package com.physical.app.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * 描述:
  */
 
-public class SeedlingBean {
+public class SeedlingBean implements Serializable{
 
     /**
      * lastVer : 0
@@ -38,4 +39,5 @@ public class SeedlingBean {
     public String typeCode;
     public String name;
     public String code;
+    public String num;
 }

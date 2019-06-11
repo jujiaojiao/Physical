@@ -1,5 +1,6 @@
 package com.physical.app.physical;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.physical.app.common.base.BaseActivity;
 import com.physical.app.common.widget.RecipeDialog;
 import com.physical.app.presenter.SeedlingPresenter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,9 +65,9 @@ public class SelectSeedlingActivity extends BaseActivity implements ISeedlingCal
     private RecipeDialog recipeDialog;
     private SeedlingPresenter seedlingPresenter;
 
-    public static void start(Context context) {
+    public static void start(Activity context) {
         Intent intent = new Intent(context, SelectSeedlingActivity.class);
-        context.startActivity(intent);
+        context.startActivityForResult(intent,101);
     }
 
     @Override
@@ -107,7 +109,16 @@ public class SelectSeedlingActivity extends BaseActivity implements ISeedlingCal
         gvRecommend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                recommendAdapter.setcurrent(position);
+                RecommendBean recommendBean = recommends.get(position);
+                for (SeedlingBean seedling : seedlings) {
+                    for (RecommendBean.MedicineInfoListBean medicineInfoListBean : recommendBean.medicineInfoList) {
+                        if (seedling.name.equals(medicineInfoListBean.name)){
+                            seedling.num =""+medicineInfoListBean.num;
+                            selectSeedlingAdapter.selOrRemoveItem(seedling);
+                        }
+                    }
+                }
+                recommendAdapter.selOrRemoveItem(recommendBean);
             }
         });
     }
@@ -129,24 +140,16 @@ public class SelectSeedlingActivity extends BaseActivity implements ISeedlingCal
 
 
     private void showRecipeDialog() {
-        List<RecipeBean> datas = new ArrayList<>();
-        datas.add(new RecipeBean());
-        datas.add(new RecipeBean());
-        datas.add(new RecipeBean());
-        datas.add(new RecipeBean());
-        datas.add(new RecipeBean());
-        datas.add(new RecipeBean());
-        datas.add(new RecipeBean());
-        datas.add(new RecipeBean());
-        datas.add(new RecipeBean());
-        datas.add(new RecipeBean());
-        datas.add(new RecipeBean());
-        datas.add(new RecipeBean());
-        datas.add(new RecipeBean());
-        recipeDialog = new RecipeDialog(this, datas, new RecipeDialog.Callback() {
+        ArrayList<RecommendBean> recipe = recommendAdapter.getSelectList();
+        final ArrayList<SeedlingBean> seedling = selectSeedlingAdapter.getSelectList();
+        recipeDialog = new RecipeDialog(this,recipe,seedling, new RecipeDialog.Callback() {
             @Override
             public void onConfirm() {
                 recipeDialog.dismiss();
+                Intent intent = new Intent();
+                intent.putExtra("seedling", (Serializable) seedling);
+                SelectSeedlingActivity.this.setResult(RESULT_OK,intent);
+                SelectSeedlingActivity.this.finish();
             }
         });
         recipeDialog.show();
@@ -163,6 +166,6 @@ public class SelectSeedlingActivity extends BaseActivity implements ISeedlingCal
     @Override
     public void onRecipeSuccess(List<RecommendBean> beans) {
         recommends.addAll(beans);
-        selectSeedlingAdapter.notifyDataSetChanged();
+        recommendAdapter.notifyDataSetChanged();
     }
 }

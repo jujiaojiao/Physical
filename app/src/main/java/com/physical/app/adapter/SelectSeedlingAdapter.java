@@ -1,9 +1,11 @@
 package com.physical.app.adapter;
 
 import android.content.Context;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -58,13 +60,13 @@ public class SelectSeedlingAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
-        if (convertView == null) {
+//        if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_select_seedling, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+//        } else {
+//            holder = (ViewHolder) convertView.getTag();
+//        }
         final SeedlingBean data = datas.get(position);
 
         if (selectList.contains(data)){
@@ -73,11 +75,31 @@ public class SelectSeedlingAdapter extends BaseAdapter {
             holder.ivCheck.setImageResource(R.mipmap.icon_block_none);
         }
         holder.tvContent.setText(data.name);
+        if (null!=data.num){
+            holder.etNum.setText(""+data.num);
+        }
 
         holder.llRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selOrRemoveItem(data);
+            }
+        });
+        final ViewHolder finalHolder = holder;
+        holder.etNum.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // 监听到回车键，会执行2次该方法。按下与松开
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        //松开事件
+                        data.num = finalHolder.etNum.getText().toString();
+                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(finalHolder.etNum.getWindowToken(), 0); //强制隐藏键盘
+                    }
+                }
+                return false;
+
             }
         });
         return convertView;
@@ -107,6 +129,7 @@ public class SelectSeedlingAdapter extends BaseAdapter {
     //单选添加或移除
     public void selOrRemoveItem(SeedlingBean data) {
         if (selectList.contains(data)) {
+            data.num ="";
             selectList.remove(data);
         } else {
             selectList.add(data);

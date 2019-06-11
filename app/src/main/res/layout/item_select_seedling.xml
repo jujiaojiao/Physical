@@ -34,6 +34,9 @@
         <EditText
             android:layout_marginLeft="@dimen/x15"
             android:id="@+id/et_num"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:textColor="@color/color_33d6ff"
             android:background="@drawable/bg_edit_blue"
             android:textSize="@dimen/x16"
             android:layout_width="@dimen/x70"
