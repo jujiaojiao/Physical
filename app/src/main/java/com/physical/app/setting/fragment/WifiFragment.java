@@ -41,6 +41,8 @@ public class WifiFragment extends BaseFragment {
     private List<ScanResult> datas;
     private InputPwdDialog inputPwdDialog;
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

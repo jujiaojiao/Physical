@@ -60,13 +60,13 @@ public class RecommendAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
+        RecommendBean data = datas.get(position);
         if (current == position) {
             holder.ivCheck.setImageResource(R.mipmap.icon_circle_have);
         } else {
             holder.ivCheck.setImageResource(R.mipmap.icon_circle_none);
         }
-//        holder.tvContent.setText(datas.get(position));
+        holder.tvContent.setText(data.hisName);
         return convertView;
     }
 

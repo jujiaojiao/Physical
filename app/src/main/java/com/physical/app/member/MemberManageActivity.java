@@ -21,6 +21,7 @@ import com.physical.app.callback.IMemberManageCallback;
 import com.physical.app.common.base.BaseActivity;
 import com.physical.app.common.utils.StringUtil;
 import com.physical.app.common.widget.RechargeDialog;
+import com.physical.app.physical.SelectSeedlingActivity;
 import com.physical.app.presenter.MemberManagePresenter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -186,13 +187,12 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
     }
 
     private void addListener() {
-//        lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-////                AddMemberActivity.start(MemberManageActivity.this);
-//                MemberDetailActivity.start(MemberManageActivity.this);
-//            }
-//        });
+        lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter.setCurrent(position);
+            }
+        });
 
         refreshlayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
@@ -212,7 +212,7 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
         memberManagePresenter.queryMemberList(getUserId(), keyword,""+pageNum,""+ pageSize);
     }
 
-    @OnClick({R.id.ivRight,R.id.ivBack,R.id.tv_search})
+    @OnClick({R.id.ivRight,R.id.ivBack,R.id.tv_search,R.id.iv_sure})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivRight:
@@ -229,6 +229,9 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
                 }
                 keyword = search;
                 refresh();
+                break;
+            case R.id.iv_sure:
+                SelectSeedlingActivity.start(this);
                 break;
         }
     }

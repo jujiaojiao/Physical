@@ -4,6 +4,9 @@ package com.physical.app.common.api;
 import com.physical.app.bean.MedicalHistory;
 import com.physical.app.bean.MemberManageBean;
 import com.physical.app.bean.MemberVo;
+import com.physical.app.bean.RecommendBean;
+import com.physical.app.bean.SeedlingBean;
+import com.physical.app.bean.UpdateBean;
 import com.physical.app.common.mine.bean.User;
 
 import java.util.List;
@@ -54,9 +57,9 @@ public interface ServerAPI {
      * @param sessionId
      * @return
      */
-    @POST("app/data/seedling")
+    @POST("app/data/seedling.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> seedling(@Field("sessionId") String sessionId);
+    Observable<HttpResult<List<SeedlingBean>>> seedling(@Field("sessionId") String sessionId);
 
     /**
      * 获取注册验证码
@@ -154,7 +157,7 @@ public interface ServerAPI {
      */
     @POST("app/member/queryRecipeList.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> queryRecipeList(@Field("hisIds") String hisIds, @Field("sessionId") String sessionId);
+    Observable<HttpResult<List<RecommendBean>>> queryRecipeList(@Field("hisIds") String hisIds, @Field("sessionId") String sessionId);
 
 
     /**
@@ -180,7 +183,7 @@ public interface ServerAPI {
      */
     @POST("app/member/saveOrUpdate.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> save(@Field("param") String param, @Field("sessionId") String sessionId);
+    Observable<HttpResult<Object>> saveOrUpdate(@Field("param") String param, @Field("sessionId") String sessionId);
 
     /**
      * 病史列表
@@ -216,7 +219,7 @@ public interface ServerAPI {
      */
     @POST("app/advertisement/queryLatestVersion.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> queryLatestVersion(@Field("sessionId") String sessionId);
+    Observable<HttpResult<UpdateBean>> queryLatestVersion(@Field("sessionId") String sessionId);
 
     /**
      * 查询广告
@@ -235,6 +238,37 @@ public interface ServerAPI {
     @POST("app/advertisement/downLoadNewVersion.json")
     @FormUrlEncoded
     Observable<HttpResult<Object>> downLoadNewVersion(@Field("sessionId") String sessionId);
+
+
+    /**
+     * 新增疗养
+     * @param param
+     * @param sessionId
+     * @return
+     */
+    @POST("app/case/save.json")
+    @FormUrlEncoded
+    Observable<HttpResult<Object>> save(@Field("param") String param,@Field("sessionId") String sessionId);
+
+
+    /**
+     *  疗养纪录
+     * @param startTime 起始时间
+     * @param endTime 结束时间
+     * @param machineCode 机器码
+     * @param page 当前页
+     * @param pageSize 每页大小
+     * @param sessionId 用户id
+     * @return
+     */
+    @POST("app/case/queryList.json")
+    @FormUrlEncoded
+    Observable<HttpResult<Object>> queryList(@Field("startTime ") String startTime ,
+                                             @Field("endTime ") String endTime,
+                                             @Field("machineCode  ") String machineCode,
+                                             @Field("page") String page,
+                                             @Field("pageSize") String pageSize,
+                                             @Field("sessionId") String sessionId);
 
 
 }

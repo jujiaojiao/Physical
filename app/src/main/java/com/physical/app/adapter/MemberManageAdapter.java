@@ -33,6 +33,7 @@ public class MemberManageAdapter extends BaseAdapter {
     private String type;
 
     private Callback callback;
+    private int current;
 
     public MemberManageAdapter(Activity context, List<MemberVo> datas, String type, Callback callback) {
         this.context = context;
@@ -105,13 +106,22 @@ public class MemberManageAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 callback.onchange(position);
-
             }
         });
+
+
+        if (current==position){
+            holder.ivChoose.setImageResource(R.mipmap.icon_choose);
+        }else{
+            holder.ivChoose.setImageResource(R.mipmap.icon_none);
+        }
         return convertView;
     }
 
-
+    public void setCurrent(int current) {
+        this.current = current;
+        notifyDataSetChanged();
+    }
 
 
     class ViewHolder {

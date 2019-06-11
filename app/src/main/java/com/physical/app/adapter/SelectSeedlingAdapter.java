@@ -11,8 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.physical.app.R;
-import com.physical.app.bean.SelectSeedlingBean;
+import com.physical.app.bean.MedicalHistory;
+import com.physical.app.bean.SeedlingBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -26,13 +28,15 @@ import butterknife.ButterKnife;
  */
 public class SelectSeedlingAdapter extends BaseAdapter {
     private Context context;
-    private List<SelectSeedlingBean> datas;
+    private List<SeedlingBean> datas;
     private LayoutInflater inflater;
     private int current;
+    private ArrayList<SeedlingBean> selectList;
 
-    public SelectSeedlingAdapter(Context context, List<SelectSeedlingBean> datas) {
+    public SelectSeedlingAdapter(Context context, List<SeedlingBean> datas) {
         this.context = context;
         this.datas = datas;
+        selectList = new ArrayList<>();
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -61,14 +65,21 @@ public class SelectSeedlingAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        final SeedlingBean data = datas.get(position);
 
-        if (current == position) {
+        if (selectList.contains(data)){
             holder.ivCheck.setImageResource(R.mipmap.icon_block_have);
+        }else{
+            holder.ivCheck.setImageResource(R.mipmap.icon_block_none);
         }
-//        else{
-//            holder.ivCheck.setImageResource(R.mipmap.icon_circle_none);
-//        }
-//        holder.tvContent.setText(datas.get(position));
+        holder.tvContent.setText(data.name);
+
+        holder.llRoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selOrRemoveItem(data);
+            }
+        });
         return convertView;
     }
 
@@ -91,4 +102,22 @@ public class SelectSeedlingAdapter extends BaseAdapter {
             ButterKnife.bind(this, view);
         }
     }
+
+
+    //单选添加或移除
+    public void selOrRemoveItem(SeedlingBean data) {
+        if (selectList.contains(data)) {
+            selectList.remove(data);
+        } else {
+            selectList.add(data);
+        }
+        notifyDataSetChanged();
+    }
+
+    //获取选中的数据集合
+    public ArrayList<SeedlingBean> getSelectList() {
+        return selectList;
+    }
+
+
 }

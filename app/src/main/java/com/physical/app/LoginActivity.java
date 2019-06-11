@@ -37,7 +37,7 @@ import butterknife.OnClick;
 /**
  * 登录页面
  */
-public class LoginActivity extends BaseActivity implements ISeedlingCallback, ILoginCallback {
+public class LoginActivity extends BaseActivity implements ILoginCallback {
     @Bind(R.id.iv_title)
     ImageView ivTitle;
     @Bind(R.id.iv_circle)
@@ -58,7 +58,6 @@ public class LoginActivity extends BaseActivity implements ISeedlingCallback, IL
     TextView tvRegister;
 
     private AnimatorSet animatorSet;
-    private SeedlingPresenter seedlingPresenter;
     private LoginPresenter loginPresenter;
     private String phone;
     private String pwd;

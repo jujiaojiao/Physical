@@ -1,5 +1,7 @@
 package com.physical.app.setting.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,8 +11,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.physical.app.R;
+import com.physical.app.bean.UpdateBean;
+import com.physical.app.callback.IUpdateCallback;
 import com.physical.app.common.base.BaseFragment;
+import com.physical.app.common.utils.DeviceUtils;
 import com.physical.app.common.widget.ComDialog;
+import com.physical.app.presenter.UpdatePresenter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,12 +28,13 @@ import butterknife.ButterKnife;
  * 描述: 版本更新
  */
 
-public class UpdateFragment extends BaseFragment {
+public class UpdateFragment extends BaseFragment implements IUpdateCallback {
     @Bind(R.id.tv_version_name)
     TextView tvVersionName;
     @Bind(R.id.tv_check_version)
     TextView tvCheckVersion;
     private ComDialog comDialog;
+    private UpdatePresenter updatePresenter;
 
     @Nullable
     @Override
@@ -48,20 +55,27 @@ public class UpdateFragment extends BaseFragment {
         tvCheckVersion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showUpdateDialog();
+//                showUpdateDialog();
+                updatePresenter.queryLatestVersion(getUserId());
             }
         });
     }
 
-    private void initData() {
 
+    private void initData() {
+        updatePresenter = new UpdatePresenter(getContext(), this);
     }
 
     private void showUpdateDialog(){
         comDialog = new ComDialog(mContext, "检测新版本","是否更新到最新版本？", new ComDialog.Callback() {
             @Override
             public void callback(int param) {
-
+                //打开系统浏览器，下载文件
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                Uri url = Uri.parse("/app/advertisement/downLoadNewVersion.json");
+                intent.setData(url);
+                startActivity(intent);
             }
         });
         comDialog.show();
@@ -71,5 +85,24 @@ public class UpdateFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onUpdateSuccess(UpdateBean bean) {
+        if (bean.versionUpdate != null) {
+//            mVersionUpdate = bean.versionUpdate;
+            int curVCode = DeviceUtils.getVersionCode(getContext());
+//            int newVCode = mVersionUpdate.versionNum;
+            //是否有新版本，是否强制更新
+//            boolean hasNewVersion = newVCode > curVCode;
+//            boolean hasNewVersion = true;
+//            if (hasNewVersion) {
+//                boolean isStrongUpdate = mVersionUpdate.forceUpdate.equals("1");
+//                if (hasNewVersion) {
+                    //发现新版本
+                    showUpdateDialog();
+//                }
+//            }
+        }
     }
 }

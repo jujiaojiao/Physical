@@ -5,6 +5,9 @@ import com.physical.app.MyApplication;
 import com.physical.app.bean.MedicalHistory;
 import com.physical.app.bean.MemberManageBean;
 import com.physical.app.bean.MemberVo;
+import com.physical.app.bean.RecommendBean;
+import com.physical.app.bean.SeedlingBean;
+import com.physical.app.bean.UpdateBean;
 import com.physical.app.common.mine.bean.User;
 
 import java.util.List;
@@ -144,9 +147,9 @@ public class RequestClient {
      *
      * @return
      */
-    public Observable<Object> seedling(String sessionId) {
+    public Observable<List<SeedlingBean>> seedling(String sessionId) {
         return mServerApi.seedling(sessionId)
-                .map(new HttpResultFuc<Object>())
+                .map(new HttpResultFuc<List<SeedlingBean>>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -242,9 +245,9 @@ public class RequestClient {
      * @param hisIds
      * @return
      */
-    public Observable<Object> queryRecipeList(String hisIds, String sessionId) {
+    public Observable<List<RecommendBean>> queryRecipeList(String hisIds, String sessionId) {
         return mServerApi.queryRecipeList(hisIds, sessionId)
-                .map(new HttpResultFuc<Object>())
+                .map(new HttpResultFuc<List<RecommendBean>>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -270,8 +273,8 @@ public class RequestClient {
      * @param param
      * @return
      */
-    public Observable<Object> save(String param, String sessionId) {
-        return mServerApi.save(param, sessionId)
+    public Observable<Object> saveOrUpdate(String param, String sessionId) {
+        return mServerApi.saveOrUpdate(param, sessionId)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -316,9 +319,9 @@ public class RequestClient {
      * @param sessionId
      * @return
      */
-    public Observable<Object> queryLatestVersion(String sessionId) {
+    public Observable<UpdateBean> queryLatestVersion(String sessionId) {
         return mServerApi.queryLatestVersion(sessionId)
-                .map(new HttpResultFuc<Object>())
+                .map(new HttpResultFuc<UpdateBean>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -349,5 +352,40 @@ public class RequestClient {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    /**
+     * 新增疗养
+     * @param param
+     * @param sessionId
+     * @return
+     */
+    public Observable<Object> save(String param,String sessionId) {
+        return mServerApi.save(param, sessionId)
+                .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+    /**
+     *  疗养纪录
+     * @param startTime 起始时间
+     * @param endTime 结束时间
+     * @param machineCode 机器码
+     * @param page 当前页
+     * @param pageSize 每页大小
+     * @param sessionId 用户id
+     * @return
+     */
+    public Observable<Object> queryList(String startTime,
+                                            String endTime,
+                                            String machineCode,
+                                            String page,
+                                            String pageSize,
+                                            String sessionId) {
+        return mServerApi.queryList(startTime, endTime, machineCode, page, pageSize, sessionId)
+                .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
 }

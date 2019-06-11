@@ -12,8 +12,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.physical.app.R;
+import com.physical.app.adapter.MemberManageAdapter;
 import com.physical.app.adapter.PhysicalAdapter;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.member.MemberManageActivity;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,8 @@ public class PhysicalActivity extends BaseActivity {
     ImageView ivBack;
     @Bind(R.id.tvTitle)
     TextView tvTitle;
+    @Bind(R.id.ivRight)
+    ImageView ivRight;
     @Bind(R.id.rlTop)
     RelativeLayout rlTop;
     @Bind(R.id.tv_user)
@@ -229,11 +233,20 @@ public class PhysicalActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.ivBack})
+    @OnClick({R.id.ivBack,R.id.iv_on,R.id.iv_off,R.id.ivRight})
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.ivBack:
                 finish();
+                break;
+            case R.id.ivRight:
+                MemberManageActivity.start(this,"1");
+                break;
+            case R.id.iv_on:
+
+                break;
+            case R.id.iv_off:
+
                 break;
         }
     }

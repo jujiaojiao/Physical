@@ -4,24 +4,39 @@
     android:background="@mipmap/bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <include layout="@layout/titlebar_common_back"/>
+    <include layout="@layout/titlebar_common_back_menu"/>
     <LinearLayout
         android:layout_gravity="center"
         android:orientation="vertical"
         android:background="@mipmap/border"
         android:layout_width="@dimen/x1789"
         android:layout_height="@dimen/x910">
-        <TextView
-            android:id="@+id/tv_user"
-            android:text="诊疗用户"
-            android:paddingTop="@dimen/x30"
-            android:textStyle="bold"
-            android:layout_marginLeft="@dimen/x60"
-            android:gravity="center|left"
-            android:textSize="@dimen/x30"
-            android:textColor="@color/color_d0f1ff"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/x110" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x110">
+            <TextView
+                android:text="诊疗用户"
+                android:paddingTop="@dimen/x30"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/x60"
+                android:gravity="center|left"
+                android:textSize="@dimen/x30"
+                android:textColor="@color/color_d0f1ff"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x110" />
+            <TextView
+                android:id="@+id/tv_user"
+                android:paddingTop="@dimen/x30"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/x30"
+                android:gravity="center|left"
+                android:textSize="@dimen/x30"
+                android:textColor="@color/color_d0f1ff"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x110" />
+        </LinearLayout>
+
         <View
             android:layout_marginLeft="@dimen/x35"
             android:layout_marginRight="@dimen/x35"

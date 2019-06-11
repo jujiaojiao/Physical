@@ -14,7 +14,7 @@
             android:id="@+id/iv_choose"
             android:layout_marginLeft="@dimen/x5"
             android:layout_gravity="center"
-            android:src="@mipmap/icon_choose"
+            android:src="@mipmap/icon_none"
             android:layout_width="@dimen/x130"
             android:layout_height="@dimen/x20" />
         <TextView

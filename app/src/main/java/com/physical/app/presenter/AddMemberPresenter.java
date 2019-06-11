@@ -33,7 +33,7 @@ public class AddMemberPresenter extends BasePresenter {
      * @return
      */
     public void save(String param,String sessionId) {
-        mRequestClient.save(param,sessionId).subscribe(new ProgressSubscriber<Object>(mContext) {
+        mRequestClient.saveOrUpdate(param,sessionId).subscribe(new ProgressSubscriber<Object>(mContext) {
             @Override
             public void onNext(Object bean) {
                 callback.onSaveSuccess();
