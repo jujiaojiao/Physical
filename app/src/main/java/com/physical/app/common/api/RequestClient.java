@@ -365,6 +365,45 @@ public class RequestClient {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    /**
+     * 开始疗养
+     * @param sessionId
+     * @return
+     */
+    public Observable<Object> start(String id,String beginTime,String sessionId) {
+        return mServerApi.start(id, beginTime, sessionId)
+                .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+    /**
+     * 结束疗养
+     * @param sessionId
+     * @return
+     */
+    public Observable<Object> finish(String id,String endTime,String sessionId) {
+        return mServerApi.finish(id, endTime, sessionId)
+                .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+
+    /**
+     * 评价
+     * @param sessionId
+     * @return
+     */
+    public Observable<Object> comment(String id,String commentType,String comment,String sessionId) {
+        return mServerApi.comment(id, commentType, comment, sessionId)
+                .map(new HttpResultFuc<Object>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 
     /**
      *  疗养纪录

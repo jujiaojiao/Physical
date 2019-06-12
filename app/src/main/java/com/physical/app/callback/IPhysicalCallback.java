@@ -8,4 +8,11 @@ package com.physical.app.callback;
  */
 public interface IPhysicalCallback {
     void onSaveSuccess();
+
+    void onFinishSuccess();
+
+    void onStartSuccess();
+
+    void onCommentSuccess();
+
 }

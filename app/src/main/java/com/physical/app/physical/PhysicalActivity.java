@@ -3,6 +3,9 @@ package com.physical.app.physical;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
@@ -63,6 +66,8 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     GridView gvData7;
     @Bind(R.id.iv_title)
     ImageView ivTitle;
+    @Bind(R.id.tv_time)
+    TextView tv_time;
 
     private PhysicalAdapter PhysicalAdapter1;
     private ArrayList<String> list1;
@@ -88,6 +93,10 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     private String totalTime = "10";
     private String magneticIntensity;
     private PhysicalPresenter physicalPresenter;
+    private String endTime;
+    private String beginTime;
+    private Thread thread;
+    private Integer integer;
 
 
     public static void start(Context context) {
@@ -265,31 +274,36 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
         });
     }
 
-    @OnClick({R.id.ivBack,R.id.iv_on,R.id.iv_off,R.id.ivRight})
-    public void onClick(View view){
+    @OnClick({R.id.ivBack, R.id.iv_on, R.id.iv_off, R.id.ivRight})
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivBack:
                 finish();
                 break;
             case R.id.ivRight:
-                MemberManageActivity.start(this,"1");
+                MemberManageActivity.start(this, "1");
                 break;
             case R.id.iv_on:
-                start();
+//                start();
+                integer = Integer.valueOf(totalTime)*60*1000;
+                Message message = handler.obtainMessage(1);     // Message
+                handler.sendMessageDelayed(message, 1000);
                 break;
             case R.id.iv_off:
-
+                integer = 1000;
+                Message message1 = handler.obtainMessage(1);     // Message
+                handler.sendMessage(message1);
                 break;
         }
     }
 
-    private void start(){
+    private void start() {
         String user = tvUser.getText().toString();
-        if (StringUtil.isEmpty(user)){
+        if (StringUtil.isEmpty(user)) {
             showToast("请选择会员");
             return;
         }
-        if (seedling.size()==0){
+        if (seedling.size() == 0) {
             showToast("请选择幼苗");
             return;
         }
@@ -306,21 +320,95 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
         memberCaseVo.memberName = member.name;
         memberCaseVo.medicineInfoList = seedling;
         memberCaseVo.machineCode = getWifiMac();
-        physicalPresenter.save(toJson(memberCaseVo),getUserId());
+        physicalPresenter.save(toJson(memberCaseVo), getUserId());
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==101&&resultCode==RESULT_OK&&null!=data){
+        if (requestCode == 101 && resultCode == RESULT_OK && null != data) {
             seedling = (ArrayList<SeedlingBean>) data.getSerializableExtra("seedling");
             member = (MemberVo) data.getSerializableExtra("member");
             tvUser.setText(member.name);
         }
     }
 
+
+    /**
+     * 新增
+     */
     @Override
     public void onSaveSuccess() {
+        physicalPresenter.start("", beginTime, getUserId());
+    }
+
+    /**
+     * 结束
+     */
+    @Override
+    public void onFinishSuccess() {
+        physicalPresenter.finish("", endTime, getUserId());
+    }
+
+    /**
+     * 开始
+     */
+    @Override
+    public void onStartSuccess() {
+        //TODO 开始指令
+    }
+
+
+    /**
+     * 评价
+     */
+    @Override
+    public void onCommentSuccess() {
 
     }
+
+    final Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    integer = integer - 1000;
+                    tv_time.setText("" +formatTime(integer));
+                    if (integer > 0) {
+                        Message message = handler.obtainMessage(1);
+                        handler.sendMessageDelayed(message, 1000);
+                    } else {
+                        tv_time.setText("00:00");
+                    }
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
+    /**
+     * 将毫秒转化为 分钟：秒 的格式
+     *
+     * @param millisecond 毫秒
+     * @return
+     */
+    public String formatTime(long millisecond) {
+        int minute;//分钟
+        int second;//秒数
+        minute = (int) ((millisecond / 1000) / 60);
+        second = (int) ((millisecond / 1000) % 60);
+        if (minute < 10) {
+            if (second < 10) {
+                return "0" + minute + ":" + "0" + second;
+            } else {
+                return "0" + minute + ":" + second;
+            }
+        }else {
+            if (second < 10) {
+                return minute + ":" + "0" + second;
+            } else {
+                return minute + ":" + second;
+            }
+        }
+    }
+
 }
+

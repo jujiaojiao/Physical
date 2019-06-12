@@ -36,4 +36,50 @@ public class PhysicalPresenter extends BasePresenter {
         });
     }
 
+    /**
+     * 开始疗养
+     * @param sessionId
+     * @return
+     */
+    public void start(String id,String beginTime,String sessionId){
+        mRequestClient.start(id, beginTime, sessionId).subscribe(new ProgressSubscriber<Object>(mContext) {
+            @Override
+            public void onNext(Object bean) {
+                callback.onStartSuccess();
+            }
+
+        });
+    }
+
+    /**
+     * 结束疗养
+     * @param sessionId
+     * @return
+     */
+    public void finish(String id,String endTime,String sessionId){
+        mRequestClient.finish(id, endTime, sessionId).subscribe(new ProgressSubscriber<Object>(mContext) {
+            @Override
+            public void onNext(Object bean) {
+                callback.onFinishSuccess();
+            }
+
+        });
+    }
+
+
+    /**
+     * 评价
+     * @param sessionId
+     * @return
+     */
+    public void comment(String id,String commentType,String comment,String sessionId){
+        mRequestClient.comment(id, commentType, comment, sessionId).subscribe(new ProgressSubscriber<Object>(mContext) {
+            @Override
+            public void onNext(Object bean) {
+                callback.onCommentSuccess();
+            }
+
+        });
+    }
+
 }

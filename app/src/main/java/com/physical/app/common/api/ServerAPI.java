@@ -251,6 +251,37 @@ public interface ServerAPI {
     Observable<HttpResult<Object>> save(@Field("param") String param,@Field("sessionId") String sessionId);
 
 
+
+    /**
+     * 开始疗养
+     * @param sessionId
+     * @return
+     */
+    @POST("app/case/start.json")
+    @FormUrlEncoded
+    Observable<HttpResult<Object>> start(@Field("Id") String Id,@Field("beginTime") String beginTime, @Field("sessionId") String sessionId);
+
+
+    /**
+     * 结束疗养
+     * @param sessionId
+     * @return
+     */
+    @POST("app/case/finish.json")
+    @FormUrlEncoded
+    Observable<HttpResult<Object>> finish(@Field("Id") String Id,@Field("endTime") String endTime, @Field("sessionId") String sessionId);
+
+
+    /**
+     * 评价
+     * @param sessionId
+     * @return
+     */
+    @POST("app/case/comment.json")
+    @FormUrlEncoded
+    Observable<HttpResult<Object>> comment(@Field("Id") String Id,@Field("commentType") String commentType,@Field("comment") String comment, @Field("sessionId") String sessionId);
+
+
     /**
      *  疗养纪录
      * @param startTime 起始时间
