@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import com.physical.app.R;
 import com.physical.app.adapter.MemberDetailAdapter;
 import com.physical.app.adapter.MemberDetailRecordAdapter;
 import com.physical.app.bean.MedicalHistory;
+import com.physical.app.bean.MemberCardVo;
 import com.physical.app.bean.MemberDetailRecordBean;
 import com.physical.app.bean.MemberVo;
 import com.physical.app.callback.IMemberDetailCallback;
@@ -24,6 +26,7 @@ import com.physical.app.presenter.MemberDetailPresenter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -74,7 +77,7 @@ public class MemberDetailActivity extends BaseActivity implements IMemberDetailC
     private MemberDetailAdapter memberDetailAdapter;
     private ArrayList<MedicalHistory> datas;
     private MemberDetailRecordAdapter memberDetailRecordAdapter;
-    private ArrayList<MemberDetailRecordBean> records;
+    private ArrayList<MemberCardVo> records;
     private String memberId;
     private MemberDetailPresenter memberDetailPresenter;
 
@@ -104,6 +107,12 @@ public class MemberDetailActivity extends BaseActivity implements IMemberDetailC
         records = new ArrayList<>();
         memberDetailRecordAdapter = new MemberDetailRecordAdapter(this, records);
         lvData.setAdapter(memberDetailRecordAdapter);
+        lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                memberDetailRecordAdapter.setCurrent(position);
+            }
+        });
 
 
         memberDetailPresenter = new MemberDetailPresenter(this, this);
@@ -145,6 +154,9 @@ public class MemberDetailActivity extends BaseActivity implements IMemberDetailC
         tvMoney.setText(bean.totalMoney);
         tvTime.setText(bean.vipTimes);
         datas.addAll(bean.medicalHistoryList);
+        if (bean.memberCaseVoList.size()>0){
+            records.addAll(bean.memberCaseVoList);
+        }
 
     }
 }

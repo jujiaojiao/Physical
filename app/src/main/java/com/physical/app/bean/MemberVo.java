@@ -91,6 +91,6 @@ public class MemberVo implements Serializable{
     /**
      * 诊疗纪录
      */
-    public List<MemberCardVo> memberCardVoList;
+    public List<MemberCardVo> memberCaseVoList;
 
 }

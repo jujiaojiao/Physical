@@ -2,6 +2,7 @@ package com.physical.app.presenter;
 
 import android.content.Context;
 
+import com.physical.app.bean.AddPhysicalBean;
 import com.physical.app.callback.IPhysicalCallback;
 import com.physical.app.common.api.ProgressSubscriber;
 import com.physical.app.common.base.BasePresenter;
@@ -27,10 +28,10 @@ public class PhysicalPresenter extends BasePresenter {
      * @return
      */
     public void save(String param,String sessionId){
-        mRequestClient.save(param, sessionId).subscribe(new ProgressSubscriber<Object>(mContext) {
+        mRequestClient.save(param, sessionId).subscribe(new ProgressSubscriber<AddPhysicalBean>(mContext) {
             @Override
-            public void onNext(Object bean) {
-                callback.onSaveSuccess();
+            public void onNext(AddPhysicalBean bean) {
+                callback.onSaveSuccess(bean);
             }
 
         });
@@ -41,8 +42,8 @@ public class PhysicalPresenter extends BasePresenter {
      * @param sessionId
      * @return
      */
-    public void start(String id,String beginTime,String sessionId){
-        mRequestClient.start(id, beginTime, sessionId).subscribe(new ProgressSubscriber<Object>(mContext) {
+    public void start(String id,String beginTime,String sessionId,String machineCode){
+        mRequestClient.start(id, beginTime, sessionId,machineCode).subscribe(new ProgressSubscriber<Object>(mContext) {
             @Override
             public void onNext(Object bean) {
                 callback.onStartSuccess();
@@ -56,8 +57,8 @@ public class PhysicalPresenter extends BasePresenter {
      * @param sessionId
      * @return
      */
-    public void finish(String id,String endTime,String sessionId){
-        mRequestClient.finish(id, endTime, sessionId).subscribe(new ProgressSubscriber<Object>(mContext) {
+    public void finish(String id,String endTime,String sessionId,String machineCode){
+        mRequestClient.finish(id, endTime, sessionId,machineCode).subscribe(new ProgressSubscriber<Object>(mContext) {
             @Override
             public void onNext(Object bean) {
                 callback.onFinishSuccess();

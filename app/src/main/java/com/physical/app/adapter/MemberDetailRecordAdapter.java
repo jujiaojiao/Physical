@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.physical.app.R;
+import com.physical.app.bean.MemberCardVo;
 import com.physical.app.bean.MemberDetailRecordBean;
+import com.physical.app.common.utils.StringUtil;
 
 import java.util.List;
 
@@ -24,11 +26,11 @@ import butterknife.ButterKnife;
  */
 public class MemberDetailRecordAdapter extends BaseAdapter {
     private Context context;
-    private List<MemberDetailRecordBean> datas;
+    private List<MemberCardVo> datas;
     private LayoutInflater inflater;
     private int current;
 
-    public MemberDetailRecordAdapter(Context context, List<MemberDetailRecordBean> datas) {
+    public MemberDetailRecordAdapter(Context context, List<MemberCardVo> datas) {
         this.context = context;
         this.datas = datas;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,9 +61,35 @@ public class MemberDetailRecordAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        MemberCardVo data = datas.get(position);
 
 
+        holder.tvNum.setText(""+(position+1));
+        holder.tvTime.setText(StringUtil.longToSDate(data.createTime,"yyyy-MM-dd HH:mm"));
+        holder.tvArea.setVisibility(View.GONE);
+        StringBuffer choose = new StringBuffer();
+        for (int i = 0; i < data.medicineInfoList.size(); i++) {
+            if (data.medicineInfoList.size()-1 ==i){
+                choose.append(data.medicineInfoList.get(i).name);
+            }else{
+                choose.append(data.medicineInfoList.get(i).name+",");
+            }
+        }
+        holder.tvChoose.setText(choose.toString());
+        if (current == position) {
+            holder.tvDetail.setVisibility(View.VISIBLE);
+            holder.tvDetail.setText(choose);
+            holder.ivChoose.setImageResource(R.mipmap.icon_ins);
+        }else{
+            holder.tvDetail.setVisibility(View.GONE);
+            holder.ivChoose.setImageResource(R.mipmap.icon_plus);
+        }
         return convertView;
+    }
+
+    public void setCurrent(int current) {
+        this.current = current;
+        notifyDataSetChanged();
     }
 
     class ViewHolder {

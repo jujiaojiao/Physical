@@ -3,6 +3,7 @@ package com.physical.app.common.api;
 import android.content.Context;
 
 
+import com.physical.app.LoginActivity;
 import com.physical.app.common.utils.NetworkUtils;
 import com.physical.app.common.utils.ToastUtil;
 
@@ -83,8 +84,9 @@ public abstract class ProgressSubscriber<T> extends Subscriber<T> implements Pro
         } else if (e instanceof ApiException) {
             ApiException ae = (ApiException) e;
             String type = ae.type;
-            if ("-100".equals(type)) {
+            if ("-200".equals(type)) {
                 //弹出互踢对话框，另外处理
+                LoginActivity.start(context);
 //                DropOutActivity.startDropOutActivity(e.getMessage(), context);
             } else {
                 ToastUtil.show(e.getMessage());

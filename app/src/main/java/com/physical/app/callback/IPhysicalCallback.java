@@ -1,5 +1,7 @@
 package com.physical.app.callback;
 
+import com.physical.app.bean.AddPhysicalBean;
+
 /**
  * @author jjj
  * 版本：1.0
@@ -7,7 +9,7 @@ package com.physical.app.callback;
  * 描述：
  */
 public interface IPhysicalCallback {
-    void onSaveSuccess();
+    void onSaveSuccess(AddPhysicalBean bean);
 
     void onFinishSuccess();
 

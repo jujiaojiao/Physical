@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -17,16 +18,20 @@ import android.widget.TextView;
 import com.physical.app.R;
 import com.physical.app.adapter.MemberManageAdapter;
 import com.physical.app.adapter.PhysicalAdapter;
+import com.physical.app.bean.AddPhysicalBean;
 import com.physical.app.bean.MemberCaseVo;
 import com.physical.app.bean.MemberVo;
 import com.physical.app.bean.SeedlingBean;
 import com.physical.app.callback.IPhysicalCallback;
 import com.physical.app.common.base.BaseActivity;
 import com.physical.app.common.utils.StringUtil;
+import com.physical.app.common.widget.CommentDialog;
 import com.physical.app.member.MemberManageActivity;
 import com.physical.app.presenter.PhysicalPresenter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -97,6 +102,10 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     private String beginTime;
     private Thread thread;
     private Integer integer;
+    private int id;
+    private CommentDialog commentDialog;
+
+    private int commentType;
 
 
     public static void start(Context context) {
@@ -284,15 +293,12 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
                 MemberManageActivity.start(this, "1");
                 break;
             case R.id.iv_on:
-//                start();
-                integer = Integer.valueOf(totalTime)*60*1000;
-                Message message = handler.obtainMessage(1);     // Message
-                handler.sendMessageDelayed(message, 1000);
+                start();
                 break;
             case R.id.iv_off:
-                integer = 1000;
-                Message message1 = handler.obtainMessage(1);     // Message
-                handler.sendMessage(message1);
+                endTime = getCurrentTime();
+                physicalPresenter.finish(""+id, endTime, getUserId(),getWifiMac());
+//                showCommentDialog();
                 break;
         }
     }
@@ -320,6 +326,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
         memberCaseVo.memberName = member.name;
         memberCaseVo.medicineInfoList = seedling;
         memberCaseVo.machineCode = getWifiMac();
+        Log.i("jjj", "start: "+toJson(memberCaseVo));
         physicalPresenter.save(toJson(memberCaseVo), getUserId());
     }
 
@@ -334,12 +341,21 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     }
 
 
+    private String getCurrentTime(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");// HH:mm:ss
+//获取当前时间
+        Date date = new Date(System.currentTimeMillis());
+        return simpleDateFormat.format(date);
+    }
+
     /**
      * 新增
      */
     @Override
-    public void onSaveSuccess() {
-        physicalPresenter.start("", beginTime, getUserId());
+    public void onSaveSuccess(AddPhysicalBean bean) {
+        id = bean.id;
+        beginTime = getCurrentTime();
+        physicalPresenter.start(""+id, beginTime, getUserId(),getWifiMac());
     }
 
     /**
@@ -347,7 +363,11 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
      */
     @Override
     public void onFinishSuccess() {
-        physicalPresenter.finish("", endTime, getUserId());
+        showToast("结束理疗");
+        integer = 1000;
+        Message message1 = handler.obtainMessage(1);     // Message
+        handler.sendMessage(message1);
+        showCommentDialog();
     }
 
     /**
@@ -356,6 +376,10 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     @Override
     public void onStartSuccess() {
         //TODO 开始指令
+        showToast("开始理疗");
+        integer = Integer.valueOf(totalTime)*60*1000;
+        Message message = handler.obtainMessage(1);     // Message
+        handler.sendMessageDelayed(message, 1000);
     }
 
 
@@ -364,7 +388,8 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
      */
     @Override
     public void onCommentSuccess() {
-
+        showToast("评价成功");
+        this.finish();
     }
 
     final Handler handler = new Handler() {
@@ -408,6 +433,35 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
                 return minute + ":" + second;
             }
         }
+    }
+
+
+    private void showCommentDialog() {
+        commentDialog = new CommentDialog(this, new CommentDialog.Callback() {
+            @Override
+            public void onCallback(String param) {
+                switch (param) {
+                    case "非常满意":
+                        commentType = 0;
+                        break;
+                    case "满意":
+                        commentType = 1;
+
+                        break;
+                    case "一般":
+                        commentType = 2;
+
+                        break;
+                    case "不满意":
+                        commentType = 3;
+
+                        break;
+                }
+                physicalPresenter.comment(""+id,""+commentType,param,getUserId());
+                commentDialog.dismiss();
+            }
+        });
+        commentDialog.show();
     }
 
 }

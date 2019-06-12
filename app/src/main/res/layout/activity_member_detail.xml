@@ -294,6 +294,7 @@
                             android:layout_marginLeft="@dimen/x50"
                             android:gravity="center"
                             android:text="地点"
+                            android:visibility="gone"
                             android:textColor="@color/color_d0f1ff"
                             android:textSize="@dimen/x30"
                             android:textStyle="bold" />

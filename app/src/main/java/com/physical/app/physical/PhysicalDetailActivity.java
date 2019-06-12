@@ -99,7 +99,7 @@ public class PhysicalDetailActivity extends BaseActivity {
 
                 break;
             case R.id.iv_off:
-                showCommentDialog();
+//                showCommentDialog();
                 break;
             case R.id.ivBack:
                 finish();
@@ -107,8 +107,4 @@ public class PhysicalDetailActivity extends BaseActivity {
         }
     }
 
-    private void showCommentDialog() {
-        commentDialog = new CommentDialog(this);
-        commentDialog.show();
-    }
 }

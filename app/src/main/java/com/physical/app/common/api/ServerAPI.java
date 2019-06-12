@@ -1,11 +1,13 @@
 package com.physical.app.common.api;
 
 
+import com.physical.app.bean.AddPhysicalBean;
 import com.physical.app.bean.MedicalHistory;
 import com.physical.app.bean.MemberManageBean;
 import com.physical.app.bean.MemberVo;
 import com.physical.app.bean.RecommendBean;
 import com.physical.app.bean.SeedlingBean;
+import com.physical.app.bean.TimeBean;
 import com.physical.app.bean.UpdateBean;
 import com.physical.app.common.mine.bean.User;
 
@@ -248,7 +250,7 @@ public interface ServerAPI {
      */
     @POST("app/case/save.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> save(@Field("param") String param,@Field("sessionId") String sessionId);
+    Observable<HttpResult<AddPhysicalBean>> save(@Field("param") String param, @Field("sessionId") String sessionId);
 
 
 
@@ -259,7 +261,7 @@ public interface ServerAPI {
      */
     @POST("app/case/start.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> start(@Field("Id") String Id,@Field("beginTime") String beginTime, @Field("sessionId") String sessionId);
+    Observable<HttpResult<Object>> start(@Field("Id") String Id,@Field("beginTime") String beginTime, @Field("sessionId") String sessionId ,@Field("machineCode") String machineCode);
 
 
     /**
@@ -269,7 +271,7 @@ public interface ServerAPI {
      */
     @POST("app/case/finish.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> finish(@Field("Id") String Id,@Field("endTime") String endTime, @Field("sessionId") String sessionId);
+    Observable<HttpResult<Object>> finish(@Field("Id") String Id,@Field("endTime") String endTime, @Field("sessionId") String sessionId,@Field("machineCode") String machineCode);
 
 
     /**
@@ -294,12 +296,12 @@ public interface ServerAPI {
      */
     @POST("app/case/queryList.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> queryList(@Field("startTime ") String startTime ,
-                                             @Field("endTime ") String endTime,
-                                             @Field("machineCode  ") String machineCode,
-                                             @Field("page") String page,
-                                             @Field("pageSize") String pageSize,
-                                             @Field("sessionId") String sessionId);
+    Observable<HttpResult<List<TimeBean>>> queryList(@Field("startTime ") String startTime ,
+                                                     @Field("endTime ") String endTime,
+                                                     @Field("machineCode  ") String machineCode,
+                                                     @Field("page") String page,
+                                                     @Field("pageSize") String pageSize,
+                                                     @Field("sessionId") String sessionId);
 
 
 }

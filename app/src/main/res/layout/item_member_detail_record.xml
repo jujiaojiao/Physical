@@ -53,6 +53,8 @@
         android:id="@+id/tv_detail"
         android:layout_gravity="center"
         android:textSize="@dimen/x24"
+        android:paddingLeft="@dimen/x60"
+        android:gravity="center|left"
         android:textColor="@color/color_33d6ff"
         android:background="@color/color_021E4F"
         android:layout_width="@dimen/x1760"

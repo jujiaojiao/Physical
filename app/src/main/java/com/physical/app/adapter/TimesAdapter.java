@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.physical.app.R;
 import com.physical.app.bean.TimeBean;
+import com.physical.app.common.utils.StringUtil;
 
 import java.util.List;
 
@@ -61,8 +62,9 @@ public class TimesAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
-
+        holder.tvNum.setText(""+(position+1));
+        holder.tvDate.setText(StringUtil.longToSDate(datas.get(position).createTime,"yyyy-MM-dd"));
+        holder.tvTime.setText(StringUtil.longToSDate(datas.get(position).createTime,"HH:mm:SS"));
         return convertView;
     }
 

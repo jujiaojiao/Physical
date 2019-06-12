@@ -2,11 +2,13 @@ package com.physical.app.common.api;
 
 
 import com.physical.app.MyApplication;
+import com.physical.app.bean.AddPhysicalBean;
 import com.physical.app.bean.MedicalHistory;
 import com.physical.app.bean.MemberManageBean;
 import com.physical.app.bean.MemberVo;
 import com.physical.app.bean.RecommendBean;
 import com.physical.app.bean.SeedlingBean;
+import com.physical.app.bean.TimeBean;
 import com.physical.app.bean.UpdateBean;
 import com.physical.app.common.mine.bean.User;
 
@@ -358,9 +360,9 @@ public class RequestClient {
      * @param sessionId
      * @return
      */
-    public Observable<Object> save(String param,String sessionId) {
+    public Observable<AddPhysicalBean> save(String param, String sessionId) {
         return mServerApi.save(param, sessionId)
-                .map(new HttpResultFuc<Object>())
+                .map(new HttpResultFuc<AddPhysicalBean>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -370,8 +372,8 @@ public class RequestClient {
      * @param sessionId
      * @return
      */
-    public Observable<Object> start(String id,String beginTime,String sessionId) {
-        return mServerApi.start(id, beginTime, sessionId)
+    public Observable<Object> start(String id,String beginTime,String sessionId,String machineCode) {
+        return mServerApi.start(id, beginTime, sessionId,machineCode)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -383,8 +385,8 @@ public class RequestClient {
      * @param sessionId
      * @return
      */
-    public Observable<Object> finish(String id,String endTime,String sessionId) {
-        return mServerApi.finish(id, endTime, sessionId)
+    public Observable<Object> finish(String id,String endTime,String sessionId,String machineCode) {
+        return mServerApi.finish(id, endTime, sessionId,machineCode)
                 .map(new HttpResultFuc<Object>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
@@ -415,14 +417,14 @@ public class RequestClient {
      * @param sessionId 用户id
      * @return
      */
-    public Observable<Object> queryList(String startTime,
-                                            String endTime,
-                                            String machineCode,
-                                            String page,
-                                            String pageSize,
-                                            String sessionId) {
+    public Observable<List<TimeBean>> queryList(String startTime,
+                                                String endTime,
+                                                String machineCode,
+                                                String page,
+                                                String pageSize,
+                                                String sessionId) {
         return mServerApi.queryList(startTime, endTime, machineCode, page, pageSize, sessionId)
-                .map(new HttpResultFuc<Object>())
+                .map(new HttpResultFuc<List<TimeBean>>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

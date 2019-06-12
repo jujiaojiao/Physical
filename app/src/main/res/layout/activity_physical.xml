@@ -347,7 +347,7 @@
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_marginLeft="@dimen/x37"
-                android:text="20:07"
+                android:text="00:00"
                 android:gravity="bottom"
                 android:textStyle="bold"
                 android:textSize="@dimen/x59"
