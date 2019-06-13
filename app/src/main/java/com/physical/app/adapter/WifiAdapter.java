@@ -24,9 +24,9 @@ import butterknife.ButterKnife;
  */
 public class WifiAdapter extends BaseAdapter {
     private Context context;
-    private List<ScanResult> datas;
     private LayoutInflater inflater;
     private int current;
+    private List<ScanResult> datas;
 
     public WifiAdapter(Context context, List<ScanResult> datas) {
         this.context = context;
@@ -76,6 +76,11 @@ public class WifiAdapter extends BaseAdapter {
 
     public void setcurrent(int current) {
         this.current = current;
+    }
+
+    public void setScanResultList(List<ScanResult> scanResultList) {
+        this.datas = scanResultList;
+        notifyDataSetChanged();
     }
 
 

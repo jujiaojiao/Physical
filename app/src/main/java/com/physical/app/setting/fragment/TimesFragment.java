@@ -25,10 +25,13 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.qqtheme.framework.util.ConvertUtils;
 
 /**
  * Created by jjj
@@ -91,7 +94,7 @@ public class TimesFragment extends BaseFragment implements ITimeCallback {
         request();
     }
 
-    private void addListener(){
+    private void addListener() {
         refreshlayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshLayout) {
@@ -106,6 +109,18 @@ public class TimesFragment extends BaseFragment implements ITimeCallback {
     }
 
 
+    @OnClick({R.id.tv_end_time,R.id.tv_start_time})
+    public void onClick(View view){
+        switch (view.getId()) {
+            case R.id.tv_end_time:
+                showTimeEndDay();
+                break;
+            case R.id.tv_start_time:
+                showTimeStartDay();
+                break;
+        }
+    }
+
     private void loadMore() {
         pageNum++;
         request();
@@ -119,19 +134,87 @@ public class TimesFragment extends BaseFragment implements ITimeCallback {
     }
 
 
-    private void request(){
-        timesPresenter.queryList(startTime,endTime,getWifiMac(),""+pageNum,""+pageSize,getUserId());
+    private void request() {
+        endTime = tvEndTime.getText().toString();
+        startTime = tvStartTime.getText().toString();
+        timesPresenter.queryList(startTime, endTime, getWifiMac(), "" + pageNum, "" + pageSize, getUserId());
     }
 
-    private void showTimeStart(){
+    /**
+     * 开始
+     */
+    public void showTimeStartDay() {
+        final cn.qqtheme.framework.picker.DatePicker picker = new cn.qqtheme.framework.picker.DatePicker(getActivity());
+        Calendar c = Calendar.getInstance();
+        picker.setCanceledOnTouchOutside(true);
+        picker.setUseWeight(true);
+        picker.setTopPadding(ConvertUtils.toPx(getContext(), 10));
+        picker.setRangeEnd(2100, 1, 11);
+        picker.setRangeStart(1900, 1, 1);
+        picker.setSelectedItem(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        picker.setResetWhileWheel(false);
+        picker.setOnDatePickListener(new cn.qqtheme.framework.picker.DatePicker.OnYearMonthDayPickListener() {
+            @Override
+            public void onDatePicked(String year, String month, String day) {
+                showToast(year + "-" + month + "-" + day);
+            }
+        });
+        picker.setOnWheelListener(new cn.qqtheme.framework.picker.DatePicker.OnWheelListener() {
+            @Override
+            public void onYearWheeled(int index, String year) {
+                tvStartTime.setText(year + "-" + picker.getSelectedMonth() + "-" + picker.getSelectedDay());
+            }
 
+            @Override
+            public void onMonthWheeled(int index, String month) {
+                tvStartTime.setText(picker.getSelectedYear() + "-" + month + "-" + picker.getSelectedDay());
+            }
+
+            @Override
+            public void onDayWheeled(int index, String day) {
+                tvStartTime.setText(picker.getSelectedYear() + "-" + picker.getSelectedMonth() + "-" + day);
+            }
+        });
+        picker.show();
     }
 
-    private void showTimeEnd(){
+    /**
+     * 结束
+     */
+    public void showTimeEndDay() {
+        final cn.qqtheme.framework.picker.DatePicker picker = new cn.qqtheme.framework.picker.DatePicker(getActivity());
+        Calendar c = Calendar.getInstance();
+        picker.setCanceledOnTouchOutside(true);
+        picker.setUseWeight(true);
+        picker.setTopPadding(ConvertUtils.toPx(getContext(), 10));
+        picker.setRangeEnd(2100, 1, 11);
+        picker.setRangeStart(1900, 1, 1);
+        picker.setSelectedItem(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        picker.setResetWhileWheel(false);
+        picker.setOnDatePickListener(new cn.qqtheme.framework.picker.DatePicker.OnYearMonthDayPickListener() {
+            @Override
+            public void onDatePicked(String year, String month, String day) {
+                showToast(year + "-" + month + "-" + day);
+            }
+        });
+        picker.setOnWheelListener(new cn.qqtheme.framework.picker.DatePicker.OnWheelListener() {
+            @Override
+            public void onYearWheeled(int index, String year) {
+                tvEndTime.setText(year + "-" + picker.getSelectedMonth() + "-" + picker.getSelectedDay());
+            }
 
+            @Override
+            public void onMonthWheeled(int index, String month) {
+                tvEndTime.setText(picker.getSelectedYear() + "-" + month + "-" + picker.getSelectedDay());
+            }
+
+            @Override
+            public void onDayWheeled(int index, String day) {
+                tvEndTime.setText(picker.getSelectedYear() + "-" + picker.getSelectedMonth() + "-" + day);
+            }
+        });
+        picker.show();
     }
-
-
 
     @Override
     public void onDestroyView() {
@@ -141,15 +224,15 @@ public class TimesFragment extends BaseFragment implements ITimeCallback {
 
     @Override
     public void onQuerySuccess(List<TimeBean> bean) {
-        if (null!=bean&&bean.size()>0){
-            if (bean.size()<pageSize){
+        if (null != bean && bean.size() > 0) {
+            if (bean.size() < pageSize) {
                 refreshlayout.setEnableLoadmore(false);
-            }else {
+            } else {
                 refreshlayout.setEnableLoadmore(true);
             }
             list.addAll(bean);
             adapter.notifyDataSetChanged();
-        }else {
+        } else {
             refreshlayout.setEnableLoadmore(false);
         }
     }

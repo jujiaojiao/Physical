@@ -43,6 +43,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.DatePicker;
+import cn.qqtheme.framework.util.ConvertUtils;
 
 /**
  * @author jjj
@@ -255,10 +257,10 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
                 selectSex(2);
                 break;
             case R.id.ll_out:
-                showDataOutPicker();
+                showOutDay();
                 break;
             case R.id.ll_birthday:
-                showDatabirthPicker();
+                showBirthDay();
                 break;
 
         }
@@ -372,75 +374,77 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
     /**
      * 生日
      */
-    private void showDatabirthPicker() {
-        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date(System.currentTimeMillis());
+    public void showBirthDay() {
+        final DatePicker picker = new DatePicker(this);
         Calendar c = Calendar.getInstance();
-        Calendar startDate = Calendar.getInstance();
-        //当开始时间已选中时，结束时间不能早于开始时间
-        if (StringUtil.isEmpty(tvBirthday.getText().toString())) {
-//            startDate.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar
-//                    .DAY_OF_MONTH));
-            startDate.set(1970, 01, 01);
-        } else {
-            //设置开始年份
-            String[] times = tvBirthday.getText().toString().split("-");
-            Integer startYear = Integer.valueOf(times[0]);
-            Integer startMonth = Integer.valueOf(times[1]) - 1;
-            Integer startDay = Integer.valueOf(times[2]);
-            startDate.set(startYear, startMonth, startDay);
-        }
-        Calendar endDate = Calendar.getInstance();
-        //设置结束年份
-        endDate.set(2030, 0, 1);
-        //设置结束年份
-        //时间选择器
-        TimePickerView pvTime = new TimePickerBuilder(AddMemberActivity.this, new OnTimeSelectListener() {
+        picker.setCanceledOnTouchOutside(true);
+        picker.setUseWeight(true);
+        picker.setTopPadding(ConvertUtils.toPx(this, 10));
+        picker.setRangeEnd(2100, 1, 11);
+        picker.setRangeStart(1900,1,1);
+        picker.setSelectedItem(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        picker.setResetWhileWheel(false);
+        picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
-            public void onTimeSelect(Date date, View v) {
-                tvBirthday.setText(format.format(date));
+            public void onDatePicked(String year, String month, String day) {
+                showToast(year + "-" + month + "-" + day);
             }
-        }).setRangDate(startDate, endDate).build();
-        pvTime.show();
+        });
+        picker.setOnWheelListener(new DatePicker.OnWheelListener() {
+            @Override
+            public void onYearWheeled(int index, String year) {
+                tvBirthday.setText(year + "-" + picker.getSelectedMonth() + "-" + picker.getSelectedDay());
+            }
 
+            @Override
+            public void onMonthWheeled(int index, String month) {
+                tvBirthday.setText(picker.getSelectedYear() + "-" + month + "-" + picker.getSelectedDay());
+            }
+
+            @Override
+            public void onDayWheeled(int index, String day) {
+                tvBirthday.setText(picker.getSelectedYear() + "-" + picker.getSelectedMonth() + "-" + day);
+            }
+        });
+        picker.show();
     }
-
     /**
      * 出诊
      */
-    private void showDataOutPicker() {
-        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date(System.currentTimeMillis());
+    public void showOutDay() {
+        final DatePicker picker = new DatePicker(this);
         Calendar c = Calendar.getInstance();
-        Calendar startDate = Calendar.getInstance();
-        //当开始时间已选中时，结束时间不能早于开始时间
-        if (StringUtil.isEmpty(tvOut.getText().toString())) {
-            startDate.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar
-                    .DAY_OF_MONTH));
-//            startDate.set(1970, 01, 01);
-        } else {
-            //设置开始年份
-            String[] times = tvOut.getText().toString().split("-");
-            Integer startYear = Integer.valueOf(times[0]);
-            Integer startMonth = Integer.valueOf(times[1]) - 1;
-            Integer startDay = Integer.valueOf(times[2]);
-            startDate.set(startYear, startMonth, startDay);
-        }
-        Calendar endDate = Calendar.getInstance();
-        //设置结束年份
-        endDate.set(2030, 0, 1);
-        //设置结束年份
-        //时间选择器
-        TimePickerView pvTime = new TimePickerBuilder(AddMemberActivity.this, new OnTimeSelectListener() {
+        picker.setCanceledOnTouchOutside(true);
+        picker.setUseWeight(true);
+        picker.setTopPadding(ConvertUtils.toPx(this, 10));
+        picker.setRangeEnd(2100, 1, 11);
+        picker.setRangeStart(1900,1,1);
+        picker.setSelectedItem(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        picker.setResetWhileWheel(false);
+        picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
-            public void onTimeSelect(Date date, View v) {
-                tvOut.setText(format.format(date));
+            public void onDatePicked(String year, String month, String day) {
+                showToast(year + "-" + month + "-" + day);
             }
-        }).setRangDate(startDate, endDate).build();
-        pvTime.show();
+        });
+        picker.setOnWheelListener(new DatePicker.OnWheelListener() {
+            @Override
+            public void onYearWheeled(int index, String year) {
+                tvOut.setText(year + "-" + picker.getSelectedMonth() + "-" + picker.getSelectedDay());
+            }
 
+            @Override
+            public void onMonthWheeled(int index, String month) {
+                tvOut.setText(picker.getSelectedYear() + "-" + month + "-" + picker.getSelectedDay());
+            }
+
+            @Override
+            public void onDayWheeled(int index, String day) {
+                tvOut.setText(picker.getSelectedYear() + "-" + picker.getSelectedMonth() + "-" + day);
+            }
+        });
+        picker.show();
     }
-
 
     /**
      * 新增会员

@@ -23,7 +23,7 @@
             android:layout_gravity="center_vertical"
             android:id="@+id/iv_switch"
             android:layout_marginRight="@dimen/x63"
-            android:src="@mipmap/button_on"
+            android:src="@mipmap/button_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
