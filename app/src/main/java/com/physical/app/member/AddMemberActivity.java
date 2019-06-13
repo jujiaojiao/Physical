@@ -1,10 +1,12 @@
 package com.physical.app.member;
 
+import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -379,7 +381,14 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
         Calendar c = Calendar.getInstance();
         picker.setCanceledOnTouchOutside(true);
         picker.setUseWeight(true);
-        picker.setTopPadding(ConvertUtils.toPx(this, 10));
+        picker.setTextSize(26);
+        picker.setCancelTextSize(26);
+        picker.setSubmitTextSize(26);
+        picker.setWidth(450);
+        picker.setLabel("","","");
+        picker.setTextPadding(ConvertUtils.toPx(this, 20));//加宽显示项
+        picker.setGravity(Gravity.CENTER);//弹框居中
+        picker.setTopPadding(ConvertUtils.toPx(this, 20));
         picker.setRangeEnd(2100, 1, 11);
         picker.setRangeStart(1900,1,1);
         picker.setSelectedItem(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
@@ -416,7 +425,14 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
         Calendar c = Calendar.getInstance();
         picker.setCanceledOnTouchOutside(true);
         picker.setUseWeight(true);
-        picker.setTopPadding(ConvertUtils.toPx(this, 10));
+        picker.setTextSize(26);
+        picker.setCancelTextSize(26);
+        picker.setSubmitTextSize(26);
+        picker.setWidth(450);
+        picker.setLabel("","","");
+        picker.setTextPadding(ConvertUtils.toPx(this, 20));//加宽显示项
+        picker.setGravity(Gravity.CENTER);//弹框居中
+        picker.setTopPadding(ConvertUtils.toPx(this, 20));
         picker.setRangeEnd(2100, 1, 11);
         picker.setRangeStart(1900,1,1);
         picker.setSelectedItem(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));

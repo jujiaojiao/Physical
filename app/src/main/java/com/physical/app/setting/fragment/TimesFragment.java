@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,8 @@ public class TimesFragment extends BaseFragment implements ITimeCallback {
     TextView tvStartTime;
     @Bind(R.id.tv_end_time)
     TextView tvEndTime;
+    @Bind(R.id.tv_confirm)
+    TextView tv_confirm;
     @Bind(R.id.lv_data)
     ListView lvData;
     @Bind(R.id.refreshlayout)
@@ -109,7 +112,7 @@ public class TimesFragment extends BaseFragment implements ITimeCallback {
     }
 
 
-    @OnClick({R.id.tv_end_time,R.id.tv_start_time})
+    @OnClick({R.id.tv_end_time,R.id.tv_start_time,R.id.tv_confirm})
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.tv_end_time:
@@ -117,6 +120,9 @@ public class TimesFragment extends BaseFragment implements ITimeCallback {
                 break;
             case R.id.tv_start_time:
                 showTimeStartDay();
+                break;
+            case R.id.tv_confirm:
+                request();
                 break;
         }
     }
@@ -148,6 +154,13 @@ public class TimesFragment extends BaseFragment implements ITimeCallback {
         Calendar c = Calendar.getInstance();
         picker.setCanceledOnTouchOutside(true);
         picker.setUseWeight(true);
+        picker.setTextSize(26);
+        picker.setCancelTextSize(26);
+        picker.setSubmitTextSize(26);
+        picker.setWidth(450);
+        picker.setLabel("","","");
+        picker.setTextPadding(ConvertUtils.toPx(getContext(), 20));//加宽显示项
+        picker.setGravity(Gravity.CENTER);//弹框居中
         picker.setTopPadding(ConvertUtils.toPx(getContext(), 10));
         picker.setRangeEnd(2100, 1, 11);
         picker.setRangeStart(1900, 1, 1);
@@ -186,6 +199,13 @@ public class TimesFragment extends BaseFragment implements ITimeCallback {
         Calendar c = Calendar.getInstance();
         picker.setCanceledOnTouchOutside(true);
         picker.setUseWeight(true);
+        picker.setTextSize(26);
+        picker.setCancelTextSize(26);
+        picker.setSubmitTextSize(26);
+        picker.setWidth(450);
+        picker.setLabel("","","");
+        picker.setTextPadding(ConvertUtils.toPx(getContext(), 20));//加宽显示项
+        picker.setGravity(Gravity.CENTER);//弹框居中
         picker.setTopPadding(ConvertUtils.toPx(getContext(), 10));
         picker.setRangeEnd(2100, 1, 11);
         picker.setRangeStart(1900, 1, 1);

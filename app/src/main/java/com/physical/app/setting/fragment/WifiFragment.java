@@ -27,12 +27,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.jflavio1.wificonnector.WifiConnector;
-import com.jflavio1.wificonnector.interfaces.ConnectionResultListener;
-import com.jflavio1.wificonnector.interfaces.RemoveWifiListener;
-import com.jflavio1.wificonnector.interfaces.ShowWifiListener;
-import com.jflavio1.wificonnector.interfaces.WifiConnectorModel;
-import com.jflavio1.wificonnector.interfaces.WifiStateListener;
 import com.physical.app.R;
 import com.physical.app.adapter.WifiAdapter;
 import com.physical.app.common.base.BaseFragment;
