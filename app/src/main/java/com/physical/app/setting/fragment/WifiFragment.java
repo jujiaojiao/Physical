@@ -1,6 +1,7 @@
 package com.physical.app.setting.fragment;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -67,7 +68,7 @@ public class WifiFragment extends BaseFragment {
 
     private boolean ischeck = false;
     private WifiUtils instance;
-
+    private ProgressDialog progressDialog;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -144,11 +145,13 @@ public class WifiFragment extends BaseFragment {
         inputPwdDialog = new InputPwdDialog(mContext, new InputPwdDialog.Callback() {
             @Override
             public void onConfirm(String code) {
+                inputPwdDialog.cancel();
+                buildProgressDialog();
                 new WifiConnector(getContext()).connectWifi(data.SSID, code, WifiUtil.TYPE_WPA, new WifiConnector.WifiConnectCallBack() {
                     @Override
                     public void onConnectSucess() {
+                        progressDialog.dismiss();
                         showToast("连接成功！！");
-                        inputPwdDialog.cancel();
                     }
 
                     @Override
@@ -168,9 +171,19 @@ public class WifiFragment extends BaseFragment {
 
     }
 
+    public void buildProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(mContext);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        }
+        progressDialog.setMessage("连接中");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+    }
+
+
 
     @Override
-
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
