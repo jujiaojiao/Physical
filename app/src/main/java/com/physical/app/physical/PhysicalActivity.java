@@ -24,6 +24,7 @@ import com.physical.app.bean.MemberVo;
 import com.physical.app.bean.SeedlingBean;
 import com.physical.app.callback.IPhysicalCallback;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.utils.NetworkUtils;
 import com.physical.app.common.utils.StringUtil;
 import com.physical.app.common.widget.CommentDialog;
 import com.physical.app.member.MemberManageActivity;
@@ -296,8 +297,9 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
                 start();
                 break;
             case R.id.iv_off:
-                endTime = getCurrentTime();
-                physicalPresenter.finish(""+id, endTime, getUserId(),getWifiMac());
+                integer = 1000;
+                Message message1 = handler.obtainMessage(1);     // Message
+                handler.sendMessage(message1);
 //                showCommentDialog();
                 break;
         }
@@ -326,8 +328,14 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
         memberCaseVo.memberName = member.name;
         memberCaseVo.medicineInfoList = seedling;
         memberCaseVo.machineCode = getWifiMac();
-        Log.i("jjj", "start: "+toJson(memberCaseVo));
-        physicalPresenter.save(toJson(memberCaseVo), getUserId());
+        Log.i("jjj", "start: " + toJson(memberCaseVo));
+        if (NetworkUtils.isNetworkAvailable(this)) {
+            physicalPresenter.save(toJson(memberCaseVo), getUserId());
+        } else {
+            integer = Integer.valueOf(totalTime) * 60 * 1000;
+            Message message = handler.obtainMessage(1);     // Message
+            handler.sendMessageDelayed(message, 1000);
+        }
     }
 
     @Override
@@ -341,7 +349,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     }
 
 
-    private String getCurrentTime(){
+    private String getCurrentTime() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");// HH:mm:ss
 //获取当前时间
         Date date = new Date(System.currentTimeMillis());
@@ -355,7 +363,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     public void onSaveSuccess(AddPhysicalBean bean) {
         id = bean.id;
         beginTime = getCurrentTime();
-        physicalPresenter.start(""+id, beginTime, getUserId(),getWifiMac());
+        physicalPresenter.start("" + id, beginTime, getUserId(), getWifiMac());
     }
 
     /**
@@ -364,9 +372,6 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     @Override
     public void onFinishSuccess() {
         showToast("结束理疗");
-        integer = 1000;
-        Message message1 = handler.obtainMessage(1);     // Message
-        handler.sendMessage(message1);
         showCommentDialog();
     }
 
@@ -377,7 +382,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     public void onStartSuccess() {
         //TODO 开始指令
         showToast("开始理疗");
-        integer = Integer.valueOf(totalTime)*60*1000;
+        integer = Integer.valueOf(totalTime) * 60 * 1000;
         Message message = handler.obtainMessage(1);     // Message
         handler.sendMessageDelayed(message, 1000);
     }
@@ -397,18 +402,23 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
             switch (msg.what) {
                 case 1:
                     integer = integer - 1000;
-                    tv_time.setText("" +formatTime(integer));
+                    tv_time.setText("" + formatTime(integer));
                     if (integer > 0) {
                         Message message = handler.obtainMessage(1);
                         handler.sendMessageDelayed(message, 1000);
                     } else {
                         tv_time.setText("00:00");
+                        endTime = getCurrentTime();
+                        if (NetworkUtils.isNetworkAvailable(PhysicalActivity.this)){
+                            physicalPresenter.finish("" + id, endTime, getUserId(), getWifiMac());
+                        }
                     }
                     break;
             }
             super.handleMessage(msg);
         }
     };
+
     /**
      * 将毫秒转化为 分钟：秒 的格式
      *
@@ -426,7 +436,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
             } else {
                 return "0" + minute + ":" + second;
             }
-        }else {
+        } else {
             if (second < 10) {
                 return minute + ":" + "0" + second;
             } else {
@@ -457,7 +467,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
 
                         break;
                 }
-                physicalPresenter.comment(""+id,""+commentType,param,getUserId());
+                physicalPresenter.comment("" + id, "" + commentType, param, getUserId());
                 commentDialog.dismiss();
             }
         });

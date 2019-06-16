@@ -28,6 +28,7 @@ import java.lang.reflect.Method;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by jjj
@@ -78,14 +79,17 @@ public class RecoverFragment extends BaseFragment {
             }
         });
 
-        tvReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-            }
-        });
     }
 
+
+    @OnClick({R.id.tv_reset})
+    public void onClick(View view){
+        switch (view.getId()) {
+            case R.id.tv_reset:
+                showDialog();
+                break;
+        }
+    }
 
 
     private void showDialog(){
@@ -101,11 +105,12 @@ public class RecoverFragment extends BaseFragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                AppData.getInstance().setUser(null);
                 getActivity().finish();
                 LoginActivity.start(getContext());
             }
         });
-        comDialog.dismiss();
+        comDialog.show();
     }
 
 

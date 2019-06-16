@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.transition.Slide;
@@ -19,21 +20,28 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.physical.app.bean.RecommendBean;
+import com.physical.app.bean.SeedlingBean;
+import com.physical.app.callback.ISeedlingCallback;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.utils.NetworkUtils;
+import com.physical.app.common.utils.Preferences;
 import com.physical.app.common.widget.NetDialog;
 import com.physical.app.common.widget.SystemSetDialog;
 import com.physical.app.member.MemberManageActivity;
 import com.physical.app.music.LocalMucicActivity;
 import com.physical.app.physical.PhysicalActivity;
+import com.physical.app.presenter.SeedlingPresenter;
 import com.physical.app.setting.SettingActivity;
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements ISeedlingCallback {
 
     @Bind(R.id.iv_head)
     ImageView ivHead;//头像
@@ -58,6 +66,7 @@ public class MainActivity extends BaseActivity {
 
     private int door = 0;//0 关  1开
     private NetDialog netDialog;
+    private SeedlingPresenter seedlingPresenter;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -73,6 +82,19 @@ public class MainActivity extends BaseActivity {
         getWindow().setEnterTransition(new Slide().setDuration(2000));
         getWindow().setExitTransition(new Slide().setDuration(2000));
         Log.i("jjj", "onCreate: ");
+        if (null!=getUser()){
+            tvUsername.setText(getUser().userName);
+        }
+        initData();
+    }
+
+
+    private void initData() {
+        if (NetworkUtils.isNetworkAvailable(this)) {
+            seedlingPresenter = new SeedlingPresenter(this, this);
+            Log.i("jjj", "initView: " + getWifiMac());
+            seedlingPresenter.seedling(getUserId());
+        }
     }
 
 
@@ -88,7 +110,7 @@ public class MainActivity extends BaseActivity {
                 PhysicalActivity.start(this);
                 break;
             case R.id.ll_vip:
-                MemberManageActivity.start(this,"");
+                MemberManageActivity.start(this, "");
                 break;
             case R.id.ll_set:
                 SettingActivity.start(this);
@@ -99,9 +121,9 @@ public class MainActivity extends BaseActivity {
 //                intent.setClassName("com.demo.surfaceviewdemo", "com.demo.surfaceviewdemo.JumpTestActivity");
 //                startActivity(intent);
                 if (checkPackInfo("com.tencent.qqmusic")) {
-                    openPackage(this,"com.tencent.qqmusic");
+                    openPackage(this, "com.tencent.qqmusic");
                 } else {
-                    Intent intent= new Intent();
+                    Intent intent = new Intent();
                     intent.setAction("android.intent.action.VIEW");
                     Uri content_url = Uri.parse("https://sj.qq.com/myapp/detail.htm?apkName=com.tencent.qqmusic");
                     intent.setData(content_url);
@@ -109,16 +131,16 @@ public class MainActivity extends BaseActivity {
                 }
                 break;
             case R.id.iv_menu://菜单
-//                showSystemDilaog();
-                showNetDilaog();
+                showSystemDilaog();
+//                showNetDilaog();
                 break;
             case R.id.iv_switch://门磁开关
-                if (door==0){
+                if (door == 0) {
 //                    ivSwitch.setImageResource();//开的图标
-                    door=1;
-                }else{
+                    door = 1;
+                } else {
 //                    ivSwitch.setImageResource();//关的图标
-                    door=0;
+                    door = 0;
                 }
                 break;
         }
@@ -139,7 +161,7 @@ public class MainActivity extends BaseActivity {
         systemSetDialog.show();
     }
 
-    private void showNetDilaog(){
+    private void showNetDilaog() {
         netDialog = new NetDialog(this, new NetDialog.Callback() {
             @Override
             public void onConfirm(String code) {
@@ -171,14 +193,14 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    public static Intent getAppOpenIntentByPackageName(Context context,String packageName){
+    public static Intent getAppOpenIntentByPackageName(Context context, String packageName) {
         //Activity完整名
         String mainAct = null;
         //根据包名寻找
         PackageManager pkgMag = context.getPackageManager();
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        intent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_NEW_TASK);
 
         @SuppressLint("WrongConstant") List<ResolveInfo> list = pkgMag.queryIntentActivities(intent,
                 PackageManager.GET_ACTIVITIES);
@@ -221,5 +243,20 @@ public class MainActivity extends BaseActivity {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 幼苗
+     *
+     * @param beans
+     */
+    @Override
+    public void onSeedlingSuccess(List<SeedlingBean> beans) {
+        Preferences.putList(mContext, "seedling", beans);
+    }
+
+    @Override
+    public void onRecipeSuccess(List<RecommendBean> beans) {
+
     }
 }

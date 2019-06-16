@@ -33,6 +33,13 @@
             </intent-filter>
         </activity>
 
+        <!--wifi-->
+        <activity
+            android:name=".setting.WifiActivity"
+            android:configChanges="keyboardHidden|orientation|fontScale|fontScale"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+
         <!--首页-->
         <activity
             android:name=".MainActivity"

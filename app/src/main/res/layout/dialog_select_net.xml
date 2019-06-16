@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:background="@mipmap/bg_set"
+        android:layout_width="@dimen/x540"
+        android:layout_height="@dimen/x340"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_title"
+            android:gravity="center"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x60" />
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/tvDesp"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingLeft="@dimen/x30"
+            android:paddingRight="@dimen/x30"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="@dimen/x28" />
+
+        <LinearLayout
+            android:layout_marginBottom="@dimen/x27"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginLeft="@dimen/x69"
+                android:id="@+id/tv_wifi"
+                android:text="选择WiFi"
+                android:gravity="center"
+                android:background="@mipmap/button_blue"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x26"
+                android:layout_width="@dimen/x145"
+                android:layout_height="@dimen/x42" />
+            <TextView
+                android:layout_marginLeft="@dimen/x116"
+                android:id="@+id/tv_no_net"
+                android:text="断网模式"
+                android:background="@mipmap/button_orange"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x26"
+                android:layout_width="@dimen/x145"
+                android:layout_height="@dimen/x42"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

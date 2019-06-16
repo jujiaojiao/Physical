@@ -22,6 +22,8 @@ import com.physical.app.bean.RecommendBean;
 import com.physical.app.bean.SeedlingBean;
 import com.physical.app.callback.ISeedlingCallback;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.utils.NetworkUtils;
+import com.physical.app.common.utils.Preferences;
 import com.physical.app.common.widget.RecipeDialog;
 import com.physical.app.presenter.SeedlingPresenter;
 
@@ -60,14 +62,14 @@ public class SelectSeedlingActivity extends BaseActivity implements ISeedlingCal
     LinearLayout llBottome;
     private RecommendAdapter recommendAdapter;
     private ArrayList<RecommendBean> recommends;
-    private ArrayList<SeedlingBean> seedlings;
+    private List<SeedlingBean> seedlings;
     private SelectSeedlingAdapter selectSeedlingAdapter;
     private RecipeDialog recipeDialog;
     private SeedlingPresenter seedlingPresenter;
 
     public static void start(Activity context) {
         Intent intent = new Intent(context, SelectSeedlingActivity.class);
-        context.startActivityForResult(intent,101);
+        context.startActivityForResult(intent, 101);
     }
 
     @Override
@@ -90,10 +92,24 @@ public class SelectSeedlingActivity extends BaseActivity implements ISeedlingCal
         gvSeedling.setAdapter(selectSeedlingAdapter);
 
         seedlingPresenter = new SeedlingPresenter(this, this);
-        Log.i("jjj", "initView: "+getWifiMac());
-        seedlingPresenter.seedling(getUserId());
-        seedlingPresenter.queryRecipeList("",getUserId());
+        initData();
+    }
 
+    private void initData() {
+        if (NetworkUtils.isNetworkAvailable(this)) {
+            Log.i("jjj", "initView: " + getWifiMac());
+            seedlingPresenter.seedling(getUserId());
+            seedlingPresenter.queryRecipeList("", getUserId());
+        } else {
+            List<SeedlingBean> seedling = Preferences.getList(mContext, "seedling");
+            if (null == seedling || seedling.size() == 0) {
+                showToast("暂无幼苗信息");
+                return;
+            } else {
+                seedlings.addAll(seedling);
+                selectSeedlingAdapter.notifyDataSetChanged();
+            }
+        }
     }
 
 
@@ -112,8 +128,8 @@ public class SelectSeedlingActivity extends BaseActivity implements ISeedlingCal
                 RecommendBean recommendBean = recommends.get(position);
                 for (SeedlingBean seedling : seedlings) {
                     for (RecommendBean.MedicineInfoListBean medicineInfoListBean : recommendBean.medicineInfoList) {
-                        if (seedling.name.equals(medicineInfoListBean.name)){
-                            seedling.num =""+medicineInfoListBean.num;
+                        if (seedling.name.equals(medicineInfoListBean.name)) {
+                            seedling.num = "" + medicineInfoListBean.num;
                             selectSeedlingAdapter.selOrRemoveItem(seedling);
                         }
                     }
@@ -142,19 +158,18 @@ public class SelectSeedlingActivity extends BaseActivity implements ISeedlingCal
     private void showRecipeDialog() {
         ArrayList<RecommendBean> recipe = recommendAdapter.getSelectList();
         final ArrayList<SeedlingBean> seedling = selectSeedlingAdapter.getSelectList();
-        recipeDialog = new RecipeDialog(this,recipe,seedling, new RecipeDialog.Callback() {
+        recipeDialog = new RecipeDialog(this, recipe, seedling, new RecipeDialog.Callback() {
             @Override
             public void onConfirm() {
                 recipeDialog.dismiss();
                 Intent intent = new Intent();
                 intent.putExtra("seedling", (Serializable) seedling);
-                SelectSeedlingActivity.this.setResult(RESULT_OK,intent);
+                SelectSeedlingActivity.this.setResult(RESULT_OK, intent);
                 SelectSeedlingActivity.this.finish();
             }
         });
         recipeDialog.show();
     }
-
 
 
     @Override

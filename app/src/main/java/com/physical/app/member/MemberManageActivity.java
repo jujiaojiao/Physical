@@ -21,6 +21,7 @@ import com.physical.app.bean.MemberVo;
 import com.physical.app.bean.SeedlingBean;
 import com.physical.app.callback.IMemberManageCallback;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.utils.NetworkUtils;
 import com.physical.app.common.utils.StringUtil;
 import com.physical.app.common.widget.RechargeDialog;
 import com.physical.app.physical.SelectSeedlingActivity;
@@ -187,7 +188,11 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
     @Override
     protected void onResume() {
         super.onResume();
-        refresh();
+        if (NetworkUtils.isNetworkAvailable(this)){
+            refresh();
+        }else {
+            showToast("无网络连接");
+        }
     }
 
     private void addListener() {
@@ -298,6 +303,12 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
             MemberManageActivity.this.setResult(RESULT_OK,intent);
             MemberManageActivity.this.finish();
 
+        }
+        if (requestCode==102&&resultCode==RESULT_OK&&null!=data){
+            MemberVo membervo = ((MemberVo) data.getSerializableExtra("membervo"));
+            selectData = membervo;
+            list.add(membervo);
+            adapter.notifyDataSetChanged();
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.physical.app.member;
 
+import android.app.Activity;
 import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import com.physical.app.bean.MemberManageBean;
 import com.physical.app.bean.MemberVo;
 import com.physical.app.callback.IAddMemberCallback;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.utils.NetworkUtils;
 import com.physical.app.common.utils.StringUtil;
 import com.physical.app.common.widget.ComDialog;
 import com.physical.app.common.widget.RechargeDialog;
@@ -118,11 +120,12 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
     private String out;//出诊日期
     private MemberVo data;
     private String id;
+    private boolean hasNet  = false;
 
-    public static void start(Context context, MemberVo data) {
+    public static void start(Activity context, MemberVo data) {
         Intent intent = new Intent(context, AddMemberActivity.class);
         intent.putExtra("data", data);
-        context.startActivity(intent);
+        context.startActivityForResult(intent,102);
     }
 
     @Override
@@ -142,11 +145,15 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
         gvData.setAdapter(adapter);
 
         addMemberPresenter = new AddMemberPresenter(this, this);
-        addMemberPresenter.disease(getUserId());
-
-
-
-
+        initData();
+    }
+    private void initData(){
+        if (NetworkUtils.isNetworkAvailable(this)) {
+            addMemberPresenter.disease(getUserId());
+            hasNet = true;
+        }else{
+            hasNet = false;
+        }
     }
 
     private void addListener() {
@@ -334,7 +341,15 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
         memberVo.vipTimes = vipTimes;
         memberVo.medicalHistoryList =  adapter.getSelectList();
         Log.i("jjj", "confirm: " + toJson(memberVo));
-        addMemberPresenter.save(toJson(memberVo), getUserId());
+
+        if (hasNet){//有网
+            addMemberPresenter.save(toJson(memberVo), getUserId());
+        }else{//无网
+            Intent intent = new Intent();
+            intent.putExtra("membervo",memberVo);
+            setResult(RESULT_OK,intent);
+            this.finish();
+        }
 
     }
 

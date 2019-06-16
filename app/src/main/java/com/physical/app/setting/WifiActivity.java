@@ -1,30 +1,32 @@
-package com.physical.app.setting.fragment;
+package com.physical.app.setting;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.physical.app.LoginActivity;
+import com.physical.app.MainActivity;
 import com.physical.app.R;
 import com.physical.app.adapter.WifiAdapter;
-import com.physical.app.common.base.BaseFragment;
+import com.physical.app.common.base.BaseActivity;
 import com.physical.app.common.utils.ToastUtil;
 import com.physical.app.common.utils.WifiUtils;
 import com.physical.app.common.widget.InputPwdDialog;
 import com.tj24.easywifi.wifi.WifiConnector;
 import com.tj24.easywifi.wifi.WifiUtil;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,19 +36,24 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by jjj
- * 时间:  2019/5/20
- * 邮箱: jujiaojiao@gemdale.com
- * 描述: WIFI
+ * @author jjj
+ * 版本：1.0
+ * 创建日期：2019/6/16
+ * 描述：
  */
-
-public class WifiFragment extends BaseFragment {
-
+public class WifiActivity extends BaseActivity {
+    @Bind(R.id.ivBack)
+    ImageView ivBack;
+    @Bind(R.id.tvTitle)
+    TextView tvTitle;
+    @Bind(R.id.iv_title)
+    ImageView ivTitle;
+    @Bind(R.id.rlTop)
+    RelativeLayout rlTop;
     @Bind(R.id.iv_switch)
     ImageView ivSwitch;
     @Bind(R.id.lv_data)
     ListView lvData;
-
     private WifiAdapter adapter;
     private List<ScanResult> datas;
     private InputPwdDialog inputPwdDialog;
@@ -54,23 +61,20 @@ public class WifiFragment extends BaseFragment {
     private boolean ischeck = false;
     private WifiUtils instance;
     private ProgressDialog progressDialog;
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_wifi, null);
-        instance = WifiUtils.getInstance(getContext());
-        ButterKnife.bind(this, view);
-        return view;
+    public static void start(Context context) {
+        Intent intent = new Intent(context, WifiActivity.class);
+        context.startActivity(intent);
     }
 
-
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_wifi);
+        instance = WifiUtils.getInstance(this);
+        ButterKnife.bind(this);
         initData();
         addListener();
     }
-
 
     private void addListener() {
         lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,9 +82,11 @@ public class WifiFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ScanResult data = datas.get(position);
                 if (data.capabilities.contains("WEP") || data.capabilities.contains("PSK") || data.capabilities.contains("EAP")) {
-                    if (instance.isConnected(data)){
+                    if (instance.isConnected(data)) {
                         ToastUtil.show("此WIFI已连接！");
-                    }else {
+                        MainActivity.start(WifiActivity.this);
+
+                    } else {
                         showInputPwdDialog(data);
                     }
                 } else {
@@ -92,7 +98,7 @@ public class WifiFragment extends BaseFragment {
 
 
     private void initData() {
-        datas  = new ArrayList<ScanResult>();
+        datas = new ArrayList<ScanResult>();
         adapter = new WifiAdapter(mContext, datas);
         lvData.setAdapter(adapter);
 
@@ -109,11 +115,11 @@ public class WifiFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.iv_switch:
                 if (!ischeck) {
+                    handler.sendEmptyMessageDelayed(100, 1000);
                     ivSwitch.setImageResource(R.mipmap.button_on);
                     ischeck = true;
                     datas.clear();
                     WifiUtils.getInstance(mContext).openWifi();
-                    handler.sendEmptyMessageDelayed(100,3000);
                     lvData.setVisibility(View.VISIBLE);
                 } else {
                     ivSwitch.setImageResource(R.mipmap.button_off);
@@ -132,12 +138,13 @@ public class WifiFragment extends BaseFragment {
             public void onConfirm(String code) {
                 inputPwdDialog.cancel();
                 buildProgressDialog();
-                Log.i("dyy",code+"===code==="+data.SSID+"===data");
-                new WifiConnector(getContext()).connectWifi(data.SSID, code, WifiUtil.TYPE_WPA, new WifiConnector.WifiConnectCallBack() {
+                Log.i("dyy", code + "===code===" + data.SSID + "===data");
+                new WifiConnector(WifiActivity.this).connectWifi(data.SSID, code, WifiUtil.TYPE_WPA, new WifiConnector.WifiConnectCallBack() {
                     @Override
                     public void onConnectSucess() {
                         progressDialog.dismiss();
                         showToast("连接成功！！");
+                        MainActivity.start(WifiActivity.this);
                     }
 
                     @Override
@@ -168,15 +175,6 @@ public class WifiFragment extends BaseFragment {
         progressDialog.show();
     }
 
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
@@ -184,8 +182,6 @@ public class WifiFragment extends BaseFragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 100:
-                    List<ScanResult> scanResults = WifiUtils.getInstance(mContext).getScanResults();
-                    Log.i("jjj", "handleMessage: "+scanResults.size());
                     datas.addAll(WifiUtils.getInstance(mContext).getScanResults());
                     adapter.notifyDataSetChanged();
                     break;
