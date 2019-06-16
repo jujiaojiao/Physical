@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.physical.app.R;
 import com.physical.app.callback.IUpdatePwdCallback;
 import com.physical.app.common.base.BaseFragment;
+import com.physical.app.common.utils.WifiUtils;
 import com.physical.app.common.widget.ChangePwdDialog;
 import com.physical.app.presenter.UpdatePwdPresenter;
 
@@ -65,17 +66,16 @@ public class MangeFragment extends BaseFragment implements IUpdatePwdCallback {
     private void initData() {
         tvName.setText(getUser().userName);
         tvPhone.setText(getUser().mobile);
-
         updatePwdPresenter = new UpdatePwdPresenter(mContext, this);
     }
 
 
+    private void showChangePwdDailog() {
 
-    private void showChangePwdDailog(){
-        changePwdDialog = new ChangePwdDialog(mContext,getUser().mobile, new ChangePwdDialog.Callback() {
+        changePwdDialog = new ChangePwdDialog(mContext, getUser().mobile, new ChangePwdDialog.Callback() {
             @Override
             public void onConfirm(String pwd, String code) {
-                updatePwdPresenter.updatePwd(pwd,getUserId(),code,getUserId());
+                updatePwdPresenter.updatePwd(pwd, getUserId(), code, getUserId());
                 changePwdDialog.dismiss();
             }
 
@@ -95,6 +95,7 @@ public class MangeFragment extends BaseFragment implements IUpdatePwdCallback {
 
     /**
      * 更新密码回调
+     *
      * @param bean
      */
     @Override

@@ -93,4 +93,7 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
+    implementation 'com.github.tangjiang24:WifiConnector:2.0'
+
+
 }

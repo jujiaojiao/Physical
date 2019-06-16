@@ -67,7 +67,6 @@ public class InputPwdDialog extends Dialog implements View.OnClickListener {
                 callback.onCancel();
                 break;
             case R.id.tv_confirm:
-
                 String code = etCode.getText().toString();
                 if (StringUtil.isEmpty(code)) {
                     ToastUtil.show("请输入密码");

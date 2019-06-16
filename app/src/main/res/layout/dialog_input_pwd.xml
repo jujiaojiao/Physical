@@ -42,6 +42,7 @@
                 android:id="@+id/et_code"
                 android:layout_width="@dimen/x290"
                 android:layout_height="@dimen/x35"
+                android:inputType="textPassword"
                 android:background="@mipmap/input_box"/>
         </LinearLayout>
 

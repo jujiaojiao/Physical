@@ -80,7 +80,9 @@ public class MainActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_local_music:
-                LocalMucicActivity.start(this);
+//                LocalMucicActivity.start(this);
+                Intent musicIntent = new Intent("android.intent.action.MUSIC_PLAYER");
+                startActivity(musicIntent);
                 break;
             case R.id.ll_phsical:
                 PhysicalActivity.start(this);

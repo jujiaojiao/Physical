@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.SupplicantState;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,8 +32,11 @@ import android.widget.Toast;
 import com.physical.app.R;
 import com.physical.app.adapter.WifiAdapter;
 import com.physical.app.common.base.BaseFragment;
+import com.physical.app.common.utils.ToastUtil;
 import com.physical.app.common.utils.WifiUtils;
 import com.physical.app.common.widget.InputPwdDialog;
+import com.tj24.easywifi.wifi.WifiConnector;
+import com.tj24.easywifi.wifi.WifiUtil;
 
 import org.json.JSONArray;
 
@@ -61,12 +66,13 @@ public class WifiFragment extends BaseFragment {
     private InputPwdDialog inputPwdDialog;
 
     private boolean ischeck = false;
-
+    private WifiUtils instance;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_wifi, null);
+        instance = WifiUtils.getInstance(getContext());
         ButterKnife.bind(this, view);
         return view;
     }
@@ -86,9 +92,13 @@ public class WifiFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ScanResult data = datas.get(position);
                 if (data.capabilities.contains("WEP") || data.capabilities.contains("PSK") || data.capabilities.contains("EAP")) {
-                    showInputPwdDialog();
+                    if (instance.isConnected(data)){
+                        ToastUtil.show("此WIFI已连接！");
+                    }else {
+                        showInputPwdDialog(data);
+                    }
                 } else {
-                    WifiUtils.getInstance(mContext).connectNoPassWordWifi(data);
+                    instance.connectNoPassWordWifi(data);
                 }
             }
         });
@@ -130,16 +140,28 @@ public class WifiFragment extends BaseFragment {
     }
 
 
-    private void showInputPwdDialog() {
+    private void showInputPwdDialog(final ScanResult data) {
         inputPwdDialog = new InputPwdDialog(mContext, new InputPwdDialog.Callback() {
             @Override
             public void onConfirm(String code) {
+                new WifiConnector(getContext()).connectWifi(data.SSID, code, WifiUtil.TYPE_WPA, new WifiConnector.WifiConnectCallBack() {
+                    @Override
+                    public void onConnectSucess() {
+                        showToast("连接成功！！");
+                        inputPwdDialog.cancel();
+                    }
 
+                    @Override
+                    public void onConnectFail(String msg) {
+                        showToast(msg);
+                        inputPwdDialog.cancel();
+                    }
+                });
             }
 
             @Override
             public void onCancel() {
-
+                inputPwdDialog.cancel();
             }
         });
         inputPwdDialog.show();
