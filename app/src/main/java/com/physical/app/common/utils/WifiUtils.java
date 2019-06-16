@@ -55,6 +55,12 @@ public class WifiUtils {
             mWifiManager.setWifiEnabled(true);
         }
     }
+    public void closeWifi(){
+        if (mWifiManager.isWifiEnabled()){
+            mWifiManager.setWifiEnabled(false);
+        }
+    }
+
 
     public void startScanWifi(){
         Log.i("ggg","》》》》执行wifi扫描！");

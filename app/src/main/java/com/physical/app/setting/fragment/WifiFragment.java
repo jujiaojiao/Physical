@@ -134,6 +134,7 @@ public class WifiFragment extends BaseFragment {
                 } else {
                     ivSwitch.setImageResource(R.mipmap.button_off);
                     ischeck = false;
+                    WifiUtils.getInstance(mContext).closeWifi();
                     lvData.setVisibility(View.GONE);
                 }
                 break;
