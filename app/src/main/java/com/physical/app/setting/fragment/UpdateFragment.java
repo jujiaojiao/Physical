@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.physical.app.R;
 import com.physical.app.bean.UpdateBean;
 import com.physical.app.callback.IUpdateCallback;
+import com.physical.app.common.api.URLs;
 import com.physical.app.common.base.BaseFragment;
 import com.physical.app.common.utils.DeviceUtils;
 import com.physical.app.common.widget.ComDialog;
@@ -73,7 +74,7 @@ public class UpdateFragment extends BaseFragment implements IUpdateCallback {
                 //打开系统浏览器，下载文件
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
-                Uri url = Uri.parse("/app/advertisement/downLoadNewVersion.json");
+                Uri url = Uri.parse(URLs.ServerUrl+"/app/advertisement/downLoadNewVersion.json");
                 intent.setData(url);
                 startActivity(intent);
             }

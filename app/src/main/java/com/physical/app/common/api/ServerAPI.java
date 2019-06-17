@@ -2,6 +2,7 @@ package com.physical.app.common.api;
 
 
 import com.physical.app.bean.AddPhysicalBean;
+import com.physical.app.bean.AdvertisementBean;
 import com.physical.app.bean.MedicalHistory;
 import com.physical.app.bean.MemberManageBean;
 import com.physical.app.bean.MemberVo;
@@ -230,7 +231,7 @@ public interface ServerAPI {
      */
     @POST("app/advertisement/query.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> query(@Field("sessionId") String sessionId);
+    Observable<HttpResult<AdvertisementBean>> query(@Field("sessionId") String sessionId);
 
     /**
      * 下载app

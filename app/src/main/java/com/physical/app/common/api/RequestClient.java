@@ -3,6 +3,7 @@ package com.physical.app.common.api;
 
 import com.physical.app.MyApplication;
 import com.physical.app.bean.AddPhysicalBean;
+import com.physical.app.bean.AdvertisementBean;
 import com.physical.app.bean.MedicalHistory;
 import com.physical.app.bean.MemberManageBean;
 import com.physical.app.bean.MemberVo;
@@ -334,9 +335,9 @@ public class RequestClient {
      * @param sessionId
      * @return
      */
-    public Observable<Object> query(String sessionId) {
+    public Observable<AdvertisementBean> query(String sessionId) {
         return mServerApi.query(sessionId)
-                .map(new HttpResultFuc<Object>())
+                .map(new HttpResultFuc<AdvertisementBean>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

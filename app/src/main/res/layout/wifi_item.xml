@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/x3">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:scaleType="fitXY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_wifi"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_width="@dimen/x185"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+    <TextView
+         android:id="@+id/tv_signal"
+         android:layout_width="@dimen/x30"
+         android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

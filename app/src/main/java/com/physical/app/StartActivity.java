@@ -1,22 +1,27 @@
 package com.physical.app;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
+import com.physical.app.bean.AdvertisementBean;
 import com.physical.app.callback.IStartCallback;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.utils.ImageManager;
 import com.physical.app.common.utils.NetworkUtils;
 import com.physical.app.common.widget.ComDialog;
 import com.physical.app.common.widget.NetDialog;
 import com.physical.app.common.widget.SelectNetorNoneDialog;
 import com.physical.app.presenter.StartPresenter;
 import com.physical.app.setting.WifiActivity;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by jjj
@@ -28,6 +33,8 @@ import com.physical.app.setting.WifiActivity;
 public class StartActivity extends BaseActivity implements IStartCallback {
 
 
+    @Bind(R.id.iv_ad)
+    ImageView ivAd;
     private StartPresenter startPresenter;
     private SelectNetorNoneDialog comDialog;
     private NetDialog netDialog;
@@ -42,6 +49,7 @@ public class StartActivity extends BaseActivity implements IStartCallback {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_start);
+        ButterKnife.bind(this);
 
 
         initData();
@@ -49,37 +57,34 @@ public class StartActivity extends BaseActivity implements IStartCallback {
     }
 
 
-
-
     private void initData() {
-        if (NetworkUtils.isNetworkAvailable(this)){//有网
+        if (NetworkUtils.isNetworkAvailable(this)) {//有网
             //请求广告//有广告展示广告，没广告进行用户登录判断
-//            startPresenter = new StartPresenter(this,this);
-//            startPresenter.query(getUserId());
-
-            if (null!=getUser()){
+            startPresenter = new StartPresenter(this, this);
+            startPresenter.query(getUserId());
+        } else {
+            if (null != getUser()) {
                 MainActivity.start(this);
-            }else{
+            } else {
                 LoginActivity.start(this);
             }
-        }else{
+
             //弹窗判断是打开WiFi 还是断网模式
             //打开连接WiFi页
-           showDialog();
+//           showDialog();
         }
 
-//        handler.sendEmptyMessageDelayed(100, 2000);
 
     }
 
 
-    private void showDialog(){
+    private void showDialog() {
         comDialog = new SelectNetorNoneDialog(this, "温馨提示", "网络连接已断开，请选择连接Wifi或使用断网模式", new ComDialog.Callback() {
             @Override
             public void callback(int param) {
-                if (param==0){
+                if (param == 0) {
                     WifiActivity.start(StartActivity.this);
-                }else{
+                } else {
                     showNetDilaog();
                 }
             }
@@ -105,9 +110,9 @@ public class StartActivity extends BaseActivity implements IStartCallback {
             switch (msg.what) {
 
                 case 100:
-                    if (null!=getUser()){
+                    if (null != getUser()) {
                         MainActivity.start(mContext);
-                    }else{
+                    } else {
                         startTo(LoginActivity.class);
                     }
                     finish();
@@ -123,7 +128,8 @@ public class StartActivity extends BaseActivity implements IStartCallback {
         }
 
     };
-    private void showNetDilaog(){
+
+    private void showNetDilaog() {
         netDialog = new NetDialog(this, new NetDialog.Callback() {
             @Override
             public void onConfirm(String code) {
@@ -141,8 +147,19 @@ public class StartActivity extends BaseActivity implements IStartCallback {
         netDialog.setCancelable(false);
         netDialog.show();
     }
-    @Override
-    public void onQuerySuccess() {
 
+    @Override
+    public void onQuerySuccess(AdvertisementBean bean) {
+        if (null != bean && bean.imgPathList.size() > 0) {
+            ivAd.setVisibility(View.VISIBLE);
+            ImageManager.Load("http://120.79.18.122:8080/" + bean.imgPathList.get(0), ivAd);
+            handler.sendEmptyMessageDelayed(100, 2000);
+        } else {
+            if (null != getUser()) {
+                MainActivity.start(this);
+            } else {
+                LoginActivity.start(this);
+            }
+        }
     }
 }

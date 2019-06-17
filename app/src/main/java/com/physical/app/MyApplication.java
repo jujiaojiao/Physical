@@ -23,6 +23,7 @@ import java.io.File;
 public class MyApplication extends Application {
     public static String BASEPATH = Environment.getExternalStorageDirectory().getPath() + "/ttyyapp/";
     public static Context context;
+    public final static boolean DEBUG = true;
 
     @Override
     public void onCreate() {
@@ -79,6 +80,10 @@ public class MyApplication extends Application {
         String wifiMac = info.getMacAddress();
         Preferences.putString(Constains.WIFIMAC, wifiMac);
 //        CrashReport.initCrashReport(getApplicationContext(), "aa2f75bab1", false);
+    }
+
+    public static Context getAppContext() {
+        return context;
     }
 
     private void initPath() {

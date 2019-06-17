@@ -2,6 +2,7 @@ package com.physical.app.presenter;
 
 import android.content.Context;
 
+import com.physical.app.bean.AdvertisementBean;
 import com.physical.app.callback.IStartCallback;
 import com.physical.app.common.api.ProgressSubscriber;
 import com.physical.app.common.base.BasePresenter;
@@ -26,10 +27,10 @@ public class StartPresenter extends BasePresenter {
      *
      */
     public void query(String sessionId) {
-        mRequestClient.query(sessionId).subscribe(new ProgressSubscriber<Object>(mContext) {
+        mRequestClient.query(sessionId).subscribe(new ProgressSubscriber<AdvertisementBean>(mContext) {
             @Override
-            public void onNext(Object bean) {
-                callback.onQuerySuccess();
+            public void onNext(AdvertisementBean bean) {
+                callback.onQuerySuccess(bean);
             }
 
         });
