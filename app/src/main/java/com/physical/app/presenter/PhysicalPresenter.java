@@ -43,7 +43,7 @@ public class PhysicalPresenter extends BasePresenter {
      * @return
      */
     public void start(String id,String beginTime,String sessionId,String machineCode){
-        mRequestClient.start(id, beginTime, sessionId,machineCode).subscribe(new ProgressSubscriber<Object>(mContext) {
+        mRequestClient.start(id, beginTime, sessionId,machineCode).subscribe(new ProgressSubscriber<Object>(mContext,false) {
             @Override
             public void onNext(Object bean) {
                 callback.onStartSuccess();

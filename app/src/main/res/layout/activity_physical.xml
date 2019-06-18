@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
     <include android:id="@+id/titleview" layout="@layout/titlebar_common_back_menu"/>
     <LinearLayout
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/titleview"
-        android:layout_gravity="center"
         android:orientation="vertical"
         android:background="@mipmap/border"
         android:layout_width="@dimen/x1789"
@@ -44,7 +44,8 @@
             android:background="@color/color_35C1F0"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
-        <HorizontalScrollView
+        <com.physical.app.common.widget.MyHoritalScrollview
+            android:id="@+id/scrollview"
             android:scrollbars="none"
             android:layout_marginRight="@dimen/x50"
             android:layout_marginLeft="@dimen/x50"
@@ -281,7 +282,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <ImageView
-                                android:src="@mipmap/icon_light"
+                                android:src="@mipmap/icon_duct"
                                 android:layout_width="@dimen/x199"
                                 android:layout_height="@dimen/x199" />
                             <TextView
@@ -306,7 +307,7 @@
 
                 </LinearLayout>
             </LinearLayout>
-        </HorizontalScrollView>
+        </com.physical.app.common.widget.MyHoritalScrollview>
         <View
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -357,6 +358,22 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_next"
+        android:layout_centerVertical="true"
+        android:background="@mipmap/button_next"
+        android:layout_alignParentRight="true"
+        android:paddingLeft="@dimen/x30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/iv_prev"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:background="@mipmap/button_up"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <TextView
         android:text="3"
         android:visibility="gone"

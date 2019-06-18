@@ -139,7 +139,11 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
 
     private void initView() {
         data = ((MemberVo) getIntent().getSerializableExtra("data"));
-        ivTitle.setImageResource(R.mipmap.word_add);
+        if (null!=data){
+            ivTitle.setImageResource(R.mipmap.word_modify);
+        }else{
+            ivTitle.setImageResource(R.mipmap.word_add);
+        }
         datas = new ArrayList<>();
         adapter = new AddMemberAdapter(this, datas);
         gvData.setAdapter(adapter);

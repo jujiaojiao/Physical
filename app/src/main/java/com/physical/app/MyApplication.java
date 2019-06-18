@@ -84,8 +84,8 @@ public class MyApplication extends Application {
         WifiInfo info = wifi.getConnectionInfo();
         wifiMac = info.getMacAddress();
         Preferences.putString(Constains.WIFIMAC, wifiMac);
-
         Preferences.putString(Constains.CODE,getCode());
+
 //        CrashReport.initCrashReport(getApplicationContext(), "aa2f75bab1", false);
     }
 

@@ -17,6 +17,6 @@ public class GlideImageLoader extends ImageLoader{
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
         //Glide 加载图片简单用法
-        Glide.with(context).load(path).into(imageView);
+        Glide.with(context).load("http://120.79.18.122:8080/"+path).into(imageView);
     }
 }

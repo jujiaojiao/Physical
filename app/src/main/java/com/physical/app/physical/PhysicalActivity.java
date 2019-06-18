@@ -8,11 +8,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.physical.app.R;
@@ -26,6 +27,7 @@ import com.physical.app.common.base.BaseActivity;
 import com.physical.app.common.utils.NetworkUtils;
 import com.physical.app.common.utils.StringUtil;
 import com.physical.app.common.widget.CommentDialog;
+import com.physical.app.common.widget.MyHoritalScrollview;
 import com.physical.app.member.MemberManageActivity;
 import com.physical.app.presenter.PhysicalPresenter;
 
@@ -51,8 +53,6 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     TextView tvTitle;
     @Bind(R.id.ivRight)
     ImageView ivRight;
-    @Bind(R.id.rlTop)
-    RelativeLayout rlTop;
     @Bind(R.id.tv_user)
     TextView tvUser;
     @Bind(R.id.gv_data1)
@@ -79,6 +79,12 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     ImageView ivOn;
     @Bind(R.id.tv_count)
     TextView tvCount;
+    @Bind(R.id.scrollview)
+    MyHoritalScrollview scrollview;
+    @Bind(R.id.iv_next)
+    ImageView ivNext;
+    @Bind(R.id.iv_prev)
+    ImageView ivPrev;
 
     private PhysicalAdapter PhysicalAdapter1;
     private ArrayList<String> list1;
@@ -287,9 +293,43 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
                 PhysicalAdapter7.setcurrent(position);
             }
         });
+        scrollview.setOnTouchListener(new View.OnTouchListener()
+        {
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                if (event.getAction() == MotionEvent.ACTION_UP)
+                {
+                    scrollview.startScrollerTask();
+                }
+                return false;
+            }
+        });
+        scrollview.setOnScrollStopListner(new MyHoritalScrollview.OnScrollStopListner() {
+            @Override
+            public void onScrollStoped() {
+
+            }
+
+            @Override
+            public void onScrollToLeftEdge() {
+                ivNext.setVisibility(View.VISIBLE);
+                ivPrev.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onScrollToRightEdge() {
+                ivNext.setVisibility(View.GONE);
+                ivPrev.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onScrollToMiddle() {
+
+            }
+        });
     }
 
-    @OnClick({R.id.ivBack, R.id.iv_on, R.id.iv_off, R.id.ivRight})
+    @OnClick({R.id.ivBack, R.id.iv_on, R.id.iv_off, R.id.ivRight,R.id.iv_next,R.id.iv_prev})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivBack:
@@ -304,6 +344,16 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
             case R.id.iv_off:
                 finishPysical();
 //                showCommentDialog();
+                break;
+            case R.id.iv_next:
+                ivNext.setVisibility(View.GONE);
+                ivPrev.setVisibility(View.VISIBLE);
+                scrollview.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
+                break;
+            case R.id.iv_prev:
+                ivNext.setVisibility(View.VISIBLE);
+                ivPrev.setVisibility(View.GONE);
+                scrollview.fullScroll(HorizontalScrollView.FOCUS_LEFT);
                 break;
         }
     }
@@ -402,6 +452,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     public void onStartSuccess() {
         //TODO 开始指令
         timer.start();
+        tvCount.setVisibility(View.VISIBLE);
 //        startPysical();
     }
 
@@ -424,7 +475,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
                     if (integer > 0) {
                         Message message = handler.obtainMessage(1);
                         handler.sendMessageDelayed(message, 1000);
-                    } else {
+                    } else if (integer==0){
                         tv_time.setText("00:00");
                         endTime = getCurrentTime();
                         if (NetworkUtils.isNetworkAvailable(PhysicalActivity.this)) {

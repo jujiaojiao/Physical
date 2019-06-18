@@ -22,6 +22,8 @@ import com.physical.app.MainActivity;
 import com.physical.app.R;
 import com.physical.app.adapter.WifiAdapter;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.constains.Constains;
+import com.physical.app.common.utils.Preferences;
 import com.physical.app.common.utils.ToastUtil;
 import com.physical.app.common.utils.WifiUtils;
 import com.physical.app.common.widget.InputPwdDialog;
@@ -61,6 +63,9 @@ public class WifiActivity extends BaseActivity {
     private boolean ischeck = false;
     private WifiUtils instance;
     private ProgressDialog progressDialog;
+    private ProgressDialog scanDialog;
+    private boolean wifi;
+
     public static void start(Context context) {
         Intent intent = new Intent(context, WifiActivity.class);
         context.startActivity(intent);
@@ -85,7 +90,6 @@ public class WifiActivity extends BaseActivity {
                     if (instance.isConnected(data)) {
                         ToastUtil.show("此WIFI已连接！");
                         MainActivity.start(WifiActivity.this);
-
                     } else {
                         showInputPwdDialog(data);
                     }
@@ -101,21 +105,36 @@ public class WifiActivity extends BaseActivity {
         datas = new ArrayList<ScanResult>();
         adapter = new WifiAdapter(mContext, datas);
         lvData.setAdapter(adapter);
-
+        ivTitle.setImageResource(R.mipmap.word_wifi);
         if (ischeck) {
             lvData.setVisibility(View.VISIBLE);
         } else {
             lvData.setVisibility(View.GONE);
         }
+        if (WifiUtils.getInstance(this).isWifienabled()) {
+            scanProgressDialog();
+            handler.sendEmptyMessageDelayed(100, 3000);
+            ivSwitch.setImageResource(R.mipmap.button_on);
+            ischeck = true;
+            datas.clear();
+            WifiUtils.getInstance(mContext).openWifi();
+            lvData.setVisibility(View.VISIBLE);
+        } else {
+            ivSwitch.setImageResource(R.mipmap.button_off);
+            ischeck = false;
+            WifiUtils.getInstance(mContext).closeWifi();
+            lvData.setVisibility(View.GONE);
+        }
 
     }
 
-    @OnClick({R.id.iv_switch})
+    @OnClick({R.id.iv_switch, R.id.ivBack})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_switch:
                 if (!ischeck) {
-                    handler.sendEmptyMessageDelayed(100, 1000);
+                    scanProgressDialog();
+                    handler.sendEmptyMessageDelayed(100, 3000);
                     ivSwitch.setImageResource(R.mipmap.button_on);
                     ischeck = true;
                     datas.clear();
@@ -128,6 +147,7 @@ public class WifiActivity extends BaseActivity {
                     lvData.setVisibility(View.GONE);
                 }
                 break;
+
         }
     }
 
@@ -144,7 +164,12 @@ public class WifiActivity extends BaseActivity {
                     public void onConnectSucess() {
                         progressDialog.dismiss();
                         showToast("连接成功！！");
-                        MainActivity.start(WifiActivity.this);
+                        if (null!=getUser()){
+                            MainActivity.start(WifiActivity.this);
+                        }else{
+                            LoginActivity.start(WifiActivity.this);
+                        }
+                        finish();
                     }
 
                     @Override
@@ -175,6 +200,16 @@ public class WifiActivity extends BaseActivity {
         progressDialog.show();
     }
 
+    public void scanProgressDialog() {
+        if (scanDialog == null) {
+            scanDialog = new ProgressDialog(mContext);
+            scanDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        }
+        scanDialog.setMessage("WiFi扫描中...");
+        scanDialog.setCancelable(true);
+        scanDialog.show();
+    }
+
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
@@ -182,6 +217,7 @@ public class WifiActivity extends BaseActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 100:
+                    scanDialog.dismiss();
                     datas.addAll(WifiUtils.getInstance(mContext).getScanResults());
                     adapter.notifyDataSetChanged();
                     break;

@@ -67,6 +67,10 @@ public class WifiUtils {
         mWifiManager.startScan();
     }
 
+    public boolean isWifienabled(){
+        return mWifiManager.isWifiEnabled();
+    }
+
     public List<ScanResult> getScanResults(){
         startScanWifi();
         return  mWifiManager.getScanResults();

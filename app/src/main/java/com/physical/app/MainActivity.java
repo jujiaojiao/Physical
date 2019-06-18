@@ -150,7 +150,7 @@ public class MainActivity extends BaseActivity implements ISeedlingCallback {
         systemSetDialog = new SystemSetDialog(this, new SystemSetDialog.Callback() {
             @Override
             public void onConfirm() {
-
+                systemSetDialog.dismiss();
             }
 
             @Override

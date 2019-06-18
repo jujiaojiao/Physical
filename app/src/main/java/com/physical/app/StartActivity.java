@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -37,10 +38,12 @@ import butterknife.ButterKnife;
  * 描述:
  */
 
-public class StartActivity extends BaseActivity implements IStartCallback {
+public class StartActivity extends BaseActivity implements IStartCallback, ViewPager.OnPageChangeListener {
 
     @Bind(R.id.banner)
     Banner banner;
+    @Bind(R.id.iv_logo)
+    ImageView iv_logo;
     private StartPresenter startPresenter;
     private SelectNetorNoneDialog comDialog;
     private NetDialog netDialog;
@@ -150,6 +153,7 @@ public class StartActivity extends BaseActivity implements IStartCallback {
         imgPathList = bean.imgPathList;
         if (null != bean && bean.imgPathList.size() > 0) {
             banner.setVisibility(View.VISIBLE);
+            iv_logo.setVisibility(View.GONE);
             initBanner();
         } else {
             handler.sendEmptyMessageDelayed(100, 2000);
@@ -160,9 +164,10 @@ public class StartActivity extends BaseActivity implements IStartCallback {
         //设置banner样式(显示圆形指示器)
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置指示器位置（指示器居右）
-        banner.setIndicatorGravity(BannerConfig.RIGHT);
+        banner.setIndicatorGravity(BannerConfig.CENTER);
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
+//        banner.setViewPagerIsScroll(false);
         //设置图片集合
         banner.setImages(imgPathList);
         //设置banner动画效果
@@ -175,5 +180,34 @@ public class StartActivity extends BaseActivity implements IStartCallback {
         banner.setDelayTime(2000);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+        banner.setOnPageChangeListener(this);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (position == (imgPathList.size()-1)) {
+            banner.stopAutoPlay();
+            if (null!=handler){
+                handler.sendEmptyMessageDelayed(100, 1000);
+            }
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (null != handler) {
+            handler = null;
+        }
     }
 }

@@ -19,6 +19,8 @@ import android.widget.ListView;
 import com.physical.app.R;
 import com.physical.app.adapter.WifiAdapter;
 import com.physical.app.common.base.BaseFragment;
+import com.physical.app.common.constains.Constains;
+import com.physical.app.common.utils.Preferences;
 import com.physical.app.common.utils.ToastUtil;
 import com.physical.app.common.utils.WifiUtils;
 import com.physical.app.common.widget.InputPwdDialog;
@@ -54,6 +56,9 @@ public class WifiFragment extends BaseFragment {
     private boolean ischeck = false;
     private WifiUtils instance;
     private ProgressDialog progressDialog;
+    private boolean wifi;
+    private ProgressDialog scanDialog;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -78,9 +83,9 @@ public class WifiFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ScanResult data = datas.get(position);
                 if (data.capabilities.contains("WEP") || data.capabilities.contains("PSK") || data.capabilities.contains("EAP")) {
-                    if (instance.isConnected(data)){
+                    if (instance.isConnected(data)) {
                         ToastUtil.show("此WIFI已连接！");
-                    }else {
+                    } else {
                         showInputPwdDialog(data);
                     }
                 } else {
@@ -92,13 +97,28 @@ public class WifiFragment extends BaseFragment {
 
 
     private void initData() {
-        datas  = new ArrayList<ScanResult>();
+        datas = new ArrayList<ScanResult>();
         adapter = new WifiAdapter(mContext, datas);
         lvData.setAdapter(adapter);
 
         if (ischeck) {
             lvData.setVisibility(View.VISIBLE);
         } else {
+            lvData.setVisibility(View.GONE);
+        }
+        wifi = Preferences.getBoolean(Constains.WIFISTATUS, false);
+        if (WifiUtils.getInstance(getContext()).isWifienabled()) {
+            scanProgressDialog();
+            handler.sendEmptyMessageDelayed(100, 3000);
+            ivSwitch.setImageResource(R.mipmap.button_on);
+            ischeck = true;
+            datas.clear();
+            WifiUtils.getInstance(mContext).openWifi();
+            lvData.setVisibility(View.VISIBLE);
+        } else {
+            ivSwitch.setImageResource(R.mipmap.button_off);
+            ischeck = false;
+            WifiUtils.getInstance(mContext).closeWifi();
             lvData.setVisibility(View.GONE);
         }
 
@@ -113,13 +133,16 @@ public class WifiFragment extends BaseFragment {
                     ischeck = true;
                     datas.clear();
                     WifiUtils.getInstance(mContext).openWifi();
-                    handler.sendEmptyMessageDelayed(100,3000);
+                    handler.sendEmptyMessageDelayed(100, 3000);
                     lvData.setVisibility(View.VISIBLE);
+                    Preferences.putBoolean(Constains.WIFISTATUS, true);
                 } else {
                     ivSwitch.setImageResource(R.mipmap.button_off);
                     ischeck = false;
                     WifiUtils.getInstance(mContext).closeWifi();
                     lvData.setVisibility(View.GONE);
+                    Preferences.putBoolean(Constains.WIFISTATUS, false);
+
                 }
                 break;
         }
@@ -132,7 +155,7 @@ public class WifiFragment extends BaseFragment {
             public void onConfirm(String code) {
                 inputPwdDialog.cancel();
                 buildProgressDialog();
-                Log.i("dyy",code+"===code==="+data.SSID+"===data");
+                Log.i("dyy", code + "===code===" + data.SSID + "===data");
                 new WifiConnector(getContext()).connectWifi(data.SSID, code, WifiUtil.TYPE_WPA, new WifiConnector.WifiConnectCallBack() {
                     @Override
                     public void onConnectSucess() {
@@ -168,7 +191,15 @@ public class WifiFragment extends BaseFragment {
         progressDialog.show();
     }
 
-
+    public void scanProgressDialog() {
+        if (scanDialog == null) {
+            scanDialog = new ProgressDialog(mContext);
+            scanDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        }
+        scanDialog.setMessage("WiFi扫描中...");
+        scanDialog.setCancelable(true);
+        scanDialog.show();
+    }
 
     @Override
     public void onDestroyView() {
@@ -184,8 +215,9 @@ public class WifiFragment extends BaseFragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 100:
+                    scanDialog.dismiss();
                     List<ScanResult> scanResults = WifiUtils.getInstance(mContext).getScanResults();
-                    Log.i("jjj", "handleMessage: "+scanResults.size());
+                    Log.i("jjj", "handleMessage: " + scanResults.size());
                     datas.addAll(WifiUtils.getInstance(mContext).getScanResults());
                     adapter.notifyDataSetChanged();
                     break;

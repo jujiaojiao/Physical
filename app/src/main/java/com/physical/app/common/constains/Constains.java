@@ -12,6 +12,7 @@ public class Constains {
     public static final String USER = "user";
     public static final String WIFIMAC = "wifimac";
     public static final String CODE = "code";
+    public static final String WIFISTATUS = "wifistatus";
     public static final String PHONE = "PHONE";
     public static final String PASSWORD = "PASSWORD";
 

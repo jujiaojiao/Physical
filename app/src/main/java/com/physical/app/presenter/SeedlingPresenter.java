@@ -33,7 +33,7 @@ public class SeedlingPresenter extends BasePresenter {
      * @return
      */
     public void seedling(String sessionId) {
-        mRequestClient.seedling(sessionId).subscribe(new ProgressSubscriber<List<SeedlingBean>>(mContext) {
+        mRequestClient.seedling(sessionId).subscribe(new ProgressSubscriber<List<SeedlingBean>>(mContext,false) {
             @Override
             public void onNext(List<SeedlingBean> bean) {
                 callback.onSeedlingSuccess(bean);
