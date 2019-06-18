@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.physical.app.R;
@@ -24,8 +25,10 @@ public class SelectNetorNoneDialog  extends AlertDialog {
 
     private ComDialog.Callback callback;
     private TextView tvTitle;
-    private View tv_wifi;
-    private View tv_no_net;
+    private TextView tv_wifi;
+    private TextView tv_no_net;
+    private LinearLayout ll_wifi;
+    private LinearLayout ll_no_net;
 
     public SelectNetorNoneDialog(Context context, String title,String desp, ComDialog.Callback callback) {
         super(context, R.style.dialog);
@@ -50,6 +53,8 @@ public class SelectNetorNoneDialog  extends AlertDialog {
         tvDesp=view.findViewById(R.id.tvDesp);
         tv_wifi =view.findViewById(R.id.tv_wifi);
         tv_no_net =view.findViewById(R.id.tv_no_net);
+        ll_wifi =view.findViewById(R.id.ll_wifi);
+        ll_no_net =view.findViewById(R.id.ll_no_net);
         setContentView(view);
         setCanceledOnTouchOutside(false);
     }
@@ -60,14 +65,14 @@ public class SelectNetorNoneDialog  extends AlertDialog {
     }
 
     private void addListener() {
-        tv_wifi.setOnClickListener(new View.OnClickListener() {
+        ll_wifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
                 callback.callback(0);
             }
         });
-        tv_no_net.setOnClickListener(new View.OnClickListener() {
+        ll_no_net.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();

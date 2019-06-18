@@ -2,10 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:gravity="center"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 
     <ImageView
@@ -20,5 +20,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:indicator_width="10dp"
+        app:indicator_height="10dp"
+        app:indicator_margin="5dp"
+        app:image_scale_type="center_inside"
+        app:indicator_drawable_selected="@mipmap/icon_strip_have"
+        app:indicator_drawable_unselected="@mipmap/icon_strip_none"/>
 </RelativeLayout>

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.physical.app.R;
@@ -33,13 +34,16 @@ public class NetDialog extends Dialog implements View.OnClickListener {
     private TextView tvConfirm;
     private Callback callback;
     private EditText etCode;
+    private LinearLayout ll_cancel;
+    private LinearLayout ll_confirm;
 
-    public NetDialog(@NonNull Context context,Callback callback) {
+    public NetDialog(@NonNull Context context, Callback callback) {
         super(context, R.style.dialog);
         this.context = context;
         this.callback = callback;
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,8 @@ public class NetDialog extends Dialog implements View.OnClickListener {
         etCode = ((EditText) findViewById(R.id.et_code));
         tvCancel = ((TextView) findViewById(R.id.tv_cancel));
         tvConfirm = ((TextView) findViewById(R.id.tv_confirm));
+        ll_cancel = ((LinearLayout) findViewById(R.id.ll_cancel));
+        ll_confirm = ((LinearLayout) findViewById(R.id.ll_confirm));
 
         tvCancel.setOnClickListener(this);
         tvConfirm.setOnClickListener(this);
@@ -62,13 +68,13 @@ public class NetDialog extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_cancel:
+            case R.id.ll_cancel:
                 callback.onCancel();
                 break;
-            case R.id.tv_confirm:
+            case R.id.ll_confirm:
 
-                String code  = etCode.getText().toString();
-                if (StringUtil.isEmpty(code)){
+                String code = etCode.getText().toString();
+                if (StringUtil.isEmpty(code)) {
                     ToastUtil.show("请输入激活码");
                     return;
                 }

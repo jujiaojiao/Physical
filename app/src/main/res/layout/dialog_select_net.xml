@@ -31,32 +31,45 @@
             android:textSize="@dimen/x28" />
 
         <LinearLayout
-            android:layout_marginBottom="@dimen/x27"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_marginLeft="@dimen/x69"
-                android:id="@+id/tv_wifi"
-                android:text="选择WiFi"
-                android:gravity="center"
-                android:background="@mipmap/button_blue"
-                android:textColor="@color/white"
-                android:textSize="@dimen/x26"
-                android:layout_width="@dimen/x145"
-                android:layout_height="@dimen/x42" />
-            <TextView
-                android:layout_marginLeft="@dimen/x116"
-                android:id="@+id/tv_no_net"
-                android:text="断网模式"
-                android:background="@mipmap/button_orange"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/x26"
-                android:layout_width="@dimen/x145"
-                android:layout_height="@dimen/x42"/>
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_wifi"
+                android:paddingBottom="@dimen/x27"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginLeft="@dimen/x69"
+                    android:id="@+id/tv_wifi"
+                    android:text="选择WiFi"
+                    android:gravity="center"
+                    android:background="@mipmap/button_blue"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x26"
+                    android:layout_width="@dimen/x145"
+                    android:layout_height="@dimen/x42" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_no_net"
+                android:paddingBottom="@dimen/x27"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginLeft="@dimen/x90"
+                    android:id="@+id/tv_no_net"
+                    android:text="断网模式"
+                    android:background="@mipmap/button_orange"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x26"
+                    android:layout_width="@dimen/x145"
+                    android:layout_height="@dimen/x42"/>
+            </LinearLayout>
 
+        </LinearLayout>
 
     </LinearLayout>
 

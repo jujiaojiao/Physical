@@ -43,6 +43,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
             <EditText
+                android:textColor="@color/white"
+                android:textSize="@dimen/x18"
+                android:singleLine="true"
                 android:paddingLeft="@dimen/x8"
                 android:layout_marginLeft="@dimen/x12"
                 android:id="@+id/et_code"
@@ -55,24 +58,37 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tv_cancel"
-                android:layout_marginLeft="@dimen/x69"
-                android:text="取消"
-                android:gravity="center"
-                android:background="@mipmap/button_blue"
-                android:textColor="@color/white"
-                android:layout_width="@dimen/x145"
-                android:layout_height="@dimen/x42" />
-            <TextView
-                android:layout_marginLeft="@dimen/x116"
-                android:background="@mipmap/button_orange"
-                android:id="@+id/tv_confirm"
-                android:text="确认"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:layout_width="@dimen/x145"
-                android:layout_height="@dimen/x42" />
+            <LinearLayout
+                android:id="@+id/ll_cancel"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_cancel"
+                    android:layout_marginLeft="@dimen/x69"
+                    android:text="取消"
+                    android:gravity="center"
+                    android:background="@mipmap/button_blue"
+                    android:textColor="@color/white"
+                    android:layout_width="@dimen/x145"
+                    android:layout_height="@dimen/x42" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_confirm"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginLeft="@dimen/x90"
+                    android:background="@mipmap/button_orange"
+                    android:id="@+id/tv_confirm"
+                    android:text="确认"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_width="@dimen/x145"
+                    android:layout_height="@dimen/x42" />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.physical.app.R;
-import com.physical.app.adapter.MemberManageAdapter;
 import com.physical.app.adapter.PhysicalAdapter;
 import com.physical.app.bean.AddPhysicalBean;
 import com.physical.app.bean.MemberCaseVo;
@@ -74,6 +73,12 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     ImageView ivTitle;
     @Bind(R.id.tv_time)
     TextView tv_time;
+    @Bind(R.id.iv_off)
+    ImageView ivOff;
+    @Bind(R.id.iv_on)
+    ImageView ivOn;
+    @Bind(R.id.tv_count)
+    TextView tvCount;
 
     private PhysicalAdapter PhysicalAdapter1;
     private ArrayList<String> list1;
@@ -297,9 +302,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
                 start();
                 break;
             case R.id.iv_off:
-                integer = 1000;
-                Message message1 = handler.obtainMessage(1);     // Message
-                handler.sendMessage(message1);
+                finishPysical();
 //                showCommentDialog();
                 break;
         }
@@ -315,6 +318,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
             showToast("请选择幼苗");
             return;
         }
+
 
         MemberCaseVo memberCaseVo = new MemberCaseVo();
         memberCaseVo.lampLight = lampLight;
@@ -344,7 +348,9 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
         if (requestCode == 101 && resultCode == RESULT_OK && null != data) {
             seedling = (ArrayList<SeedlingBean>) data.getSerializableExtra("seedling");
             member = (MemberVo) data.getSerializableExtra("member");
-            tvUser.setText(member.name);
+            if (null != member) {
+                tvUser.setText(member.name);
+            }
         }
     }
 
@@ -375,16 +381,28 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
         showCommentDialog();
     }
 
+
+    private void startPysical() {
+        showToast("开始理疗");
+        integer = Integer.valueOf(totalTime) * 60 * 1000;
+        Message message = handler.obtainMessage(1);     // Message
+        handler.sendMessageDelayed(message, 1000);
+    }
+
+    private void finishPysical() {
+        integer = 1000;
+        Message message1 = handler.obtainMessage(1);     // Message
+        handler.sendMessage(message1);
+    }
+
     /**
      * 开始
      */
     @Override
     public void onStartSuccess() {
         //TODO 开始指令
-        showToast("开始理疗");
-        integer = Integer.valueOf(totalTime) * 60 * 1000;
-        Message message = handler.obtainMessage(1);     // Message
-        handler.sendMessageDelayed(message, 1000);
+        timer.start();
+//        startPysical();
     }
 
 
@@ -409,7 +427,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
                     } else {
                         tv_time.setText("00:00");
                         endTime = getCurrentTime();
-                        if (NetworkUtils.isNetworkAvailable(PhysicalActivity.this)){
+                        if (NetworkUtils.isNetworkAvailable(PhysicalActivity.this)) {
                             physicalPresenter.finish("" + id, endTime, getUserId(), getWifiMac());
                         }
                     }
@@ -472,6 +490,32 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
             }
         });
         commentDialog.show();
+    }
+
+
+    CountDownTimer timer = new CountDownTimer(3000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            int time = (int) (millisUntilFinished / 1000);
+            tvCount.setText(time + "");
+            tvCount.setEnabled(false);
+//            tvGetmsg.setBackgroundResource(R.drawable.);
+        }
+
+        @Override
+        public void onFinish() {
+            tvCount.setVisibility(View.GONE);
+            startPysical();
+        }
+    };
+
+
+    @Override
+    protected void onDestroy() {
+        if (timer != null) {
+            timer.cancel();
+        }
+        super.onDestroy();
     }
 
 }

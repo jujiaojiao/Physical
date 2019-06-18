@@ -11,9 +11,13 @@ import android.provider.Settings;
 import android.view.View;
 
 import com.physical.app.common.constains.Constains;
+import com.physical.app.common.utils.Md5Util;
 import com.physical.app.common.utils.Preferences;
+import com.physical.app.common.utils.StringUtil;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 作者: liangzixun
@@ -24,6 +28,7 @@ public class MyApplication extends Application {
     public static String BASEPATH = Environment.getExternalStorageDirectory().getPath() + "/ttyyapp/";
     public static Context context;
     public final static boolean DEBUG = true;
+    private String wifiMac;
 
     @Override
     public void onCreate() {
@@ -77,8 +82,10 @@ public class MyApplication extends Application {
         WifiManager wifi = (WifiManager)
                 context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = wifi.getConnectionInfo();
-        String wifiMac = info.getMacAddress();
+        wifiMac = info.getMacAddress();
         Preferences.putString(Constains.WIFIMAC, wifiMac);
+
+        Preferences.putString(Constains.CODE,getCode());
 //        CrashReport.initCrashReport(getApplicationContext(), "aa2f75bab1", false);
     }
 
@@ -94,5 +101,21 @@ public class MyApplication extends Application {
     }
 
 
+    private String  getCode() {
+        String sign = wifiMac+getCurrentTime();
+        if (!StringUtil.isEmpty(sign)){
+            String encode = Md5Util.encode(sign);
+            return encode.substring(0,10);
+        }
+        return "";
+    }
+
+
+    private String getCurrentTime() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
+        //获取当前时间
+        Date date = new Date(System.currentTimeMillis());
+        return simpleDateFormat.format(date);
+    }
 
 }

@@ -9,16 +9,23 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.physical.app.adapter.GlideImageLoader;
 import com.physical.app.bean.AdvertisementBean;
 import com.physical.app.callback.IStartCallback;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.constains.Constains;
 import com.physical.app.common.utils.ImageManager;
 import com.physical.app.common.utils.NetworkUtils;
+import com.physical.app.common.utils.Preferences;
 import com.physical.app.common.widget.ComDialog;
 import com.physical.app.common.widget.NetDialog;
 import com.physical.app.common.widget.SelectNetorNoneDialog;
 import com.physical.app.presenter.StartPresenter;
 import com.physical.app.setting.WifiActivity;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,12 +39,12 @@ import butterknife.ButterKnife;
 
 public class StartActivity extends BaseActivity implements IStartCallback {
 
-
-    @Bind(R.id.iv_ad)
-    ImageView ivAd;
+    @Bind(R.id.banner)
+    Banner banner;
     private StartPresenter startPresenter;
     private SelectNetorNoneDialog comDialog;
     private NetDialog netDialog;
+    private List<String> imgPathList;
 
     @Override
 
@@ -63,15 +70,9 @@ public class StartActivity extends BaseActivity implements IStartCallback {
             startPresenter = new StartPresenter(this, this);
             startPresenter.query(getUserId());
         } else {
-            if (null != getUser()) {
-                MainActivity.start(this);
-            } else {
-                LoginActivity.start(this);
-            }
-
             //弹窗判断是打开WiFi 还是断网模式
             //打开连接WiFi页
-//           showDialog();
+            showDialog();
         }
 
 
@@ -98,17 +99,13 @@ public class StartActivity extends BaseActivity implements IStartCallback {
 
 
     @SuppressLint("HandlerLeak")
-
     private Handler handler = new Handler() {
 
         @Override
 
         public void handleMessage(Message msg) {
-
             super.handleMessage(msg);
-
             switch (msg.what) {
-
                 case 100:
                     if (null != getUser()) {
                         MainActivity.start(mContext);
@@ -116,15 +113,10 @@ public class StartActivity extends BaseActivity implements IStartCallback {
                         startTo(LoginActivity.class);
                     }
                     finish();
-
                     break;
-
                 default:
-
                     break;
-
             }
-
         }
 
     };
@@ -133,7 +125,12 @@ public class StartActivity extends BaseActivity implements IStartCallback {
         netDialog = new NetDialog(this, new NetDialog.Callback() {
             @Override
             public void onConfirm(String code) {
-                MainActivity.start(StartActivity.this);
+                String string = Preferences.getString(Constains.CODE);
+                if (null != string && string.equals(code)) {
+                    MainActivity.start(StartActivity.this);
+                } else {
+                    showToast("无法进入断网模式");
+                }
             }
 
             @Override
@@ -150,16 +147,33 @@ public class StartActivity extends BaseActivity implements IStartCallback {
 
     @Override
     public void onQuerySuccess(AdvertisementBean bean) {
+        imgPathList = bean.imgPathList;
         if (null != bean && bean.imgPathList.size() > 0) {
-            ivAd.setVisibility(View.VISIBLE);
-            ImageManager.Load("http://120.79.18.122:8080/" + bean.imgPathList.get(0), ivAd);
-            handler.sendEmptyMessageDelayed(100, 2000);
+            banner.setVisibility(View.VISIBLE);
+            initBanner();
         } else {
-            if (null != getUser()) {
-                MainActivity.start(this);
-            } else {
-                LoginActivity.start(this);
-            }
+            handler.sendEmptyMessageDelayed(100, 2000);
         }
+    }
+
+    private void initBanner() {
+        //设置banner样式(显示圆形指示器)
+        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        //设置指示器位置（指示器居右）
+        banner.setIndicatorGravity(BannerConfig.RIGHT);
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        banner.setImages(imgPathList);
+        //设置banner动画效果
+//        banner.setBannerAnimation(Transformer.DepthPage);
+        //设置标题集合（当banner样式有显示title时）
+//        banner.setBannerTitles(titles);
+        //设置自动轮播，默认为true
+//        banner.isAutoPlay(true);
+        //设置轮播时间
+        banner.setDelayTime(2000);
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
     }
 }

@@ -241,7 +241,13 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
                 refresh();
                 break;
             case R.id.iv_sure:
-                SelectSeedlingActivity.start(this);
+                Integer integer = Integer.valueOf(selectData.vipTimes);
+                if (integer>0){
+                    SelectSeedlingActivity.start(this);
+                }else{
+                    selectData = null;
+                    showToast("该会员已无剩余疗养次数，请充值");
+                }
                 break;
         }
     }

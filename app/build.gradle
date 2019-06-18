@@ -93,5 +93,5 @@ dependencies {
     implementation 'com.github.tangjiang24:WifiConnector:2.0'
     implementation(name: 'NetworkApi-release', ext: 'aar')
 
-
+    implementation 'com.youth.banner:banner:1.4.10'
 }
