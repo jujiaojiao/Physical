@@ -192,6 +192,7 @@ public class MemberManageActivity extends BaseActivity implements IMemberManageC
             refresh();
         }else {
             showToast("无网络连接");
+//            this.finish();
         }
     }
 

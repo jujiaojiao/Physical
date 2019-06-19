@@ -60,8 +60,8 @@ public class NetDialog extends Dialog implements View.OnClickListener {
         ll_cancel = ((LinearLayout) findViewById(R.id.ll_cancel));
         ll_confirm = ((LinearLayout) findViewById(R.id.ll_confirm));
 
-        tvCancel.setOnClickListener(this);
-        tvConfirm.setOnClickListener(this);
+        ll_cancel.setOnClickListener(this);
+        ll_confirm.setOnClickListener(this);
 
     }
 
@@ -72,7 +72,6 @@ public class NetDialog extends Dialog implements View.OnClickListener {
                 callback.onCancel();
                 break;
             case R.id.ll_confirm:
-
                 String code = etCode.getText().toString();
                 if (StringUtil.isEmpty(code)) {
                     ToastUtil.show("请输入激活码");

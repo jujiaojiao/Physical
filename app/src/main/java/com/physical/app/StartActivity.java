@@ -1,5 +1,6 @@
 package com.physical.app;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,8 @@ import com.physical.app.setting.WifiActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -88,8 +91,15 @@ public class StartActivity extends BaseActivity implements IStartCallback, ViewP
             public void callback(int param) {
                 if (param == 0) {
                     WifiActivity.start(StartActivity.this);
+                    StartActivity.this.finish();
                 } else {
-                    showNetDilaog();
+                    String timeCode = Preferences.getString(Constains.TIMECODE);
+                    if (null == timeCode || !timeCode.equals(getCurrentTime())) {//为空，或者不相等弹出弹窗
+                        showNetDilaog();
+                    } else {
+                        MainActivity.start(StartActivity.this);
+                        StartActivity.this.finish();
+                    }
                 }
             }
         });
@@ -130,7 +140,10 @@ public class StartActivity extends BaseActivity implements IStartCallback, ViewP
             public void onConfirm(String code) {
                 String string = Preferences.getString(Constains.CODE);
                 if (null != string && string.equals(code)) {
+                    netDialog.dismiss();
+                    Preferences.putString(Constains.TIMECODE, getCurrentTime());
                     MainActivity.start(StartActivity.this);
+                    StartActivity.this.finish();
                 } else {
                     showToast("无法进入断网模式");
                 }
@@ -138,7 +151,7 @@ public class StartActivity extends BaseActivity implements IStartCallback, ViewP
 
             @Override
             public void onCancel() {
-
+                netDialog.dismiss();
             }
         });
         //设置点击屏幕不消失
@@ -190,9 +203,9 @@ public class StartActivity extends BaseActivity implements IStartCallback, ViewP
 
     @Override
     public void onPageSelected(int position) {
-        if (position == (imgPathList.size()-1)) {
+        if (position == (imgPathList.size() - 1)) {
             banner.stopAutoPlay();
-            if (null!=handler){
+            if (null != handler) {
                 handler.sendEmptyMessageDelayed(100, 1000);
             }
         }
@@ -201,6 +214,13 @@ public class StartActivity extends BaseActivity implements IStartCallback, ViewP
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    private String getCurrentTime() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
+        //获取当前时间
+        Date date = new Date(System.currentTimeMillis());
+        return simpleDateFormat.format(date);
     }
 
     @Override

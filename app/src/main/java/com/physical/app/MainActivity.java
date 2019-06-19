@@ -24,17 +24,23 @@ import com.physical.app.bean.RecommendBean;
 import com.physical.app.bean.SeedlingBean;
 import com.physical.app.callback.ISeedlingCallback;
 import com.physical.app.common.base.BaseActivity;
+import com.physical.app.common.constains.Constains;
 import com.physical.app.common.utils.NetworkUtils;
 import com.physical.app.common.utils.Preferences;
+import com.physical.app.common.widget.ComDialog;
 import com.physical.app.common.widget.NetDialog;
+import com.physical.app.common.widget.SelectNetorNoneDialog;
 import com.physical.app.common.widget.SystemSetDialog;
 import com.physical.app.member.MemberManageActivity;
 import com.physical.app.music.LocalMucicActivity;
 import com.physical.app.physical.PhysicalActivity;
 import com.physical.app.presenter.SeedlingPresenter;
 import com.physical.app.setting.SettingActivity;
+import com.physical.app.setting.WifiActivity;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -67,6 +73,7 @@ public class MainActivity extends BaseActivity implements ISeedlingCallback {
     private int door = 0;//0 关  1开
     private NetDialog netDialog;
     private SeedlingPresenter seedlingPresenter;
+    private SelectNetorNoneDialog comDialog;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -82,19 +89,38 @@ public class MainActivity extends BaseActivity implements ISeedlingCallback {
         getWindow().setEnterTransition(new Slide().setDuration(2000));
         getWindow().setExitTransition(new Slide().setDuration(2000));
         Log.i("jjj", "onCreate: ");
-        if (null!=getUser()){
+        if (null != getUser()) {
             tvUsername.setText(getUser().userName);
         }
-        initData();
+//        initData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
 
     private void initData() {
         if (NetworkUtils.isNetworkAvailable(this)) {
             seedlingPresenter = new SeedlingPresenter(this, this);
             Log.i("jjj", "initView: " + getWifiMac());
             seedlingPresenter.seedling(getUserId());
+
+            //TODO 有网调用上传进度接口，更新进度 ，点击开始理疗时保存进度  保存成列表 每次都添加，在上传进度接口调用成功后，清除记录
+        } else {
+            String timeCode = Preferences.getString(Constains.TIMECODE);
+            if (null == timeCode || !timeCode.equals(getCurrentTime())) {
+                showDialog();
+            }
         }
+    }
+
+    private String getCurrentTime() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
+        //获取当前时间
+        Date date = new Date(System.currentTimeMillis());
+        return simpleDateFormat.format(date);
     }
 
 
@@ -161,18 +187,47 @@ public class MainActivity extends BaseActivity implements ISeedlingCallback {
         systemSetDialog.show();
     }
 
+    private void showDialog() {
+        comDialog = new SelectNetorNoneDialog(this, "温馨提示", "网络连接已断开，请选择连接Wifi或使用断网模式", new ComDialog.Callback() {
+            @Override
+            public void callback(int param) {
+                if (param == 0) {
+                    WifiActivity.start(MainActivity.this);
+                } else {
+                    showNetDilaog();
+                }
+//                MainActivity.this.finish();
+            }
+        });
+        //设置点击屏幕不消失
+        comDialog.setCanceledOnTouchOutside(false);
+        //设置点击返回键不消失
+        comDialog.setCancelable(false);
+        comDialog.show();
+    }
+
     private void showNetDilaog() {
         netDialog = new NetDialog(this, new NetDialog.Callback() {
             @Override
             public void onConfirm(String code) {
-
+                String string = Preferences.getString(Constains.CODE);
+                if (null != string && string.equals(code)) {
+                    netDialog.dismiss();
+//                    MainActivity.start(MainActivity.this);
+                } else {
+                    showToast("激活码有误请重新输入");
+                }
             }
 
             @Override
             public void onCancel() {
-
+//                netDialog.dismiss();
             }
         });
+        //设置点击屏幕不消失
+        netDialog.setCanceledOnTouchOutside(false);
+        //设置点击返回键不消失
+        netDialog.setCancelable(false);
         netDialog.show();
     }
 
