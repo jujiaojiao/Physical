@@ -2,6 +2,7 @@ package com.physical.app.presenter;
 
 import android.content.Context;
 
+import com.physical.app.bean.MemberDetailBean;
 import com.physical.app.bean.MemberVo;
 import com.physical.app.callback.IMemberDetailCallback;
 import com.physical.app.common.api.ProgressSubscriber;
@@ -31,9 +32,9 @@ public class MemberDetailPresenter extends BasePresenter {
      * @return
      */
     public void queryDetailById(String memberId,String sessionId) {
-        mRequestClient.queryDetailById(memberId,sessionId).subscribe(new ProgressSubscriber<MemberVo>(mContext) {
+        mRequestClient.queryDetailById(memberId,sessionId).subscribe(new ProgressSubscriber<MemberDetailBean>(mContext) {
             @Override
-            public void onNext(MemberVo bean) {
+            public void onNext(MemberDetailBean bean) {
                 callback.onQueryDetailSuccess(bean);
             }
 

@@ -25,6 +25,7 @@ import com.physical.app.bean.SeedlingBean;
 import com.physical.app.callback.IPhysicalCallback;
 import com.physical.app.common.base.BaseActivity;
 import com.physical.app.common.utils.NetworkUtils;
+import com.physical.app.common.utils.Preferences;
 import com.physical.app.common.utils.StringUtil;
 import com.physical.app.common.widget.CommentDialog;
 import com.physical.app.common.widget.MyHoritalScrollview;
@@ -34,6 +35,7 @@ import com.physical.app.presenter.PhysicalPresenter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -116,8 +118,10 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
     private Integer integer;
     private int id;
     private CommentDialog commentDialog;
+    List<MemberVo> list = new ArrayList<>();
 
     private int commentType;
+    private MemberCaseVo memberCaseVo;
 
 
     public static void start(Context context) {
@@ -293,12 +297,9 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
                 PhysicalAdapter7.setcurrent(position);
             }
         });
-        scrollview.setOnTouchListener(new View.OnTouchListener()
-        {
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                if (event.getAction() == MotionEvent.ACTION_UP)
-                {
+        scrollview.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     scrollview.startScrollerTask();
                 }
                 return false;
@@ -329,7 +330,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
         });
     }
 
-    @OnClick({R.id.ivBack, R.id.iv_on, R.id.iv_off, R.id.ivRight,R.id.iv_next,R.id.iv_prev})
+    @OnClick({R.id.ivBack, R.id.iv_on, R.id.iv_off, R.id.ivRight, R.id.iv_next, R.id.iv_prev})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivBack:
@@ -370,7 +371,7 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
         }
 
 
-        MemberCaseVo memberCaseVo = new MemberCaseVo();
+        memberCaseVo = new MemberCaseVo();
         memberCaseVo.lampLight = lampLight;
         memberCaseVo.seedlingLight = seedlingLight;
         memberCaseVo.magneticIntensity = magneticIntensity;
@@ -445,6 +446,19 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
         handler.sendMessage(message1);
     }
 
+    private void save() {
+        MemberVo memberVo = new MemberVo();
+        if (null != member) {
+            memberVo = member;
+            memberCaseVo.beginTime = beginTime;
+            memberCaseVo.endTime = endTime;
+            memberVo.memberCaseVoList.add(memberCaseVo);
+        }
+
+        list.add(memberVo);
+        Preferences.putList(mContext, "nonet", list);
+    }
+
     /**
      * 开始
      */
@@ -475,11 +489,13 @@ public class PhysicalActivity extends BaseActivity implements IPhysicalCallback 
                     if (integer > 0) {
                         Message message = handler.obtainMessage(1);
                         handler.sendMessageDelayed(message, 1000);
-                    } else if (integer==0){
+                    } else if (integer == 0) {
                         tv_time.setText("00:00");
                         endTime = getCurrentTime();
                         if (NetworkUtils.isNetworkAvailable(PhysicalActivity.this)) {
                             physicalPresenter.finish("" + id, endTime, getUserId(), getWifiMac());
+                        } else {
+//                            save();
                         }
                     }
                     break;

@@ -15,6 +15,7 @@ import com.physical.app.adapter.MemberDetailAdapter;
 import com.physical.app.adapter.MemberDetailRecordAdapter;
 import com.physical.app.bean.MedicalHistory;
 import com.physical.app.bean.MemberCardVo;
+import com.physical.app.bean.MemberDetailBean;
 import com.physical.app.bean.MemberDetailRecordBean;
 import com.physical.app.bean.MemberVo;
 import com.physical.app.callback.IMemberDetailCallback;
@@ -138,7 +139,7 @@ public class MemberDetailActivity extends BaseActivity implements IMemberDetailC
      * @param bean
      */
     @Override
-    public void onQueryDetailSuccess(MemberVo bean) {
+    public void onQueryDetailSuccess(MemberDetailBean bean) {
         tvName.setText(bean.name);
         tvPhone.setText(bean.mobile);
         tvIden.setText(bean.idCard);

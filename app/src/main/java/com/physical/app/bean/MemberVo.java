@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by bucke on 2019/5/6.
  */
-public class MemberVo implements Serializable{
+public class MemberVo implements Serializable {
 
     public String id;
 
@@ -40,7 +40,7 @@ public class MemberVo implements Serializable{
     /**
      * 生日
      */
-    public long  birthday;
+    public long birthday;
 
     /**
      * 升高
@@ -84,6 +84,7 @@ public class MemberVo implements Serializable{
 
     /**
      * 病史
+     *
      * @return
      */
     public List<MedicalHistory> medicalHistoryList;
@@ -91,6 +92,6 @@ public class MemberVo implements Serializable{
     /**
      * 诊疗纪录
      */
-    public List<MemberCardVo> memberCaseVoList;
-
+//    public List<MemberCardVo> memberCaseVoList;
+    public List<MemberCaseVo> memberCaseVoList;
 }

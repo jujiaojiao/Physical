@@ -4,6 +4,7 @@ package com.physical.app.common.api;
 import com.physical.app.bean.AddPhysicalBean;
 import com.physical.app.bean.AdvertisementBean;
 import com.physical.app.bean.MedicalHistory;
+import com.physical.app.bean.MemberDetailBean;
 import com.physical.app.bean.MemberManageBean;
 import com.physical.app.bean.MemberVo;
 import com.physical.app.bean.RecommendBean;
@@ -72,7 +73,7 @@ public interface ServerAPI {
      */
     @POST("app/message/sendMessage.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> sendMessage(@Field("mobile") String mobile,@Field("type")String type);
+    Observable<HttpResult<Object>> sendMessage(@Field("mobile") String mobile, @Field("type") String type);
 
     /**
      * 注册
@@ -130,7 +131,7 @@ public interface ServerAPI {
      */
     @POST("app/member/queryDetailById.json")
     @FormUrlEncoded
-    Observable<HttpResult<MemberVo>> queryDetailById(@Field("memberId") String memberId, @Field("sessionId") String sessionId);
+    Observable<HttpResult<MemberDetailBean>> queryDetailById(@Field("memberId") String memberId, @Field("sessionId") String sessionId);
 
 
     /**
@@ -217,6 +218,7 @@ public interface ServerAPI {
 
     /**
      * 查询最新的版本号
+     *
      * @param sessionId
      * @return
      */
@@ -226,6 +228,7 @@ public interface ServerAPI {
 
     /**
      * 查询广告
+     *
      * @param sessionId
      * @return
      */
@@ -235,6 +238,7 @@ public interface ServerAPI {
 
     /**
      * 下载app
+     *
      * @param sessionId
      * @return
      */
@@ -245,6 +249,7 @@ public interface ServerAPI {
 
     /**
      * 新增疗养
+     *
      * @param param
      * @param sessionId
      * @return
@@ -254,55 +259,68 @@ public interface ServerAPI {
     Observable<HttpResult<AddPhysicalBean>> save(@Field("param") String param, @Field("sessionId") String sessionId);
 
 
-
     /**
      * 开始疗养
+     *
      * @param sessionId
      * @return
      */
     @POST("app/case/start.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> start(@Field("Id") String Id,@Field("beginTime") String beginTime, @Field("sessionId") String sessionId ,@Field("machineCode") String machineCode);
+    Observable<HttpResult<Object>> start(@Field("Id") String Id, @Field("beginTime") String beginTime, @Field("sessionId") String sessionId, @Field("machineCode") String machineCode);
 
 
     /**
      * 结束疗养
+     *
      * @param sessionId
      * @return
      */
     @POST("app/case/finish.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> finish(@Field("Id") String Id,@Field("endTime") String endTime, @Field("sessionId") String sessionId,@Field("machineCode") String machineCode);
+    Observable<HttpResult<Object>> finish(@Field("Id") String Id, @Field("endTime") String endTime, @Field("sessionId") String sessionId, @Field("machineCode") String machineCode);
 
 
     /**
      * 评价
+     *
      * @param sessionId
      * @return
      */
     @POST("app/case/comment.json")
     @FormUrlEncoded
-    Observable<HttpResult<Object>> comment(@Field("Id") String Id,@Field("commentType") String commentType,@Field("comment") String comment, @Field("sessionId") String sessionId);
+    Observable<HttpResult<Object>> comment(@Field("Id") String Id, @Field("commentType") String commentType, @Field("comment") String comment, @Field("sessionId") String sessionId);
 
 
     /**
-     *  疗养纪录
-     * @param startTime 起始时间
-     * @param endTime 结束时间
+     * 疗养纪录
+     *
+     * @param startTime   起始时间
+     * @param endTime     结束时间
      * @param machineCode 机器码
-     * @param page 当前页
-     * @param pageSize 每页大小
-     * @param sessionId 用户id
+     * @param page        当前页
+     * @param pageSize    每页大小
+     * @param sessionId   用户id
      * @return
      */
     @POST("app/case/queryList.json")
     @FormUrlEncoded
-    Observable<HttpResult<List<TimeBean>>> queryList(@Field("startTime ") String startTime ,
+    Observable<HttpResult<List<TimeBean>>> queryList(@Field("startTime ") String startTime,
                                                      @Field("endTime ") String endTime,
                                                      @Field("machineCode  ") String machineCode,
                                                      @Field("page") String page,
                                                      @Field("pageSize") String pageSize,
                                                      @Field("sessionId") String sessionId);
 
+    /**
+     * 上传离线缓存
+     *
+     * @param param
+     * @param sessionId
+     * @return
+     */
+    @POST("app/member/upload.json")//http://120.79.18.122:8080/app/upload.json
+    @FormUrlEncoded
+    Observable<HttpResult<Object>> upload(@Field("param") String param, @Field("sessionId") String sessionId);
 
 }

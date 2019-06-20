@@ -86,8 +86,8 @@ public class RegisterActivity extends BaseActivity implements IRegisterCallback 
 
         registerPresenter = new RegisterPresenter(this, this);
 //        startAnimator();
-        getWindow().setEnterTransition(new Fade().setDuration(2000));
-        getWindow().setExitTransition(new Fade().setDuration(2000));
+//        getWindow().setEnterTransition(new Fade().setDuration(2000));
+//        getWindow().setExitTransition(new Fade().setDuration(2000));
         addListener();
     }
 

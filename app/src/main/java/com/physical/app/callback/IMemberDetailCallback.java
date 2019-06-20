@@ -1,5 +1,6 @@
 package com.physical.app.callback;
 
+import com.physical.app.bean.MemberDetailBean;
 import com.physical.app.bean.MemberVo;
 
 /**
@@ -10,6 +11,6 @@ import com.physical.app.bean.MemberVo;
  */
 
 public interface IMemberDetailCallback {
-    void onQueryDetailSuccess(MemberVo bean);
+    void onQueryDetailSuccess(MemberDetailBean bean);
 
 }

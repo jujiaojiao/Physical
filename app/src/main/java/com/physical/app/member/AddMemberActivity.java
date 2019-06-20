@@ -25,6 +25,7 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.physical.app.R;
 import com.physical.app.adapter.AddMemberAdapter;
 import com.physical.app.bean.MedicalHistory;
+import com.physical.app.bean.MemberDetailBean;
 import com.physical.app.bean.MemberManageBean;
 import com.physical.app.bean.MemberVo;
 import com.physical.app.callback.IAddMemberCallback;
@@ -511,7 +512,7 @@ public class AddMemberActivity extends BaseActivity implements IAddMemberCallbac
      * @param data
      */
     @Override
-    public void onQueryDetailSuccess(MemberVo data) {
+    public void onQueryDetailSuccess(MemberDetailBean data) {
         id = data.id;
         etName.setText(data.name);
         etPhone.setText(data.mobile);

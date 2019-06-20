@@ -20,8 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.physical.app.bean.MemberVo;
 import com.physical.app.bean.RecommendBean;
 import com.physical.app.bean.SeedlingBean;
+import com.physical.app.callback.IMainCallback;
 import com.physical.app.callback.ISeedlingCallback;
 import com.physical.app.common.base.BaseActivity;
 import com.physical.app.common.constains.Constains;
@@ -34,11 +36,13 @@ import com.physical.app.common.widget.SystemSetDialog;
 import com.physical.app.member.MemberManageActivity;
 import com.physical.app.music.LocalMucicActivity;
 import com.physical.app.physical.PhysicalActivity;
+import com.physical.app.presenter.MainPresenter;
 import com.physical.app.presenter.SeedlingPresenter;
 import com.physical.app.setting.SettingActivity;
 import com.physical.app.setting.WifiActivity;
 
 import java.io.File;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -47,7 +51,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements ISeedlingCallback {
+public class MainActivity extends BaseActivity implements ISeedlingCallback, IMainCallback {
 
     @Bind(R.id.iv_head)
     ImageView ivHead;//头像
@@ -74,6 +78,7 @@ public class MainActivity extends BaseActivity implements ISeedlingCallback {
     private NetDialog netDialog;
     private SeedlingPresenter seedlingPresenter;
     private SelectNetorNoneDialog comDialog;
+    private MainPresenter mainPresenter;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -86,12 +91,13 @@ public class MainActivity extends BaseActivity implements ISeedlingCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        getWindow().setEnterTransition(new Slide().setDuration(2000));
-        getWindow().setExitTransition(new Slide().setDuration(2000));
+//        getWindow().setEnterTransition(new Slide().setDuration(2000));
+//        getWindow().setExitTransition(new Slide().setDuration(2000));
         Log.i("jjj", "onCreate: ");
         if (null != getUser()) {
             tvUsername.setText(getUser().userName);
         }
+        mainPresenter = new MainPresenter(this, this);
 //        initData();
     }
 
@@ -106,8 +112,11 @@ public class MainActivity extends BaseActivity implements ISeedlingCallback {
             seedlingPresenter = new SeedlingPresenter(this, this);
             Log.i("jjj", "initView: " + getWifiMac());
             seedlingPresenter.seedling(getUserId());
-
-            //TODO 有网调用上传进度接口，更新进度 ，点击开始理疗时保存进度  保存成列表 每次都添加，在上传进度接口调用成功后，清除记录
+//            List<MemberVo> nonet = Preferences.getList(this, "nonet");
+//            if (nonet.size() > 0) {
+//                mainPresenter.upload(toJson(nonet), getUserId());
+//            }
+//            有网调用上传进度接口，更新进度 ，点击开始理疗时保存进度  保存成列表 每次都添加，在上传进度接口调用成功后，清除记录
         } else {
             String timeCode = Preferences.getString(Constains.TIMECODE);
             if (null == timeCode || !timeCode.equals(getCurrentTime())) {
@@ -313,5 +322,15 @@ public class MainActivity extends BaseActivity implements ISeedlingCallback {
     @Override
     public void onRecipeSuccess(List<RecommendBean> beans) {
 
+    }
+
+    /**
+     * 上传进度接口
+     *
+     * @param bean
+     */
+    @Override
+    public void onUploadSuccess(Object bean) {
+        Preferences.putList(mContext, "nonet", null);
     }
 }
